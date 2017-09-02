@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CleaningPic.Views.TopPage"
+             xmlns:pages="clr-namespace:CleaningPic.Views"
+             Title="トップページ">
+    <ContentPage
+        x:Name="TopPageDetail">
+        <Label 
+            x:Name="TopPageLabel" 
+            Text="これはトップページです" 
+            HorizontalOptions="Center"
+            VerticalOptions="Center"/>
+    </ContentPage>
+    <pages:CameraPage/>
+</CarouselPage>
