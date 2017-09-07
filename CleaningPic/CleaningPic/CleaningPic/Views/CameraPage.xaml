@@ -3,10 +3,10 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="CleaningPic.Views.CameraPage"
-    Title="撮影した画像">
+    Title="カメラ">
     
     <Image 
-        x:Name="TakenImage"
-        HorizontalOptions="CenterAndExpand"
-        VerticalOptions="CenterAndExpand"/>
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        Resources="ic_camera.png"/>
 </ContentPage>

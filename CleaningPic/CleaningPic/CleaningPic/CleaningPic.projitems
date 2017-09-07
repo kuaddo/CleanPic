@@ -12,23 +12,35 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Place.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BindableBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UploadViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\CameraPage.xaml.cs">
       <SubType>Code</SubType>
+      <DependentUpon>CameraPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml.cs">
       <SubType>Code</SubType>
+      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\MainPageDetail.xaml.cs">
       <SubType>Code</SubType>
+      <DependentUpon>MainPageDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\MainPageMaster.xaml.cs">
       <SubType>Code</SubType>
+      <DependentUpon>MainPageMaster.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)MainPageMenuItem.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\TopPage.xaml.cs">
       <SubType>Code</SubType>
+      <DependentUpon>TopPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\UploadPage.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>UploadPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -58,10 +70,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\CameraPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\CameraPage.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\UploadPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

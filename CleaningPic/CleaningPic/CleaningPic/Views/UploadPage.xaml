@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CleaningPic"
+    x:Class="CleaningPic.Views.UploadPage"
+    Padding="16, 16, 16, 16"
+    Title="アップロード">
+
+    <ContentPage.BindingContext>
+        <local:ViewModels.UploadViewModel/>
+    </ContentPage.BindingContext>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>    
+        </Grid.RowDefinitions>
+
+        <Image
+            x:Name="uploadImage"
+            Grid.Row="0"
+            Grid.Column="0"/>
+        
+        <StackLayout
+            Grid.Row="1"
+            Grid.Column="0"
+            Orientation="Vertical">
+
+            <!-- RadioButtonが無いようなので、Switchで代用 -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Label Text="リビング" HorizontalOptions="StartAndExpand"/>
+                <Switch 
+                    x:Name="livingSwitch"
+                    HorizontalOptions="End"
+                    IsToggled="True"
+                    Toggled="SelectPlaceSwitch_Toggled"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Label Text="キッチン" HorizontalOptions="StartAndExpand"/>
+                <Switch 
+                    x:Name="kitchenSwitch"
+                    HorizontalOptions="End"
+                    IsToggled="false"
+                    Toggled="SelectPlaceSwitch_Toggled"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Label Text="お風呂" HorizontalOptions="StartAndExpand"/>
+                <Switch
+                    x:Name="bathSwitch"
+                    HorizontalOptions="End"
+                    IsToggled="false"
+                    Toggled="SelectPlaceSwitch_Toggled"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Label Text="トイレ" HorizontalOptions="StartAndExpand"/>
+                <Switch
+                    x:Name="toiletSwitch"
+                    HorizontalOptions="End"
+                    IsToggled="false"
+                    Toggled="SelectPlaceSwitch_Toggled"/>
+            </StackLayout>
+
+            <Button
+                HorizontalOptions="EndAndExpand"
+                VerticalOptions="EndAndExpand"
+                Text="アップロード"
+                Clicked="UploadButton_Clicked"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>

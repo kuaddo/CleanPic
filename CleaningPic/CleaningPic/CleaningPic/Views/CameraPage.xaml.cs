@@ -17,15 +17,13 @@ namespace CleaningPic.Views
 			InitializeComponent();
         }
 
-        public async Task<bool> LaunchCamera()
+        public async Task<ImageSource> LaunchCamera()
         {
             var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
             if (photo != null)
-            {
-                TakenImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
-                return true;
-            }
-            else return false;
+                return ImageSource.FromStream(() => { return photo.GetStream(); });
+            else
+                return null;
         }
     }
 }
