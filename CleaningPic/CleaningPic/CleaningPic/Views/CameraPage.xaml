@@ -6,7 +6,7 @@
     Title="カメラ">
     
     <Image 
-        HorizontalOptions="Center"
-        VerticalOptions="Center"
-        Resources="ic_camera.png"/>
+        HorizontalOptions="CenterAndExpand"
+        VerticalOptions="CenterAndExpand"
+        Source="ic_camera.png"/>
 </ContentPage>

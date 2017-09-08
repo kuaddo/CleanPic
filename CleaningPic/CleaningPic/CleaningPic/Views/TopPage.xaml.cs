@@ -19,12 +19,10 @@ namespace CleaningPic.Views
             {
                 if (CurrentPage is CameraPage cameraPage)
                 {
+                    CurrentPage = topPage;      // カメラ処理を立ち上げる前に元ページに戻す
                     var source = await cameraPage.LaunchCamera();
-                    // カメラで写真を取れなかった時に元の画面に戻る
                     if (source != null)
                         await Navigation.PushAsync(new UploadPage(source));
-                    else
-                        CurrentPage = topPage;
                 }
             };
 		}
