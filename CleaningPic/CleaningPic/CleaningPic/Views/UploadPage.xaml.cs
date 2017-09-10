@@ -39,9 +39,14 @@ namespace CleaningPic.Views
             }
         }
 
-        public void UploadButton_Clicked(object sender, EventArgs e)
+        public async void UploadButton_Clicked(object sender, EventArgs e)
         {
-            Console.WriteLine((BindingContext as UploadViewModel).CleanigPlace);
+            //Console.WriteLine((BindingContext as UploadViewModel).CleanigPlace);
+
+            // MessagingCenterを利用して、プラットフォーム固有のダイアログを表示
+            MessagingCenter.Send(this, "progress_dialog", true);
+            await Task.Delay(3000);
+            MessagingCenter.Send(this, "progress_dialog", false);
         }
 	}
 }

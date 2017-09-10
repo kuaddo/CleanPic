@@ -23,6 +23,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\CleaningTabbedPage.xaml.cs">
       <SubType>Code</SubType>
+      <DependentUpon>CleaningTabbedPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml.cs">
       <SubType>Code</SubType>
