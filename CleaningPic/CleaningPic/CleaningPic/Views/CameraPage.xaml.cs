@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,13 +18,20 @@ namespace CleaningPic.Views
 			InitializeComponent();
         }
 
-        public async Task<ImageSource> LaunchCamera()
+        public async Task<byte[]> LaunchCamera()
         {
             var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
             if (photo != null)
-                return ImageSource.FromStream(() => { return photo.GetStream(); });
-            else
-                return null;
+            {
+                using (var stream = photo.GetStream())
+                using (var ms = new MemoryStream())
+                {
+                    if (stream == null) return null;
+                    stream.CopyTo(ms);
+                    return ms.ToArray();
+                }
+            }
+            return null;
         }
     }
 }

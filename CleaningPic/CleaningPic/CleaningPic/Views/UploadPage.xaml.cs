@@ -1,4 +1,6 @@
-﻿using CleaningPic.ViewModels;
+﻿using CleaningPic.Data;
+using CleaningPic.Utils;
+using CleaningPic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +15,13 @@ namespace CleaningPic.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class UploadPage : ContentPage
 	{
-		public UploadPage(ImageSource source)
+        private byte[] data;
+
+		public UploadPage(byte[] imageData)
 		{
 			InitializeComponent();
-            uploadImage.Source = source;
+            data = imageData;
+            uploadImage.Source = new ImageConverter().Convert(imageData, null, null, null) as ImageSource;
 		}
 
         // ONになったSwitch以外を全てOFFにする
@@ -47,6 +52,14 @@ namespace CleaningPic.Views
             MessagingCenter.Send(this, "progress_dialog", true);
             await Task.Delay(3000);
             MessagingCenter.Send(this, "progress_dialog", false);
+            await Navigation.PushAsync(new ResultPage(data, new List<CleaningMethod>()
+            {
+                new CleaningMethod() { Dirt = "汚れ1", ImageData = null, Method = "手法1", Tools = new List<string> { "道具1" }, Created = DateTime.Now },
+                new CleaningMethod() { Dirt = "汚れ2", ImageData = null, Method = "手法2", Tools = new List<string> { "道具2" }, Created = DateTime.Now },
+                new CleaningMethod() { Dirt = "汚れ3", ImageData = null, Method = "手法3", Tools = new List<string> { "道具3" }, Created = DateTime.Now },
+                new CleaningMethod() { Dirt = "汚れ4", ImageData = null, Method = "手法4", Tools = new List<string> { "道具4" }, Created = DateTime.Now },
+                new CleaningMethod() { Dirt = "汚れ5", ImageData = null, Method = "手法5", Tools = new List<string> { "道具5" }, Created = DateTime.Now }
+            }.ToArray()));
         }
 	}
 }
