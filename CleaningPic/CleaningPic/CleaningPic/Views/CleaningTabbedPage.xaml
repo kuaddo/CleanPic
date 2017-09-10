@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:CleaningPic.Views"  
+    xmlns:badge="clr-namespace:Plugin.Badge.Abstractions;assembly=Plugin.Badge.Abstractions"
+    x:Class="CleaningPic.Views.CleaningTabbedPage">
+
+    <pages:CleaningMethodListPage
+        x:Name="wantToDoPage"
+        badge:TabBadge.BadgeColor="Red"
+        badge:TabBadge.BadgeText="{Binding ItemCountString, Source={x:Reference wantToDoPage}}"/>
+
+    <pages:CleaningMethodListPage
+        x:Name="donePage"/>
+</TabbedPage>

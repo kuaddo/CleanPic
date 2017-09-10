@@ -13,14 +13,31 @@ using Xamarin.Forms.Xaml;
 namespace CleaningPic.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class WantToDoPage : ContentPage
+	public partial class CleaningMethodListPage : ContentPage
 	{
         ObservableCollection<CleaningMethod> Items = new ObservableCollection<CleaningMethod>();
+        
+        // BindablePropertyを利用してTabbedPageのバッチとバインドできるようにする
+        public static readonly BindableProperty ItemCountStringProperty = BindableProperty.Create(
+            "ItemCountString",
+            typeof(string),
+            typeof(CleaningMethodListPage));
+        public string ItemCountString
+        {
+            get { return (string)GetValue(ItemCountStringProperty); }
+            set { SetValue(ItemCountStringProperty, value); }
+        }
 
-		public WantToDoPage()
+        public CleaningMethodListPage()
 		{
 			InitializeComponent();
             listView.ItemsSource = Items;
+            // Itemsが変化した時にItemCountStringを更新するようにする
+            Items.CollectionChanged += (sender, e) =>
+            {
+                if (Items.Count == 0) ItemCountString = "";
+                else ItemCountString = Items.Count.ToString();
+            };
         }
 
         private async void AddListItemButton_Clicked(object sender, EventArgs e)

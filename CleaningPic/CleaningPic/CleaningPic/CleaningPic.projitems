@@ -21,6 +21,9 @@
       <SubType>Code</SubType>
       <DependentUpon>CameraPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\CleaningTabbedPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -44,9 +47,9 @@
       <SubType>Code</SubType>
       <DependentUpon>UploadPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\WantToDoPage.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)Views\CleaningMethodListPage.xaml.cs">
       <SubType>Code</SubType>
-      <DependentUpon>WantToDoPage.xaml</DependentUpon>
+      <DependentUpon>CleaningMethodListPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -86,7 +89,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\WantToDoPage.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\CleaningMethodListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\CleaningTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

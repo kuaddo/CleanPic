@@ -23,10 +23,11 @@ namespace CleaningPic.Views
             var item = e.SelectedItem as MainPageMenuItem;
             if (item == null)
                 return;
+            if (item.Title == "やりたい" || item.Title == "やった")
+                item.Title = "掃除方法";
 
-            var page = (Page)Activator.CreateInstance(item.TargetType);
+            Page page = (Page)Activator.CreateInstance(item.TargetType, item.Params);
             page.Title = item.Title;
-
             Detail = new NavigationPage(page);
             IsPresented = false;
 
