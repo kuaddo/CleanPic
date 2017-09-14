@@ -24,5 +24,15 @@ namespace CleaningPic.Views
             foreach (var method in methods) Items.Add(method);
             listView.ItemsSource = Items;
         }
-	}
+
+        public void CleanAfter_Clicked(object sender, EventArgs e)
+        {
+            Console.WriteLine("Clean after button is clicked");
+        }
+
+        public void CleanNow_Clicked(object sender, EventArgs e)
+        {
+            Console.WriteLine("Clean now button is clicked");
+        }
+    }
 }
