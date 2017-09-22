@@ -15,24 +15,14 @@ namespace CleaningPic.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ResultPage : ContentPage
 	{
-        ObservableCollection<CleaningMethod> Items = new ObservableCollection<CleaningMethod>();
+        ObservableCollection<Cleaning> Items = new ObservableCollection<Cleaning>();
 
-        public ResultPage(byte[] imageData, CleaningMethod[] methods)
+        public ResultPage(byte[] imageData, Cleaning[] methods)
 		{
 			InitializeComponent();
             resultImage.Source = new ImageConverter().Convert(imageData, null, null, null) as ImageSource;
             foreach (var method in methods) Items.Add(method);
             listView.ItemsSource = Items;
-        }
-
-        public void CleanAfter_Clicked(object sender, EventArgs e)
-        {
-            Console.WriteLine("Clean after button is clicked");
-        }
-
-        public void CleanNow_Clicked(object sender, EventArgs e)
-        {
-            Console.WriteLine("Clean now button is clicked");
         }
     }
 }

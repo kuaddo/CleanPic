@@ -6,17 +6,31 @@
              Title="トップページ">
     <ContentPage
         x:Name="topPage">
+        
         <ContentPage.ToolbarItems>
             <ToolbarItem
                 Text="カメラ"
                 Icon="ic_camera.png"
                 Clicked="CameraMenu_Clicked"/>
         </ContentPage.ToolbarItems>
-        <Label
-            Text="これはトップページです" 
-            HorizontalOptions="Center"
-            VerticalOptions="Center"/>
+
+        <StackLayout
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            Orientation="Vertical">
+            
+            <Label
+                Text="これはトップページです" 
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+
+            <Button
+                Text="データを削除する"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Clicked="DeleteButton_Clicked"/>
+        </StackLayout>
     </ContentPage>
-    <pages:CameraPage
-        x:Name="cameraPage"/>
+    
+    <pages:CameraPage x:Name="cameraPage"/>
 </CarouselPage>

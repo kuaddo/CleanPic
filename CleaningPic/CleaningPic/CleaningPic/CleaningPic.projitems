@@ -12,10 +12,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Data\CleaningMethod.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data\Place.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Cleaning.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\DataSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Place.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ImageConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BindableBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ResultViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UploadViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\CameraPage.xaml.cs">
       <SubType>Code</SubType>
@@ -37,7 +39,7 @@
       <SubType>Code</SubType>
       <DependentUpon>MainPageMaster.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Data\MainPageMenuItem.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)Models\MainPageMenuItem.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\ResultPage.xaml.cs">

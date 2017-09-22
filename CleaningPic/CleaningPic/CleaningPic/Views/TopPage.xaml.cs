@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CleaningPic.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,14 @@ namespace CleaningPic.Views
         public void CameraMenu_Clicked(object sender, EventArgs e)
         {
             CurrentPage = cameraPage;
+        }
+
+        public void DeleteButton_Clicked(object sender, EventArgs e)
+        {
+            using (var ds = new DataSource())
+            {
+                ds.RemoveAllCleaning();
+            }
         }
     }
 }

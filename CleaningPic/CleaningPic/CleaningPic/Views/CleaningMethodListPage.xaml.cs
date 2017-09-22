@@ -15,7 +15,7 @@ namespace CleaningPic.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CleaningMethodListPage : ContentPage
 	{
-        ObservableCollection<CleaningMethod> Items = new ObservableCollection<CleaningMethod>();
+        ObservableCollection<Cleaning> Items = new ObservableCollection<Cleaning>();
         
         // BindablePropertyを利用してTabbedPageのバッチとバインドできるようにする
         public static readonly BindableProperty ItemCountStringProperty = BindableProperty.Create(
@@ -51,7 +51,7 @@ namespace CleaningPic.Views
                 byteArray = ms.ToArray();
             }
 
-            Items.Add(new CleaningMethod()
+            Items.Add(new Cleaning()
             {
                 Dirt = "汚れテスト",
                 Method = "手法テスト",
