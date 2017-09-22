@@ -72,11 +72,12 @@
 
                                 <Button
                                     Text="後で落とす"
-                                    Command="{Binding BindingContext.ShowCommand, Source={x:Reference root}"/>
+                                    Command="{Binding BindingContext.AddNotDoneCommand, Source={x:Reference root}"
+                                    CommandParameter="{Binding}"/>
 
                                 <Button
                                     Text="汚れを落とす！"     
-                                    Command="{Binding BindingContext.AddCommand, Source={x:Reference root}"
+                                    Command="{Binding BindingContext.AddDoneCommand, Source={x:Reference root}"
                                     CommandParameter="{Binding}"/>
                             </StackLayout>
                         </StackLayout>

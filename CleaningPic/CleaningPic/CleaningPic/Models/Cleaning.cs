@@ -19,6 +19,7 @@ namespace CleaningPic.Data
             set { ToolsString = string.Join(concatChar.ToString(), value); }
         }
         public byte[] ImageData { get; set; }                       // 汚れの画像
+        public bool Done { get; set; } = false;                     // やりたいならfalse、やったならtrue
         public DateTimeOffset Created { get; set; }                 // この手法のクラスを作成した日時。ソートに利用
         public double Probability { get; set; }                     // 汚れの予想確率。0~1
         public string ToolsString { get; private set; }             // リスト表示用の道具リストの文字列

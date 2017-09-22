@@ -9,33 +9,33 @@ namespace CleaningPic.ViewModels
 {
     public class ResultViewModel
     {
-        public Command AddCommand { get; private set; }
-        public Command ShowCommand { get; private set; }
+        public Command AddNotDoneCommand { get; private set; }
+        public Command AddDoneCommand { get; private set; }
 
         public ResultViewModel()
         {
-            AddCommand = new Command<Cleaning>(data =>
+            AddNotDoneCommand = new Command<Cleaning>(cleaning =>
             {
-                // Realmに追加する処理
-                using (var ds = new DataSource())
-                {
-                    if (ds.Exists(data))
-                        Debug.WriteLine("このデータは存在しています");
-                    else
-                        ds.AddCleaning(data);
-                }
+                AddCleaning(cleaning);
             });
 
-            ShowCommand = new Command(() => 
+            AddDoneCommand = new Command<Cleaning>(cleaning =>
             {
-                using (var ds = new DataSource())
-                {
-                    foreach (var c in ds.ReadAllCleaning())
-                    {
-                        Debug.WriteLine($"Id = {c.Id}, Dirt = {c.Dirt}");
-                    }
-                }
+                cleaning.Done = true;
+                AddCleaning(cleaning);
             });
+        }
+
+        private void AddCleaning(Cleaning c)
+        {
+            // Realmに追加する処理
+            using (var ds = new DataSource())
+            {
+                if (ds.Exists(c))
+                    Debug.WriteLine("このデータは存在しています");
+                else
+                    ds.AddCleaning(c);
+            }
         }
     }
 }
