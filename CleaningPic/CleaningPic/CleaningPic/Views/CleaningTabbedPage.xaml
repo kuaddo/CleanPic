@@ -8,9 +8,11 @@
 
     <pages:CleaningMethodListPage
         x:Name="wantToDoPage"
+        Icon="ic_want.png"
         badge:TabBadge.BadgeColor="Red"
         badge:TabBadge.BadgeText="{Binding ItemCountString, Source={x:Reference wantToDoPage}}"/>
 
     <pages:CleaningMethodListPage
-        x:Name="donePage"/>
+        x:Name="donePage"
+        Icon="ic_done.png"/>
 </TabbedPage>
