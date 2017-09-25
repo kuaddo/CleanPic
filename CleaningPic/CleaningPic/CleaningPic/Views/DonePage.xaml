@@ -1,15 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:CleaningPic.Utils"
-             x:Class="CleaningPic.Views.CleaningMethodListPage">
-
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"         
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CleaningPic.Utils"
+    x:Class="CleaningPic.Views.DonePage"
+    Title="やった">
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:ImageConverter x:Key="ImageConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
         <StackLayout>
             <ListView x:Name="listView">
@@ -19,9 +21,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button
-                Text="Add list item button"
-                Clicked="AddListItemButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

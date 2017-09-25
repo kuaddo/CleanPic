@@ -6,13 +6,13 @@
     xmlns:badge="clr-namespace:Plugin.Badge.Abstractions;assembly=Plugin.Badge.Abstractions"
     x:Class="CleaningPic.Views.CleaningTabbedPage">
 
-    <pages:CleaningMethodListPage
+    <pages:WantToDoPage
         x:Name="wantToDoPage"
         Icon="ic_want.png"
         badge:TabBadge.BadgeColor="Red"
         badge:TabBadge.BadgeText="{Binding ItemCountString, Source={x:Reference wantToDoPage}}"/>
 
-    <pages:CleaningMethodListPage
+    <pages:DonePage
         x:Name="donePage"
         Icon="ic_done.png"/>
 </TabbedPage>

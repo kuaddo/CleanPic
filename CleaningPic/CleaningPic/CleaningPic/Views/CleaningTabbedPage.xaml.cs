@@ -15,8 +15,6 @@ namespace CleaningPic.Views
         public CleaningTabbedPage(bool startWantToDoPage)
         {
             InitializeComponent();
-            wantToDoPage.Title = "やりたい";
-            donePage.Title = "やった";
             if (startWantToDoPage)
                 CurrentPage = wantToDoPage;
             else

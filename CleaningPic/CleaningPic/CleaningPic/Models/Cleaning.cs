@@ -13,6 +13,7 @@ namespace CleaningPic.Data
         public string Id { get; set; } = Guid.NewGuid().ToString(); // Id。DBのアップデートなどに利用
         public string Dirt { get; set; }                            // 汚れの種類。TODO: 後でDirtクラスを作る
         public string Method { get; set; }                          // 掃除の手法
+        public string ToolsString { get; private set; }             // リスト表示用の道具リストの文字列
         public IList<string> Tools                                  // 掃除の道具。入出力のインターフェースで、保存はToolsStringの方で行う
         {
             get { return ToolsString.Split(concatChar); }
@@ -22,7 +23,6 @@ namespace CleaningPic.Data
         public bool Done { get; set; } = false;                     // やりたいならfalse、やったならtrue
         public DateTimeOffset Created { get; set; }                 // この手法のクラスを作成した日時。ソートに利用
         public double Probability { get; set; }                     // 汚れの予想確率。0~1
-        public string ToolsString { get; private set; }             // リスト表示用の道具リストの文字列
 
         public Cleaning Clone()
         {
@@ -31,8 +31,9 @@ namespace CleaningPic.Data
                 Id = Id,
                 Dirt = Dirt,
                 Method = Method,
-                Tools = Tools,
+                ToolsString = ToolsString,
                 ImageData = ImageData,
+                Done = Done,
                 Created = Created,
                 Probability = Probability
             };

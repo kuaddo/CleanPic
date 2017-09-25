@@ -16,6 +16,7 @@ namespace CleaningPic.ViewModels
         {
             AddNotDoneCommand = new Command<Cleaning>(cleaning =>
             {
+                cleaning.Done = false;
                 AddCleaning(cleaning);
             });
 
@@ -28,6 +29,7 @@ namespace CleaningPic.ViewModels
 
         private void AddCleaning(Cleaning c)
         {
+            c.Created = DateTime.Now;
             // Realmに追加する処理
             using (var ds = new DataSource())
             {
