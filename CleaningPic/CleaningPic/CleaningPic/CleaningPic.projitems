@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BindableBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ResultViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UploadViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WantToDoViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\CameraPage.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>CameraPage.xaml</DependentUpon>

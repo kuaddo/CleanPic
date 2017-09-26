@@ -54,11 +54,11 @@ namespace CleaningPic.Views
             MessagingCenter.Send(this, "progress_dialog", false);
             await Navigation.PushAsync(new ResultPage(data, new List<Cleaning>()
             {
-                new Cleaning() { Dirt = "汚れ1", ImageData = null, Method = "手法1", Tools = new List<string> { "道具1", "道具1'" }, Created = DateTime.Now, Probability = 0.7 },
-                new Cleaning() { Dirt = "汚れ2", ImageData = null, Method = "手法2", Tools = new List<string> { "道具2", "道具2'" }, Created = DateTime.Now, Probability = 0.13 },
-                new Cleaning() { Dirt = "汚れ3", ImageData = null, Method = "手法3", Tools = new List<string> { "道具3", "道具3'" }, Created = DateTime.Now, Probability = 0.11 },
-                new Cleaning() { Dirt = "汚れ4", ImageData = null, Method = "手法4", Tools = new List<string> { "道具4", "道具4'" }, Created = DateTime.Now, Probability = 0.05 },
-                new Cleaning() { Dirt = "汚れ5", ImageData = null, Method = "手法5", Tools = new List<string> { "道具5", "道具5'" }, Created = DateTime.Now, Probability = 0.01 }
+                new Cleaning() { Dirt = "汚れ1", ImageData = null, Method = "手法1", Tools = new List<string> { "道具1", "道具1'" }, Created = DateTime.Now, Probability = 0.7,  CleaningTime = 10 },
+                new Cleaning() { Dirt = "汚れ2", ImageData = null, Method = "手法2", Tools = new List<string> { "道具2", "道具2'" }, Created = DateTime.Now, Probability = 0.13, CleaningTime = 50  },
+                new Cleaning() { Dirt = "汚れ3", ImageData = null, Method = "手法3", Tools = new List<string> { "道具3", "道具3'" }, Created = DateTime.Now, Probability = 0.11, CleaningTime = 30  },
+                new Cleaning() { Dirt = "汚れ4", ImageData = null, Method = "手法4", Tools = new List<string> { "道具4", "道具4'" }, Created = DateTime.Now, Probability = 0.05, CleaningTime = 120  },
+                new Cleaning() { Dirt = "汚れ5", ImageData = null, Method = "手法5", Tools = new List<string> { "道具5", "道具5'" }, Created = DateTime.Now, Probability = 0.01, CleaningTime = 150  }
             }.ToArray()));
         }
 	}

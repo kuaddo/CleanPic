@@ -19,6 +19,7 @@ namespace CleaningPic.Data
             get { return ToolsString.Split(concatChar); }
             set { ToolsString = string.Join(concatChar.ToString(), value); }
         }
+        public int CleaningTime { get; set; }
         public byte[] ImageData { get; set; }                       // 汚れの画像
         public bool Done { get; set; } = false;                     // やりたいならfalse、やったならtrue
         public DateTimeOffset Created { get; set; }                 // この手法のクラスを作成した日時。ソートに利用
@@ -32,6 +33,7 @@ namespace CleaningPic.Data
                 Dirt = Dirt,
                 Method = Method,
                 ToolsString = ToolsString,
+                CleaningTime = CleaningTime,
                 ImageData = ImageData,
                 Done = Done,
                 Created = Created,

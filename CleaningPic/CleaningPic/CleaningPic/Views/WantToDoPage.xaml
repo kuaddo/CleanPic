@@ -2,25 +2,73 @@
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:CleaningPic.Utils"
-    x:Class="CleaningPic.Views.WantToDoPage"
+    xmlns:local="clr-namespace:CleaningPic"
+    x:Class="CleaningPic.Views.WantToDoPage"    
+    x:Name="root"
     Title="やりたい">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <local:ImageConverter x:Key="ImageConverter"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <local:ViewModels.WantToDoViewModel/>
+    </ContentPage.BindingContext>
 
-    <ContentPage.Content>
-        <StackLayout>
-            <ListView x:Name="listView">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ImageCell Text="{Binding Dirt}" Detail="{Binding Method}" ImageSource="{Binding ImageData, Converter={StaticResource ImageConverter}}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
-    </ContentPage.Content>
+    <ListView ItemsSource="{Binding Items}" HasUnevenRows="True">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Orientation="Vertical" Padding="5">
+                        <Label Text="{Binding Dirt}" FontAttributes="Bold" FontSize="Large"/>
+
+                        <Grid Padding="12, 0, 0, 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label     
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Text="掃除道具"/>
+
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Text="{Binding ToolsString}"/>
+
+                            <Label      
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Text="予想作業時間"/>
+
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Text="{Binding CleaningTime, StringFormat='{0}分'}"/>
+                        </Grid>
+
+                        <StackLayout
+                            Orientation="Horizontal"
+                            HorizontalOptions="EndAndExpand"
+                            Spacing="16">
+
+                            <Image Source="ic_shopping.png" WidthRequest="20" HeightRequest="20"/>
+
+                            <Image Source="ic_notification_off.png" WidthRequest="30" HeightRequest="30"/>
+
+                            <Image Source="ic_done.png" WidthRequest="10" HeightRequest="10">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                    Command="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference root}"
+                                    CommandParameter="{Binding}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </StackLayout>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>

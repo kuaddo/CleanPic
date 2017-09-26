@@ -172,7 +172,7 @@
     <BundleResource Include="Resources\ic_want.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_assignment.png" />
+    <BundleResource Include="Resources\ic_add.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_camera.png" />
