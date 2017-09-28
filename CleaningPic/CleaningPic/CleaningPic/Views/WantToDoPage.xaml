@@ -2,13 +2,14 @@
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:CleaningPic"
+    xmlns:viewmodels="clr-namespace:CleaningPic.ViewModels"
+    xmlns:utils="clr-namespace:CleaningPic.Utils"
     x:Class="CleaningPic.Views.WantToDoPage"    
     x:Name="root"
     Title="やりたい">
 
     <ContentPage.BindingContext>
-        <local:ViewModels.WantToDoViewModel/>
+        <viewmodels:WantToDoViewModel/>
     </ContentPage.BindingContext>
 
     <ListView ItemsSource="{Binding Items}" HasUnevenRows="True">
@@ -56,12 +57,12 @@
 
                             <Image Source="ic_shopping.png" WidthRequest="20" HeightRequest="20"/>
 
-                            <Image Source="ic_notification_off.png" WidthRequest="30" HeightRequest="30"/>
+                            <Image Source="ic_notification_off.png" WidthRequest="20" HeightRequest="20"/>
 
-                            <Image Source="ic_done.png" WidthRequest="10" HeightRequest="10">
+                            <Image Source="ic_done.png" WidthRequest="20" HeightRequest="20">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer
-                                    Command="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference root}"
+                                    Command="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference root}}"
                                     CommandParameter="{Binding}"/>
                                 </Image.GestureRecognizers>
                             </Image>

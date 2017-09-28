@@ -9,7 +9,8 @@
     <pages:WantToDoPage
         x:Name="wantToDoPage"
         Icon="ic_want.png"
-        badge:TabBadge.BadgeColor="Red"/>
+        badge:TabBadge.BadgeColor="Red"
+        badge:TabBadge.BadgeText="{Binding BindingContext.ItemCountString, Source={x:Reference wantToDoPage}}"/>
 
     <pages:DonePage
         x:Name="donePage"

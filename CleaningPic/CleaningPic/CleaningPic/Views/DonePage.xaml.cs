@@ -14,15 +14,9 @@ namespace CleaningPic.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DonePage : ContentPage
 	{
-        ObservableCollection<Cleaning> Items = new ObservableCollection<Cleaning>();
-
         public DonePage()
         {
             InitializeComponent();
-            using (var ds = new DataSource())
-                foreach (var c in ds.ReadAllCleaning().Where(c => c.Done))
-                    Items.Add(c);
-            listView.ItemsSource = Items;
         }
     }
 }

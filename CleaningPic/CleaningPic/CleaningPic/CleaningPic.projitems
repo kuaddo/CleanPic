@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Place.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ImageConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BindableBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DoneViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ResultViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UploadViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WantToDoViewModel.cs" />

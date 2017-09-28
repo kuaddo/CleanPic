@@ -19,6 +19,7 @@ namespace CleaningPic.ViewModels
             get { return itemCountString; }
             set { SetProperty(ref itemCountString, value); }
         }
+        public const string cleaningDoneMessage = "cleaningDoneMessage";
 
         public Command CleaningDoneCommand { get; private set; }
 
@@ -30,7 +31,12 @@ namespace CleaningPic.ViewModels
                 using (var ds = new DataSource())
                     ds.UpdateCleaning(c);
                 Items.Remove(c);
+
                 // Messageをやったページに送って、更新するようにする
+                MessagingCenter.Send(
+                    this,
+                    cleaningDoneMessage,
+                    c);
             });
 
             // Itemsが変化した時にItemCountStringを更新するようにする
