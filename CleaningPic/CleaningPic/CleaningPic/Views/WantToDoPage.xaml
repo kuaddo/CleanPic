@@ -3,7 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:CleaningPic.ViewModels"
-    xmlns:utils="clr-namespace:CleaningPic.Utils"
+    xmlns:customviews="clr-namespace:CleaningPic.CustomViews"
     x:Class="CleaningPic.Views.WantToDoPage"    
     x:Name="root"
     Title="やりたい">
@@ -15,60 +15,16 @@
     <ListView ItemsSource="{Binding Items}" HasUnevenRows="True">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <ViewCell>
-                    <StackLayout Orientation="Vertical" Padding="5">
-                        <Label Text="{Binding Dirt}" FontAttributes="Bold" FontSize="Large"/>
-
-                        <Grid Padding="12, 0, 0, 0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="3*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Label     
-                                Grid.Row="0"
-                                Grid.Column="0"
-                                Text="掃除道具"/>
-
-                            <Label
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                Text="{Binding ToolsString}"/>
-
-                            <Label      
-                                Grid.Row="1"
-                                Grid.Column="0"
-                                Text="予想作業時間"/>
-
-                            <Label
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                Text="{Binding CleaningTime, StringFormat='{0}分'}"/>
-                        </Grid>
-
-                        <StackLayout
-                            Orientation="Horizontal"
-                            HorizontalOptions="EndAndExpand"
-                            Spacing="16">
-
-                            <Image Source="ic_shopping.png" WidthRequest="20" HeightRequest="20"/>
-
-                            <Image Source="ic_notification_off.png" WidthRequest="20" HeightRequest="20"/>
-
-                            <Image Source="ic_done.png" WidthRequest="20" HeightRequest="20">
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                    Command="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference root}}"
-                                    CommandParameter="{Binding}"/>
-                                </Image.GestureRecognizers>
-                            </Image>
-                        </StackLayout>
-                    </StackLayout>
-                </ViewCell>
+                <customviews:CleaningCell 
+                    ShowsAddDate="True"
+                    Created="{Binding Created}"
+                    DirtOrPlace="{Binding Dirt}"
+                    ToolsString="{Binding ToolsString}"
+                    CleaningTime="{Binding CleaningTime}" 
+                    NotificationIsVisible="True"
+                    DoneIsVisible="True"
+                    DoneCommand="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference root}}"
+                    DoneParam="{Binding}"/>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
