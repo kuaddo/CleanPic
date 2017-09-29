@@ -5,6 +5,7 @@
     xmlns:viewmodels="clr-namespace:CleaningPic.ViewModels"
     xmlns:customviews="clr-namespace:CleaningPic.CustomViews"
     x:Class="CleaningPic.Views.DonePage"
+    x:Name="root"
     Title="やった">
 
     <ContentPage.BindingContext>
@@ -21,7 +22,10 @@
                             Created="{Binding Created}"
                             DirtOrPlace="{Binding Dirt}"
                             ToolsString="{Binding ToolsString}"
-                            CleaningTime="{Binding CleaningTime}"/>
+                            CleaningTime="{Binding CleaningTime}"
+                            RemoveIsVisible="True"
+                            RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference root}}"
+                            RemoveParam="{Binding}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

@@ -42,13 +42,15 @@
             HorizontalOptions="EndAndExpand"
             Spacing="16">
 
-            <Image Source="ic_shopping.png"         x:Name="shoppingImage"     WidthRequest="20" HeightRequest="20" IsVisible="False"/>
+            <Image Source="ic_remove.png"           x:Name="removeImage"       WidthRequest="24" HeightRequest="24" IsVisible="False"/>
 
-            <Image Source="ic_add.png"              x:Name="addImage"          WidthRequest="20" HeightRequest="20" IsVisible="False"/>
+            <Image Source="ic_shopping.png"         x:Name="shoppingImage"     WidthRequest="24" HeightRequest="24" IsVisible="False"/>
 
-            <Image Source="ic_notification_off.png" x:Name="notificationImage" WidthRequest="20" HeightRequest="20" IsVisible="False"/>
+            <Image Source="ic_add.png"              x:Name="addImage"          WidthRequest="24" HeightRequest="24" IsVisible="False"/>
 
-            <Image Source="ic_done.png"             x:Name="doneImage"         WidthRequest="20" HeightRequest="20" IsVisible="False"/>
+            <Image Source="ic_notification_off.png" x:Name="notificationImage" WidthRequest="24" HeightRequest="24" IsVisible="False"/>
+
+            <Image Source="ic_done.png"             x:Name="doneImage"         WidthRequest="24" HeightRequest="24" IsVisible="False"/>
         </StackLayout>
     </StackLayout>
 </ViewCell>

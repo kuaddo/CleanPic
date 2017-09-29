@@ -2,14 +2,14 @@
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:CleaningPic"
+    xmlns:viewmodels="clr-namespace:CleaningPic.ViewModels"
+    xmlns:customviews="clr-namespace:CleaningPic.CustomViews"
     x:Class="CleaningPic.Views.ResultPage"
     x:Name="root"
-    Padding="16, 16, 16, 16"
     Title="解析結果">
     
     <ContentPage.BindingContext>
-        <local:ViewModels.ResultViewModel/>
+        <viewmodels:ResultViewModel/>
     </ContentPage.BindingContext>
 
     <Grid>
@@ -23,65 +23,22 @@
             Grid.Row="0"
             Grid.Column="0"/>
 
-        <ListView
-            x:Name="listView"
+        <ListView 
+            x:Name="listView" 
             Grid.Row="1"
             Grid.Column="0"
+            ItemsSource="{Binding Items}" 
             HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Vertical" Padding="5">
-                            <Label Text="{Binding Dirt}" FontAttributes="Bold" FontSize="Large"/>
-
-                            <Grid Padding="12, 0, 0, 0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="3*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <Label     
-                                    Grid.Row="0"
-                                    Grid.Column="0"
-                                    Text="掃除道具"/>
-
-                                <Label
-                                    Grid.Row="0"
-                                    Grid.Column="1"
-                                    Text="{Binding ToolsString}"/>
-
-                                <Label      
-                                    Grid.Row="1"
-                                    Grid.Column="0"
-                                    Text="予想率"/>
-
-                                <Label
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    Text="{Binding Probability, StringFormat='{0:0.#%}'}"/>
-                            </Grid>
-
-                            <StackLayout
-                                Orientation="Horizontal"
-                                HorizontalOptions="EndAndExpand"
-                                Spacing="16">
-
-                                <Button
-                                    Text="後で落とす"
-                                    Command="{Binding BindingContext.AddNotDoneCommand, Source={x:Reference root}"
-                                    CommandParameter="{Binding}"/>
-
-                                <Button
-                                    Text="汚れを落とす！"     
-                                    Command="{Binding BindingContext.AddDoneCommand, Source={x:Reference root}"
-                                    CommandParameter="{Binding}"/>
-                            </StackLayout>
-                        </StackLayout>
-                    </ViewCell>
+                    <customviews:CleaningCell 
+                        DirtOrPlace="{Binding Dirt}"
+                        ToolsString="{Binding ToolsString}"
+                        CleaningTime="{Binding CleaningTime}"
+                        ShoppingIsVisible="True"
+                        AddIsVisible="True"
+                        AddCommand="{Binding BindingContext.CleaningAddCommand, Source={x:Reference root}}"
+                        AddParam="{Binding}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

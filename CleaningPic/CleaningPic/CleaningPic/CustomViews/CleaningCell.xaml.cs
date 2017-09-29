@@ -14,13 +14,6 @@ namespace CleaningPic.CustomViews
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CleaningCell : ViewCell
 	{
-        private bool shoppingIsVisible     = false;
-        private bool addIsVisible          = false;
-        private bool notificationIsVisible = false;
-        private bool doneIsVisible         = false;
-        private bool showsAddDate          = false;
-        private bool showsDoneDate         = false;
-
         public static readonly BindableProperty CreatedProperty = BindableProperty.Create(
             nameof(Created),
             typeof(DateTimeOffset),
@@ -62,6 +55,34 @@ namespace CleaningPic.CustomViews
             typeof(CleaningCell),
             null,
             propertyChanged: (b, o, n) => (b as CleaningCell).DoneParam = n);
+
+        public static readonly BindableProperty RemoveCommandProperty = BindableProperty.Create(
+            nameof(RemoveCommand),
+            typeof(Command),
+            typeof(CleaningCell),
+            null,
+            propertyChanged: (b, o, n) => (b as CleaningCell).RemoveCommand = n as Command);
+
+        public static readonly BindableProperty RemoveParamProperty = BindableProperty.Create(
+            nameof(RemoveParam),
+            typeof(object),
+            typeof(CleaningCell),
+            null,
+            propertyChanged: (b, o, n) => (b as CleaningCell).RemoveParam = n);
+
+        public static readonly BindableProperty AddCommandProperty = BindableProperty.Create(
+            nameof(AddCommand),
+            typeof(Command),
+            typeof(CleaningCell),
+            null,
+            propertyChanged: (b, o, n) => (b as CleaningCell).AddCommand = n as Command);
+
+        public static readonly BindableProperty AddParamProperty = BindableProperty.Create(
+            nameof(AddParam),
+            typeof(object),
+            typeof(CleaningCell),
+            null,
+            propertyChanged: (b, o, n) => (b as CleaningCell).AddParam = n);
 
         public DateTimeOffset Created
         {
@@ -125,64 +146,83 @@ namespace CleaningPic.CustomViews
             }
         }
 
-        public bool ShoppingIsVisible
+        public Command RemoveCommand
         {
-            get { return shoppingIsVisible; }
+            get { return GetValue(RemoveCommandProperty) as Command; }
             set
             {
-                shoppingIsVisible = value;
-                shoppingImage.IsVisible = value;
+                SetValue(RemoveCommandProperty, value);
+                if (RemoveParam != null)
+                    SetRemoveRecognizer();
             }
+        }
+
+        public object RemoveParam
+        {
+            get { return GetValue(RemoveParamProperty); }
+            set
+            {
+                SetValue(RemoveParamProperty, value);
+                if (RemoveCommand != null)
+                    SetRemoveRecognizer();
+            }
+        }
+
+        public Command AddCommand
+        {
+            get { return GetValue(AddCommandProperty) as Command; }
+            set
+            {
+                SetValue(AddCommandProperty, value);
+                if (AddParam != null)
+                    SetAddRecognizer();
+            }
+        }
+
+        public object AddParam
+        {
+            get { return GetValue(AddParamProperty); }
+            set
+            {
+                SetValue(AddParamProperty, value);
+                if (AddCommand != null)
+                    SetAddRecognizer();
+            }
+        }
+
+        public bool RemoveIsVisible
+        {
+            set { removeImage.IsVisible = value; }
+        }
+
+        public bool ShoppingIsVisible
+        {
+            set { shoppingImage.IsVisible = value; }
         }
 
         public bool AddIsVisible
         {
-            get { return addIsVisible; }
-            set
-            {
-                addIsVisible = value;
-                addImage.IsVisible = value;
-            }
+            set {  addImage.IsVisible = value; }
         }
 
         public bool NotificationIsVisible
         {
-            get { return notificationIsVisible; }
-            set
-            {
-                notificationIsVisible = value;
-                notificationImage.IsVisible = value;
-            }
+            set { notificationImage.IsVisible = value; }
         }
 
         public bool DoneIsVisible
         {
-            get { return doneIsVisible; }
-            set
-            {
-                doneIsVisible = value;
-                doneImage.IsVisible = value;
-            }
+            set { doneImage.IsVisible = value; }
         }
 
         public bool ShowsAddDate
         {
-            get { return showsAddDate; }
-            set
-            {
-                showsAddDate = value;
-                addDateLabel.IsVisible = value;
-            }
+            set { addDateLabel.IsVisible = value; }
         }
 
         public bool ShowsDoneDate
         {
-            get { return showsDoneDate; }
-            set
-            {
-                showsDoneDate = value;
-                doneDateLable.IsVisible = value;
-            }
+            set { doneDateLable.IsVisible = value; }
         }
 
         private void SetDoneRecognizer()
@@ -190,6 +230,20 @@ namespace CleaningPic.CustomViews
             if (doneImage.GestureRecognizers.Count > 1) return;
             var recognizer = new TapGestureRecognizer() { Command = DoneCommand, CommandParameter = DoneParam };
             doneImage.GestureRecognizers.Add(recognizer);
+        }
+
+        private void SetRemoveRecognizer()
+        {
+            if (removeImage.GestureRecognizers.Count > 1) return;
+            var recognizer = new TapGestureRecognizer() { Command = RemoveCommand, CommandParameter = RemoveParam };
+            removeImage.GestureRecognizers.Add(recognizer);
+        }
+
+        private void SetAddRecognizer()
+        {
+            if (addImage.GestureRecognizers.Count > 1) return;
+            var recognizer = new TapGestureRecognizer() { Command = AddCommand, CommandParameter = AddParam };
+            addImage.GestureRecognizers.Add(recognizer);
         }
 
         public CleaningCell()

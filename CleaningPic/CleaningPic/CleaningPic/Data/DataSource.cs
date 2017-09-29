@@ -49,8 +49,11 @@ namespace CleaningPic.Data
         // Cleaningを更新する
         public void UpdateCleaning(Cleaning data) => realm.Write(() => realm.Add(data.Clone(), update: true));
 
-        // Cleaningを削除する
-        public void RemoveCleaning(Cleaning data) => realm.Write(() => realm.Remove(data.Clone()));
+        // Cleaningを削除する。削除するオブジェクトはManagedObjectでなければならない
+        public void RemoveCleaning(Cleaning data) => realm.Write(() => realm.Remove(
+            realm.All<Cleaning>()
+                .Where(c => c.Id == data.Id)
+                .FirstOrDefault()));
 
         // Cleaningを全て削除する
         public void RemoveAllCleaning() => realm.Write(() => realm.RemoveAll<Cleaning>());

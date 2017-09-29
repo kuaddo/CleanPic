@@ -12,6 +12,8 @@ namespace CleaningPic.ViewModels
     {
         public ObservableCollection<Cleaning> Items { get; set; } = new ObservableCollection<Cleaning>();
 
+        public Command CleaningRemoveCommand { get; private set; }
+
         public DoneViewModel()
         {
             // やりたいページで完了したものをMessageで確認、やったページに追加
@@ -19,6 +21,13 @@ namespace CleaningPic.ViewModels
                 this,
                 WantToDoViewModel.cleaningDoneMessage,
                 (sender, cleaning) => { Items.Add(cleaning); });
+
+            CleaningRemoveCommand = new Command<Cleaning>(c =>
+            {
+                using (var ds = new DataSource())
+                    ds.RemoveCleaning(c);
+                Items.Remove(c);
+            });
 
             // データの読み込み
             using (var ds = new DataSource())

@@ -21,8 +21,12 @@
                     DirtOrPlace="{Binding Dirt}"
                     ToolsString="{Binding ToolsString}"
                     CleaningTime="{Binding CleaningTime}" 
+                    RemoveIsVisible="True"
+                    ShoppingIsVisible="True"
                     NotificationIsVisible="True"
                     DoneIsVisible="True"
+                    RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference root}}"
+                    RemoveParam="{Binding}"
                     DoneCommand="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference root}}"
                     DoneParam="{Binding}"/>
             </DataTemplate>

@@ -22,6 +22,7 @@ namespace CleaningPic.ViewModels
         public const string cleaningDoneMessage = "cleaningDoneMessage";
 
         public Command CleaningDoneCommand { get; private set; }
+        public Command CleaningRemoveCommand { get; private set; }
 
         public WantToDoViewModel()
         {
@@ -37,6 +38,13 @@ namespace CleaningPic.ViewModels
                     this,
                     cleaningDoneMessage,
                     c);
+            });
+
+            CleaningRemoveCommand = new Command<Cleaning>(c =>
+            {
+                using (var ds = new DataSource())
+                    ds.RemoveCleaning(c);
+                Items.Remove(c);
             });
 
             // Itemsが変化した時にItemCountStringを更新するようにする
