@@ -29,6 +29,7 @@ namespace CleaningPic.ViewModels
             CleaningDoneCommand = new Command<Cleaning>(c =>
             {
                 c.Done = true;
+                c.Created = DateTimeOffset.UtcNow;
                 using (var ds = new DataSource())
                     ds.UpdateCleaning(c);
                 Items.Remove(c);
