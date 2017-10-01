@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ViewCell 
+<ContentView 
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="CleaningPic.CustomViews.CleaningCell">
+    x:Class="CleaningPic.CustomViews.CleaningView">
 
     <StackLayout Orientation="Vertical" Padding="5">
 
         <StackLayout Orientation="Horizontal" Spacing="3">
-            
+
             <Label x:Name="titleLabel" FontAttributes="Bold" FontSize="Large" HorizontalOptions="StartAndExpand"/>
 
             <Label x:Name="addDateLabel"  IsVisible="False" Text="追加日"/>
@@ -53,4 +53,4 @@
             <Image Source="ic_done.png"             x:Name="doneImage"         WidthRequest="24" HeightRequest="24" IsVisible="False"/>
         </StackLayout>
     </StackLayout>
-</ViewCell>
+</ContentView>

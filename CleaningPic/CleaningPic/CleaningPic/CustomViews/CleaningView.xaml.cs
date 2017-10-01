@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,77 +10,77 @@ using Xamarin.Forms.Xaml;
 namespace CleaningPic.CustomViews
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CleaningCell : ViewCell
+	public partial class CleaningView : ContentView
 	{
         public static readonly BindableProperty CreatedProperty = BindableProperty.Create(
             nameof(Created),
             typeof(DateTimeOffset),
-            typeof(CleaningCell),
+            typeof(CleaningView),
             DateTimeOffset.Now,
-            propertyChanged: (b, o, n) => (b as CleaningCell).Created = (DateTimeOffset)n);
+            propertyChanged: (b, o, n) => (b as CleaningView).Created = (DateTimeOffset)n);
 
         public static readonly BindableProperty DirtOrPlaceProperty = BindableProperty.Create(
             nameof(DirtOrPlace),
             typeof(string),
-            typeof(CleaningCell),
+            typeof(CleaningView),
             "",
-            propertyChanged: (b, o, n) => (b as CleaningCell).DirtOrPlace = (string)n);
+            propertyChanged: (b, o, n) => (b as CleaningView).DirtOrPlace = (string)n);
 
         public static readonly BindableProperty CleaningTimeProperty = BindableProperty.Create(
             nameof(CleaningTime),
             typeof(int),
-            typeof(CleaningCell),
+            typeof(CleaningView),
             0,
-            propertyChanged: (b, o, n) => (b as CleaningCell).CleaningTime = (int)n);
+            propertyChanged: (b, o, n) => (b as CleaningView).CleaningTime = (int)n);
 
         public static readonly BindableProperty ToolsStringProperty = BindableProperty.Create(
             nameof(ToolsString),
             typeof(string),
-            typeof(CleaningCell),
+            typeof(CleaningView),
             "",
-            propertyChanged: (b, o, n) => (b as CleaningCell).ToolsString = (string)n);
+            propertyChanged: (b, o, n) => (b as CleaningView).ToolsString = (string)n);
 
         public static readonly BindableProperty DoneCommandProperty = BindableProperty.Create(
             nameof(DoneCommand),
             typeof(Command),
-            typeof(CleaningCell),
+            typeof(CleaningView),
             null,
-            propertyChanged: (b, o, n) => (b as CleaningCell).DoneCommand = n as Command);
+            propertyChanged: (b, o, n) => (b as CleaningView).DoneCommand = n as Command);
 
         public static readonly BindableProperty DoneParamProperty = BindableProperty.Create(
             nameof(DoneParam),
             typeof(object),
-            typeof(CleaningCell),
+            typeof(CleaningView),
             null,
-            propertyChanged: (b, o, n) => (b as CleaningCell).DoneParam = n);
+            propertyChanged: (b, o, n) => (b as CleaningView).DoneParam = n);
 
         public static readonly BindableProperty RemoveCommandProperty = BindableProperty.Create(
             nameof(RemoveCommand),
             typeof(Command),
-            typeof(CleaningCell),
+            typeof(CleaningView),
             null,
-            propertyChanged: (b, o, n) => (b as CleaningCell).RemoveCommand = n as Command);
+            propertyChanged: (b, o, n) => (b as CleaningView).RemoveCommand = n as Command);
 
         public static readonly BindableProperty RemoveParamProperty = BindableProperty.Create(
             nameof(RemoveParam),
             typeof(object),
-            typeof(CleaningCell),
+            typeof(CleaningView),
             null,
-            propertyChanged: (b, o, n) => (b as CleaningCell).RemoveParam = n);
+            propertyChanged: (b, o, n) => (b as CleaningView).RemoveParam = n);
 
         public static readonly BindableProperty AddCommandProperty = BindableProperty.Create(
             nameof(AddCommand),
             typeof(Command),
-            typeof(CleaningCell),
+            typeof(CleaningView),
             null,
-            propertyChanged: (b, o, n) => (b as CleaningCell).AddCommand = n as Command);
+            propertyChanged: (b, o, n) => (b as CleaningView).AddCommand = n as Command);
 
         public static readonly BindableProperty AddParamProperty = BindableProperty.Create(
             nameof(AddParam),
             typeof(object),
-            typeof(CleaningCell),
+            typeof(CleaningView),
             null,
-            propertyChanged: (b, o, n) => (b as CleaningCell).AddParam = n);
+            propertyChanged: (b, o, n) => (b as CleaningView).AddParam = n);
 
         public DateTimeOffset Created
         {
@@ -202,7 +200,7 @@ namespace CleaningPic.CustomViews
 
         public bool AddIsVisible
         {
-            set {  addImage.IsVisible = value; }
+            set { addImage.IsVisible = value; }
         }
 
         public bool NotificationIsVisible
@@ -245,10 +243,9 @@ namespace CleaningPic.CustomViews
             var recognizer = new TapGestureRecognizer() { Command = AddCommand, CommandParameter = AddParam };
             addImage.GestureRecognizers.Add(recognizer);
         }
-
-        public CleaningCell()
+        public CleaningView ()
 		{
-			InitializeComponent();
-        }
-    }
+			InitializeComponent ();
+		}
+	}
 }

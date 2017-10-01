@@ -17,15 +17,17 @@
             <ListView ItemsSource="{Binding Items}" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <customviews:CleaningCell 
-                            ShowsDoneDate="True"
-                            Created="{Binding Created}"
-                            DirtOrPlace="{Binding Dirt}"
-                            ToolsString="{Binding ToolsString}"
-                            CleaningTime="{Binding CleaningTime}"
-                            RemoveIsVisible="True"
-                            RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference root}}"
-                            RemoveParam="{Binding}"/>
+                        <ViewCell>
+                            <customviews:CleaningView 
+                                ShowsDoneDate="True"
+                                Created="{Binding Created}"
+                                DirtOrPlace="{Binding Dirt}"
+                                ToolsString="{Binding ToolsString}"
+                                CleaningTime="{Binding CleaningTime}"
+                                RemoveIsVisible="True"
+                                RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference root}}"
+                                RemoveParam="{Binding}"/>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

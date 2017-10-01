@@ -31,14 +31,16 @@
             HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <customviews:CleaningCell 
-                        DirtOrPlace="{Binding Dirt}"
-                        ToolsString="{Binding ToolsString}"
-                        CleaningTime="{Binding CleaningTime}"
-                        ShoppingIsVisible="True"
-                        AddIsVisible="True"
-                        AddCommand="{Binding BindingContext.CleaningAddCommand, Source={x:Reference root}}"
-                        AddParam="{Binding}"/>
+                    <ViewCell>
+                        <customviews:CleaningView
+                            DirtOrPlace="{Binding Dirt}"
+                            ToolsString="{Binding ToolsString}"
+                            CleaningTime="{Binding CleaningTime}"
+                            ShoppingIsVisible="True"
+                            AddIsVisible="True"
+                            AddCommand="{Binding BindingContext.CleaningAddCommand, Source={x:Reference root}}"
+                            AddParam="{Binding}"/>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

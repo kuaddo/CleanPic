@@ -12,9 +12,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)CustomViews\CleaningCell.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)CustomViews\CleaningView.xaml.cs">
       <SubType>Code</SubType>
-      <DependentUpon>CleaningCell.xaml</DependentUpon>
+      <DependentUpon>CleaningView.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Models\Cleaning.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\DataSource.cs" />
@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BindableBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DoneViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ResultViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\TopViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UploadViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WantToDoViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\CameraPage.xaml.cs">
@@ -126,7 +127,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)CustomViews\CleaningCell.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)CustomViews\CleaningView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

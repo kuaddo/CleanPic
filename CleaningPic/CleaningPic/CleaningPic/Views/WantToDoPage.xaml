@@ -9,26 +9,28 @@
     Title="やりたい">
 
     <ContentPage.BindingContext>
-        <viewmodels:WantToDoViewModel/>
+        <viewmodels:TopViewModel/>
     </ContentPage.BindingContext>
 
     <ListView ItemsSource="{Binding Items}" HasUnevenRows="True">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <customviews:CleaningCell 
-                    ShowsAddDate="True"
-                    Created="{Binding Created}"
-                    DirtOrPlace="{Binding Dirt}"
-                    ToolsString="{Binding ToolsString}"
-                    CleaningTime="{Binding CleaningTime}" 
-                    RemoveIsVisible="True"
-                    ShoppingIsVisible="True"
-                    NotificationIsVisible="True"
-                    DoneIsVisible="True"
-                    RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference root}}"
-                    RemoveParam="{Binding}"
-                    DoneCommand="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference root}}"
-                    DoneParam="{Binding}"/>
+                <ViewCell>
+                    <customviews:CleaningView
+                        ShowsAddDate="True"
+                        Created="{Binding Created}"
+                        DirtOrPlace="{Binding Dirt}"
+                        ToolsString="{Binding ToolsString}"
+                        CleaningTime="{Binding CleaningTime}" 
+                        RemoveIsVisible="True"
+                        ShoppingIsVisible="True"
+                        NotificationIsVisible="True"
+                        DoneIsVisible="True"
+                        RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference root}}"
+                        RemoveParam="{Binding}"
+                        DoneCommand="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference root}}"
+                        DoneParam="{Binding}"/>
+                </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
