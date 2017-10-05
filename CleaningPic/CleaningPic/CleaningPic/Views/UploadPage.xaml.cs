@@ -12,7 +12,6 @@ using Xamarin.Forms.Xaml;
 
 namespace CleaningPic.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class UploadPage : ContentPage
 	{
         private byte[] data;

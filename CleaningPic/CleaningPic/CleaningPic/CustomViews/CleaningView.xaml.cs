@@ -9,7 +9,6 @@ using Xamarin.Forms.Xaml;
 
 namespace CleaningPic.CustomViews
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CleaningView : ContentView
 	{
         public static readonly BindableProperty CreatedProperty = BindableProperty.Create(
