@@ -9,7 +9,7 @@
     Title="やりたい">
 
     <ContentPage.BindingContext>
-        <viewmodels:TopViewModel/>
+        <viewmodels:WantToDoViewModel/>
     </ContentPage.BindingContext>
 
     <ListView ItemsSource="{Binding Items}" HasUnevenRows="True">
