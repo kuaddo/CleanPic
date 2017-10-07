@@ -38,6 +38,7 @@
                             CleaningTime="{Binding CleaningTime}"
                             ShoppingIsVisible="True"
                             AddIsVisible="True"
+                            ChangesAddColor="True"
                             AddCommand="{Binding BindingContext.CleaningAddCommand, Source={x:Reference root}}"
                             AddParam="{Binding}"/>
                     </ViewCell>

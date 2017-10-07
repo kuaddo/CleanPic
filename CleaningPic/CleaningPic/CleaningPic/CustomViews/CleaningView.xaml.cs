@@ -222,26 +222,42 @@ namespace CleaningPic.CustomViews
             set { doneDateLable.IsVisible = value; }
         }
 
+        public bool ChangesAddColor
+        {
+            set { if (value) SetAddFinishRecognizer(); }
+        }
+
         private void SetDoneRecognizer()
         {
-            if (doneImage.GestureRecognizers.Count > 1) return;
             var recognizer = new TapGestureRecognizer() { Command = DoneCommand, CommandParameter = DoneParam };
             doneImage.GestureRecognizers.Add(recognizer);
         }
 
         private void SetRemoveRecognizer()
         {
-            if (removeImage.GestureRecognizers.Count > 1) return;
             var recognizer = new TapGestureRecognizer() { Command = RemoveCommand, CommandParameter = RemoveParam };
             removeImage.GestureRecognizers.Add(recognizer);
         }
 
         private void SetAddRecognizer()
         {
-            if (addImage.GestureRecognizers.Count > 1) return;
             var recognizer = new TapGestureRecognizer() { Command = AddCommand, CommandParameter = AddParam };
             addImage.GestureRecognizers.Add(recognizer);
         }
+
+        private void SetAddFinishRecognizer()
+        {
+            var recognizer = new TapGestureRecognizer()
+            {
+                Command = new Command(() =>
+                {
+                    addImage.IsVisible = false;
+                    addFinishImage.IsVisible = true;
+                })
+            };
+            addImage.GestureRecognizers.Add(recognizer);
+        }
+
         public CleaningView ()
 		{
 			InitializeComponent ();

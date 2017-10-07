@@ -48,6 +48,8 @@
 
             <Image Source="ic_add.png"              x:Name="addImage"          WidthRequest="24" HeightRequest="24" IsVisible="False"/>
 
+            <Image Source="ic_add_finish.png"       x:Name="addFinishImage"    WidthRequest="24" HeightRequest="24" IsVisible="False"/>
+
             <Image Source="ic_notification_off.png" x:Name="notificationImage" WidthRequest="24" HeightRequest="24" IsVisible="False"/>
 
             <Image Source="ic_done.png"             x:Name="doneImage"         WidthRequest="24" HeightRequest="24" IsVisible="False"/>

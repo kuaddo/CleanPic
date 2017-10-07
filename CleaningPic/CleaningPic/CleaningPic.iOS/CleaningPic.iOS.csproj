@@ -201,6 +201,9 @@
   <ItemGroup>
     <BundleResource Include="Resources\ic_remove.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_add_finish.png" />
+  </ItemGroup>
   <Import Project="..\CleaningPic\CleaningPic.projitems" Label="Shared" Condition="Exists('..\CleaningPic\CleaningPic.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
