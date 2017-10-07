@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,12 @@ namespace CleaningPic.Views
                 CurrentPage = wantToDoPage;
             else
                 CurrentPage = donePage;
+
+            // やりたい、やったのタイトル切り替え
+            CurrentPageChanged += (sender, e) =>
+            {
+                Title = CurrentPage.Title;
+            };
         }
     }
 }
