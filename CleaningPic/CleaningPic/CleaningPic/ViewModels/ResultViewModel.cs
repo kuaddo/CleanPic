@@ -1,4 +1,5 @@
 ﻿using CleaningPic.Data;
+using CleaningPic.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,10 +23,11 @@ namespace CleaningPic.ViewModels
                 // Realmに追加する処理
                 using (var ds = new DataSource())
                 {
-                    if (ds.Exists(c))
-                        Debug.WriteLine("このデータは存在しています");   // TODO: トーストか何かでユーザに伝える必要がある
-                    else
+                    if (!ds.Exists(c))
+                    {
                         ds.AddCleaning(c);
+                        DependencyService.Get<IFormsToast>().Show(c.ToString() + "を追加しました");
+                    }
                 }
             });
         }

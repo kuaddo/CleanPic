@@ -25,6 +25,12 @@ namespace CleaningPic.Data
         public DateTimeOffset Created { get; set; }                 // この手法のクラスを作成・追加・完了した日時。ソートに利用。offsetが上手く保存されないのでUTCで保存する
         public double Probability { get; set; }                     // 汚れの予想確率。0~1
 
+        public override string ToString()
+        {
+            // TODO: Place実装時にPlaceの情報も追加する
+            return Dirt;
+        }
+
         public Cleaning Clone()
         {
             var clone = new Cleaning()
