@@ -12,26 +12,41 @@
         <viewmodels:WantToDoViewModel/>
     </ContentPage.BindingContext>
 
-    <ListView ItemsSource="{Binding Items}" HasUnevenRows="True">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <customviews:CleaningView
-                        ShowsAddDate="True"
-                        Created="{Binding Created}"
-                        DirtOrPlace="{Binding Dirt}"
-                        ToolsString="{Binding ToolsString}"
-                        CleaningTime="{Binding CleaningTime}" 
-                        RemoveIsVisible="True"
-                        ShoppingIsVisible="True"
-                        NotificationIsVisible="True"
-                        DoneIsVisible="True"
-                        RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference root}}"
-                        RemoveParam="{Binding}"
-                        DoneCommand="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference root}}"
-                        DoneParam="{Binding}"/>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+    <Grid>
+        <ListView ItemsSource="{Binding Items}" ItemAppearing="OnItemAppearing" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <customviews:CleaningView
+                            ShowsAddDate="True"
+                            Created="{Binding Created}"
+                            DirtOrPlace="{Binding Dirt}"
+                            ToolsString="{Binding ToolsString}"
+                            CleaningTime="{Binding CleaningTime}" 
+                            RemoveIsVisible="True"
+                            ShoppingIsVisible="True"
+                            NotificationIsVisible="True"
+                            DoneIsVisible="True"
+                            RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference root}}"
+                            RemoveParam="{Binding}"
+                            DoneCommand="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference root}}"
+                            DoneParam="{Binding}"/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+        <Frame
+            HorizontalOptions="Center" 
+            VerticalOptions="Center"
+            BackgroundColor="White"
+            IsVisible="{Binding IsLoading}">
+
+            <StackLayout>
+                <ActivityIndicator IsRunning="True" Color="Black"/>
+                <Label Text="Data loading..." XAlign="Center"/>
+            </StackLayout>
+        </Frame>
+    </Grid>
 </ContentPage>

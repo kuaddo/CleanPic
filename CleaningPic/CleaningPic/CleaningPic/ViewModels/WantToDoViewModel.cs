@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace CleaningPic.ViewModels
@@ -15,11 +16,19 @@ namespace CleaningPic.ViewModels
     {
         public ObservableCollection<Cleaning> Items { get; set; } = new ObservableCollection<Cleaning>();
         private string itemCountString;
+        private bool isLoading = false;
         public string ItemCountString
         {
             get { return itemCountString; }
             set { SetProperty(ref itemCountString, value); }
         }
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set { SetProperty(ref isLoading, value); }
+        }
+
+        private const int loadingCount = 10;
         public const string cleaningDoneMessage = "cleaningDoneMessage";
 
         public Command CleaningDoneCommand { get; private set; }
@@ -55,14 +64,48 @@ namespace CleaningPic.ViewModels
             // Itemsが変化した時にItemCountStringを更新するようにする
             Items.CollectionChanged += (sender, e) =>
             {
-                if (Items.Count == 0) ItemCountString = "";
-                else ItemCountString = Items.Count.ToString();
+                var count = 0;
+                using (var ds = new DataSource())
+                    count = ds.ReadAllCleaning()
+                        .Where(c => !c.Done)
+                        .Count();
+                if (count == 0) ItemCountString = "";
+                else ItemCountString = count.ToString();
             };
 
             // データの読み込み
             using (var ds = new DataSource())
-                foreach (var c in ds.ReadAllCleaning().Where(c => !c.Done).OrderByDescending(c => c.Created.Ticks))
+                foreach (var c in ds.ReadAllCleaning()
+                    .Where(c => !c.Done)
+                    .OrderByDescending(c => c.Created.Ticks)
+                    .Skip(Items.Count)
+                    .Take(loadingCount))
+                {
                     Items.Add(c);
+                }
+        }
+
+        public async Task OnItemAppearing(Cleaning cleaning)
+        {
+            if (cleaning == Items.Last() && ItemCountString != "" && int.Parse(ItemCountString) != Items.Count)
+            {
+                // ObservableCollection にデータを追加する処理
+                IsLoading = true;
+                await Task.Run(() =>
+                {
+                    using (var ds = new DataSource())
+                        foreach (var c in ds.ReadAllCleaning()
+                            .Where(c => !c.Done)
+                            .OrderByDescending(c => c.Created.Ticks)
+                            .Skip(Items.Count)
+                            .Take(loadingCount))
+                        {
+                            // ここのAddが重すぎて、非同期にするメリットが殆ど無い
+                            Items.Add(c);
+                        }
+                });
+                IsLoading = false;
+            }
         }
     }
 }

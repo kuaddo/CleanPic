@@ -1,5 +1,7 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using CleaningPic.Data;
+using CleaningPic.ViewModels;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace CleaningPic.Views
 {
@@ -8,6 +10,11 @@ namespace CleaningPic.Views
         public WantToDoPage()
         {
             InitializeComponent();
+        }
+
+        public async void OnItemAppearing(object sender, ItemVisibilityEventArgs e)
+        {
+            await (BindingContext as WantToDoViewModel).OnItemAppearing(e.Item as Cleaning);
         }
     }
 }
