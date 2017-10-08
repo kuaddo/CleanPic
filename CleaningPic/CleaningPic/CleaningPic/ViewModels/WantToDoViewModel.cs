@@ -1,4 +1,5 @@
 ﻿using CleaningPic.Data;
+using CleaningPic.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -39,6 +40,8 @@ namespace CleaningPic.ViewModels
                     this,
                     cleaningDoneMessage,
                     c);
+
+                DependencyService.Get<IFormsToast>().Show(c.ToString() + "を完了しました");
             });
 
             CleaningRemoveCommand = new Command<Cleaning>(c =>
@@ -46,6 +49,7 @@ namespace CleaningPic.ViewModels
                 using (var ds = new DataSource())
                     ds.RemoveCleaning(c);
                 Items.Remove(c);
+                DependencyService.Get<IFormsToast>().Show(c.ToString() + "を削除しました");
             });
 
             // Itemsが変化した時にItemCountStringを更新するようにする
@@ -57,7 +61,7 @@ namespace CleaningPic.ViewModels
 
             // データの読み込み
             using (var ds = new DataSource())
-                foreach (var c in ds.ReadAllCleaning().Where(c => !c.Done))
+                foreach (var c in ds.ReadAllCleaning().Where(c => !c.Done).OrderByDescending(c => c.Created.Ticks))
                     Items.Add(c);
         }
     }
