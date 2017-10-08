@@ -9,6 +9,7 @@ using Android.OS;
 using Plugin.Permissions;
 using Xamarin.Forms;
 using CleaningPic.Views;
+using FFImageLoading.Forms.Droid;
 
 [assembly: UsesFeature("android.hardware.camera", Required = false)]
 [assembly: UsesFeature("android.hardware.camera.autofocus", Required = false)]
@@ -27,7 +28,8 @@ namespace CleaningPic.Droid
 			base.OnCreate (bundle);
 
 			global::Xamarin.Forms.Forms.Init (this, bundle);
-			LoadApplication (new CleaningPic.App ());
+            CachedImageRenderer.Init();
+            LoadApplication (new CleaningPic.App ());
 
             // LoadingDialogのメッセージ待ち
             MessagingCenter.Subscribe<UploadPage, bool>(this, "progress_dialog", (page, isVisible) =>

@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using FFImageLoading.Forms.Touch;
 
 namespace CleaningPic.iOS
 {
@@ -23,7 +24,8 @@ namespace CleaningPic.iOS
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init ();
-			LoadApplication (new CleaningPic.App ());
+            CachedImageRenderer.Init();
+            LoadApplication (new CleaningPic.App ());
 
 			return base.FinishedLaunching (app, options);
 		}
