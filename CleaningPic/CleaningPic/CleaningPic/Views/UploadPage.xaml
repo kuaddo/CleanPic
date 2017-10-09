@@ -2,13 +2,13 @@
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:CleaningPic"
+    xmlns:viewmodels="clr-namespace:CleaningPic.ViewModels"
     x:Class="CleaningPic.Views.UploadPage"
     Padding="16, 16, 16, 16"
     Title="アップロード">
 
     <ContentPage.BindingContext>
-        <local:ViewModels.UploadViewModel/>
+        <viewmodels:UploadViewModel/>
     </ContentPage.BindingContext>
     
     <Grid>
@@ -65,7 +65,23 @@
                 HorizontalOptions="EndAndExpand"
                 VerticalOptions="EndAndExpand"
                 Text="アップロード"
-                Clicked="UploadButton_Clicked"/>
+                Command="{Binding UploadCommand}"/>
         </StackLayout>
+
+        <Frame
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="1"
+            HorizontalOptions="Center" 
+            VerticalOptions="Center"
+            BackgroundColor="White"
+            IsVisible="{Binding IsUploading}">
+
+            <StackLayout>
+                <ActivityIndicator IsRunning="True" Color="Black"/>
+                <Label Text="画像送信中..." XAlign="Center"/>
+            </StackLayout>
+        </Frame>
     </Grid>
 </ContentPage>
