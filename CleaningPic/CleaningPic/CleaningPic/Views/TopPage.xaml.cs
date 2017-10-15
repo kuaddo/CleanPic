@@ -1,4 +1,5 @@
 ﻿using CleaningPic.Data;
+using CleaningPic.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,11 @@ namespace CleaningPic.Views
                     CurrentPage = topPage;      // カメラ処理を立ち上げる前に元ページに戻す
                     var imageData = await cameraPage.LaunchCamera();
                     if (imageData != null)
-                        await Navigation.PushAsync(new UploadPage(imageData));
+                    {
+                        var square = DependencyService.Get<IImageEditor>().Square(imageData);
+                        var data = DependencyService.Get<IImageEditor>().Resize(square, 144);   // 72 * 2 = 144
+                        await Navigation.PushAsync(new UploadPage(data));
+                    }
                 }
             };
 		}
