@@ -40,6 +40,31 @@ namespace CleaningPic.Droid
             return ToByteArray(newBitmap);
         }
 
+        // 大きい画像だとSquare()の段階でサイズが非常に大きくなってしまうので、こちらの利用推奨
+        public byte[] SquareAndResize(byte[] data, int size)
+        {
+            var bitmap = ToBitmap(data);
+            var ss = Math.Min(bitmap.Width, bitmap.Height);
+            int x, y;
+            if (bitmap.Width > ss)
+            {
+                x = (bitmap.Width - ss) / 2;
+                y = 0;
+            }
+            else
+            {
+                x = 0;
+                y = (bitmap.Height - ss) / 2;
+            }
+
+            float scale = ((float)size) / ss;
+            Matrix matrix = new Matrix();
+            matrix.PostScale(scale, scale);
+            var square = Bitmap.CreateBitmap(bitmap, x, y, ss, ss, null, true);
+            var newBitmap = Bitmap.CreateBitmap(square, 0, 0, ss, ss, matrix, true);
+            return ToByteArray(newBitmap);
+        }
+
         private Bitmap ToBitmap(byte[] bytes)
         {
             if (bytes != null)

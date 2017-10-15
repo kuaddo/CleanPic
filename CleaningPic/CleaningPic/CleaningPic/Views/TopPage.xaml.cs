@@ -2,6 +2,7 @@
 using CleaningPic.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using Xamarin.Forms.Xaml;
 
 namespace CleaningPic.Views
 {
+    // このページのMVVMは妥協することにした
 	public partial class TopPage : CarouselPage
 	{
 		public TopPage ()
@@ -24,8 +26,7 @@ namespace CleaningPic.Views
                     var imageData = await cameraPage.LaunchCamera();
                     if (imageData != null)
                     {
-                        var square = DependencyService.Get<IImageEditor>().Square(imageData);
-                        var data = DependencyService.Get<IImageEditor>().Resize(square, 144);   // 72 * 2 = 144
+                        var data = DependencyService.Get<IImageEditor>().SquareAndResize(imageData, 144);   // 72 * 2 = 144
                         await Navigation.PushAsync(new UploadPage(data));
                     }
                 }
@@ -35,6 +36,22 @@ namespace CleaningPic.Views
         public void CameraMenu_Clicked(object sender, EventArgs e)
         {
             CurrentPage = cameraPage;
+        }
+
+        public async void SelectImageButton_Clicked(object sender, EventArgs e)
+        {
+            var photo = await Plugin.Media.CrossMedia.Current.PickPhotoAsync();
+            if (photo != null)
+            {
+                using (var stream = photo.GetStream())
+                using (var ms = new MemoryStream())
+                {
+                    if (stream == null) return;
+                    stream.CopyTo(ms);
+                    var data = DependencyService.Get<IImageEditor>().SquareAndResize(ms.ToArray(), 144);    // 72 * 2 = 144
+                    await Navigation.PushAsync(new UploadPage(data));
+                }
+            }
         }
 
         public void DeleteButton_Clicked(object sender, EventArgs e)

@@ -37,7 +37,13 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
                 Clicked="DeleteButton_Clicked"/>
-            
+
+            <Button
+                Text="画像をファイルから選択する"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Clicked="SelectImageButton_Clicked"/>
+
             <forms:CarouselView ItemsSource="{Binding Items}" HorizontalOptions="FillAndExpand">
                 <forms:CarouselView.ItemTemplate>
                     <DataTemplate>
