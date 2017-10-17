@@ -35,7 +35,7 @@ namespace CleaningPic.ViewModels
 
             // データの読み込み
             using (var ds = new DataSource())
-                foreach (var c in ds.ReadAllCleaning().Where(c => !c.Done))
+                foreach (var c in ds.ReadAllCleaning().Where(c => !c.Done).Take(5))
                     Items.Add(c);
         }
     }

@@ -44,26 +44,28 @@
                 VerticalOptions="Center"
                 Clicked="SelectImageButton_Clicked"/>
 
-            <forms:CarouselView ItemsSource="{Binding Items}" HorizontalOptions="FillAndExpand">
-                <forms:CarouselView.ItemTemplate>
+            <ListView ItemsSource="{Binding Items}" HasUnevenRows="True">
+                <ListView.ItemTemplate>
                     <DataTemplate>
-                        <customviews:CleaningView
-                            ShowsAddDate="True"
-                            Created="{Binding Created}"
-                            DirtOrPlace="{Binding Dirt}"
-                            ToolsString="{Binding ToolsString}"
-                            CleaningTime="{Binding CleaningTime}" 
-                            RemoveIsVisible="True"
-                            ShoppingIsVisible="True"
-                            NotificationIsVisible="True"
-                            DoneIsVisible="True"
-                            RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference topPage}}"
-                            RemoveParam="{Binding}"
-                            DoneCommand="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference topPage}}"
-                            DoneParam="{Binding}"/>
+                        <ViewCell>
+                            <customviews:CleaningView
+                                ShowsAddDate="True"
+                                Created="{Binding Created}"
+                                DirtOrPlace="{Binding Dirt}"
+                                ToolsString="{Binding ToolsString}"
+                                CleaningTime="{Binding CleaningTime}" 
+                                RemoveIsVisible="True"
+                                ShoppingIsVisible="True"
+                                NotificationIsVisible="True"
+                                DoneIsVisible="True"
+                                RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference topPage}}"
+                                RemoveParam="{Binding}"
+                                DoneCommand="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference topPage}}"
+                                DoneParam="{Binding}"/>
+                        </ViewCell>
                     </DataTemplate>
-                </forms:CarouselView.ItemTemplate>
-            </forms:CarouselView>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage>
     
