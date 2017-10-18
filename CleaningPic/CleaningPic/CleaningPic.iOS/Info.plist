@@ -48,6 +48,10 @@
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen.storyboard</string>
+	<key>NSCameraUsageDescription</key>
+	<string>写真をアプリから撮影できるようになります。</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>端末内の写真をアップロードできるようになります。</string>
 	<key>CFBundleName</key>
 	<string>CleaningPic</string>
 </dict>
