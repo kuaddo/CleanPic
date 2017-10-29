@@ -26,11 +26,14 @@
                             RemoveIsVisible="True"
                             ShoppingIsVisible="True"
                             NotificationIsVisible="True"
-                            DoneIsVisible="True"
+                            DoneIsVisible="True"   
+                            CanNotify="{Binding CanNotify}"
                             RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference root}}"
                             RemoveParam="{Binding}"
                             DoneCommand="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference root}}"
-                            DoneParam="{Binding}"/>
+                            DoneParam="{Binding}"
+                            NotificationCommand="{Binding BindingContext.CleaningNotificationCommand, Source={x:Reference root}}"
+                            NotificationParam="{Binding}"/>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

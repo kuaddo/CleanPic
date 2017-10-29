@@ -24,6 +24,8 @@ namespace CleaningPic.Data
         public bool Done { get; set; } = false;                     // やりたいならfalse、やったならtrue
         public DateTimeOffset Created { get; set; }                 // この手法のクラスを作成・追加・完了した日時。ソートに利用。offsetが上手く保存されないのでUTCで保存する
         public double Probability { get; set; }                     // 汚れの予想確率。0~1
+        public bool CanNotify { get; set; } = false;                // 通知を行うかどうか
+        public DateTimeOffset NotificationDate { get; set; }        // 通知日時
 
         public override string ToString()
         {
@@ -43,7 +45,9 @@ namespace CleaningPic.Data
                 ImageData = ImageData,
                 Done = Done,
                 Created = Created,
-                Probability = Probability
+                Probability = Probability,
+                CanNotify = CanNotify,
+                NotificationDate = NotificationDate
             };
             return clone;
         }

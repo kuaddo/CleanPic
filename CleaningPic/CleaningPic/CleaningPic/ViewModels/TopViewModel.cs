@@ -14,6 +14,7 @@ namespace CleaningPic.ViewModels
 
         public Command CleaningDoneCommand { get; private set; }
         public Command CleaningRemoveCommand { get; private set; }
+        public Command CleaningNotificationCommand { get; private set; }
 
         public TopViewModel()
         {
@@ -31,6 +32,11 @@ namespace CleaningPic.ViewModels
                 using (var ds = new DataSource())
                     ds.RemoveCleaning(c);
                 Items.Remove(c);
+            });
+
+            CleaningNotificationCommand = new Command<Cleaning>(c =>
+            {
+                c.CanNotify = !c.CanNotify;
             });
 
             // データの読み込み

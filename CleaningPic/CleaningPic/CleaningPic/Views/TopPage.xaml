@@ -54,14 +54,16 @@
                                 DirtOrPlace="{Binding Dirt}"
                                 ToolsString="{Binding ToolsString}"
                                 CleaningTime="{Binding CleaningTime}" 
-                                RemoveIsVisible="True"
                                 ShoppingIsVisible="True"
                                 NotificationIsVisible="True"
                                 DoneIsVisible="True"
+                                CanNotify="{Binding CanNotify}"
                                 RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference topPage}}"
                                 RemoveParam="{Binding}"
                                 DoneCommand="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference topPage}}"
-                                DoneParam="{Binding}"/>
+                                DoneParam="{Binding}"
+                                NotificationCommand="{Binding BindingContext.CleaningNotificationCommand, Source={x:Reference topPage}}"
+                                NotificationParam="{Binding}"/>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

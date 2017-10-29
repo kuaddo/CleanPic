@@ -39,6 +39,14 @@ namespace CleaningPic.CustomViews
             "",
             propertyChanged: (b, o, n) => (b as CleaningView).ToolsString = (string)n);
 
+        public static readonly BindableProperty CanNotifyProperty = BindableProperty.Create(
+            nameof(CanNotify),
+            typeof(bool),
+            typeof(CleaningView),
+            false,
+            propertyChanged: (b, o, n) => (b as CleaningView).CanNotify = (bool)n,                
+            defaultBindingMode: BindingMode.TwoWay);    // TwoWayにしないと動かない。
+
         public static readonly BindableProperty DoneCommandProperty = BindableProperty.Create(
             nameof(DoneCommand),
             typeof(Command),
@@ -81,6 +89,20 @@ namespace CleaningPic.CustomViews
             null,
             propertyChanged: (b, o, n) => (b as CleaningView).AddParam = n);
 
+        public static readonly BindableProperty NotificationCommandProperty = BindableProperty.Create(
+            nameof(NotificationCommand),
+            typeof(Command),
+            typeof(CleaningView),
+            null,
+            propertyChanged: (b, o, n) => (b as CleaningView).NotificationCommand = n as Command);
+
+        public static readonly BindableProperty NotificationParamProperty = BindableProperty.Create(
+            nameof(NotificationParam),
+            typeof(object),
+            typeof(CleaningView),
+            null,
+            propertyChanged: (b, o, n) => (b as CleaningView).NotificationParam = n);
+
         public DateTimeOffset Created
         {
             get { return (DateTimeOffset)GetValue(CreatedProperty); }
@@ -118,6 +140,19 @@ namespace CleaningPic.CustomViews
             {
                 SetValue(ToolsStringProperty, value);
                 toolsLabel.Text = value;
+            }
+        }
+
+        public bool CanNotify
+        {
+            get { return (bool)GetValue(CanNotifyProperty); }
+            set
+            {
+                SetValue(CanNotifyProperty, value);
+                if (value)
+                    notificationImage.Source = "ic_notification_on.png";
+                else
+                    notificationImage.Source = "ic_notification_off.png";
             }
         }
 
@@ -184,6 +219,28 @@ namespace CleaningPic.CustomViews
                 SetValue(AddParamProperty, value);
                 if (AddCommand != null)
                     SetAddRecognizer();
+            }
+        }
+
+        public Command NotificationCommand
+        {
+            get { return GetValue(NotificationCommandProperty) as Command; }
+            set
+            {
+                SetValue(NotificationCommandProperty, value);
+                if (NotificationParam != null)
+                    SetNotificationRecognizer();
+            }
+        }
+
+        public object NotificationParam
+        {
+            get { return GetValue(NotificationParamProperty); }
+            set
+            {
+                SetValue(NotificationParamProperty, value);
+                if (NotificationCommand != null)
+                    SetNotificationRecognizer();
             }
         }
 
@@ -256,6 +313,12 @@ namespace CleaningPic.CustomViews
                 })
             };
             addImage.GestureRecognizers.Add(recognizer);
+        }
+
+        private void SetNotificationRecognizer()
+        {
+            var recognizer = new TapGestureRecognizer() { Command = NotificationCommand, CommandParameter = NotificationParam };
+            notificationImage.GestureRecognizers.Add(recognizer);
         }
 
         public CleaningView ()

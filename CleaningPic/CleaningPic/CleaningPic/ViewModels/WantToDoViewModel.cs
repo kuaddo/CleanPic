@@ -33,6 +33,7 @@ namespace CleaningPic.ViewModels
 
         public Command CleaningDoneCommand { get; private set; }
         public Command CleaningRemoveCommand { get; private set; }
+        public Command CleaningNotificationCommand { get; private set; }
 
         public WantToDoViewModel()
         {
@@ -59,6 +60,11 @@ namespace CleaningPic.ViewModels
                     ds.RemoveCleaning(c);
                 Items.Remove(c);
                 DependencyService.Get<IFormsToast>().Show(c.ToString() + "を削除しました");
+            });
+
+            CleaningNotificationCommand = new Command<Cleaning>(c =>
+            {
+                c.CanNotify = !c.CanNotify;
             });
 
             // Itemsが変化した時にItemCountStringを更新するようにする
