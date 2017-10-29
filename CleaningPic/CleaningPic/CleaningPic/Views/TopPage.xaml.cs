@@ -26,7 +26,8 @@ namespace CleaningPic.Views
                     var imageData = await cameraPage.LaunchCamera();
                     if (imageData != null)
                     {
-                        var data = DependencyService.Get<IImageEditor>().SquareAndResize(imageData, 144);   // 72 * 2 = 144
+                        //var data = DependencyService.Get<IImageEditor>().SquareAndResize(imageData, 144);   // 72 * 2 = 144
+                        var data = DependencyService.Get<IImageEditor>().Square(imageData);
                         await Navigation.PushAsync(new UploadPage(data));
                     }
                 }
