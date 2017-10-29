@@ -1,5 +1,6 @@
 ﻿using CleaningPic.Data;
 using CleaningPic.Utils;
+using CleaningPic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,7 +33,12 @@ namespace CleaningPic.Views
                     }
                 }
             };
-		}
+
+            MessagingCenter.Subscribe<TopViewModel, (bool, string)>(
+                this,
+                TopViewModel.navigateNotificationSettingPageMessage,
+                async (sender, args) => { await Navigation.PushAsync(new NotificationSettingPage(args.Item1, args.Item2)); });
+        }
 
         public void CameraMenu_Clicked(object sender, EventArgs e)
         {

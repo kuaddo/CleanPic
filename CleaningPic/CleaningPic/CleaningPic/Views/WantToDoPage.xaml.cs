@@ -10,6 +10,10 @@ namespace CleaningPic.Views
         public WantToDoPage()
         {
             InitializeComponent();
+            MessagingCenter.Subscribe<WantToDoViewModel, (bool, string)>(
+                this,
+                WantToDoViewModel.navigateNotificationSettingPageMessage,
+                async (sender, args) => { await Navigation.PushAsync(new NotificationSettingPage(args.Item1, args.Item2)); });
         }
 
         public async void OnItemAppearing(object sender, ItemVisibilityEventArgs e)

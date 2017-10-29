@@ -55,6 +55,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\MainPageMenuItem.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\NotificationSettingPage.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>NotificationSettingPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\ResultPage.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>ResultPage.xaml</DependentUpon>
@@ -130,6 +134,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)CustomViews\CleaningView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\NotificationSettingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

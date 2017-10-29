@@ -1,4 +1,5 @@
 ﻿using CleaningPic.Data;
+using CleaningPic.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +12,7 @@ namespace CleaningPic.ViewModels
     public class TopViewModel : BindableBase
     {
         public ObservableCollection<Cleaning> Items { get; set; } = new ObservableCollection<Cleaning>();
+        public const string navigateNotificationSettingPageMessage = "navigateNotificationSettingPageMessage";
 
         public Command CleaningDoneCommand { get; private set; }
         public Command CleaningRemoveCommand { get; private set; }
@@ -36,13 +38,26 @@ namespace CleaningPic.ViewModels
 
             CleaningNotificationCommand = new Command<Cleaning>(c =>
             {
-                c.CanNotify = !c.CanNotify;
+                MessagingCenter.Send(this, navigateNotificationSettingPageMessage, (c.CanNotify, c.Id));
             });
+
+            MessagingCenter.Subscribe<NotificationSettingPage, (string, bool)>(
+                this,
+                NotificationSettingPage.notificationSettingDoneMessage,
+                (sender, args) => UpdateCanNotify(args.Item1, args.Item2));
 
             // データの読み込み
             using (var ds = new DataSource())
                 foreach (var c in ds.ReadAllCleaning().Where(c => !c.Done).Take(5))
                     Items.Add(c);
+        }
+
+        private void UpdateCanNotify(string cleaningId, bool canNotify)
+        {
+            var cleaning = Items.First(c => c.Id == cleaningId);
+            cleaning.CanNotify = canNotify;
+            using (var ds = new DataSource())
+                ds.UpdateCleaning(cleaning);
         }
     }
 }

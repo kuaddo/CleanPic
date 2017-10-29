@@ -1,5 +1,6 @@
 ﻿using CleaningPic.Data;
 using CleaningPic.Utils;
+using CleaningPic.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,6 +31,7 @@ namespace CleaningPic.ViewModels
 
         private const int loadingCount = 10;
         public const string cleaningDoneMessage = "cleaningDoneMessage";
+        public const string navigateNotificationSettingPageMessage = "navigateNotificationSettingPageMessage";
 
         public Command CleaningDoneCommand { get; private set; }
         public Command CleaningRemoveCommand { get; private set; }
@@ -64,8 +66,13 @@ namespace CleaningPic.ViewModels
 
             CleaningNotificationCommand = new Command<Cleaning>(c =>
             {
-                c.CanNotify = !c.CanNotify;
+                MessagingCenter.Send(this, navigateNotificationSettingPageMessage, (c.CanNotify, c.Id));
             });
+
+            MessagingCenter.Subscribe<NotificationSettingPage, (string, bool)>(
+                this,
+                NotificationSettingPage.notificationSettingDoneMessage,
+                (sender, args) => UpdateCanNotify(args.Item1, args.Item2));
 
             // Itemsが変化した時にItemCountStringを更新するようにする
             Items.CollectionChanged += (sender, e) =>
@@ -112,6 +119,14 @@ namespace CleaningPic.ViewModels
                 });
                 IsLoading = false;
             }
+        }
+
+        private void UpdateCanNotify(string cleaningId, bool canNotify)
+        {
+            var cleaning = Items.First(c => c.Id == cleaningId);
+            cleaning.CanNotify = canNotify;
+            using (var ds = new DataSource())
+                ds.UpdateCleaning(cleaning);
         }
     }
 }
