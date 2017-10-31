@@ -1,4 +1,5 @@
-﻿using CleaningPic.ViewModels;
+﻿using CleaningPic.Utils;
+using CleaningPic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,11 @@ namespace CleaningPic.Views
                 this,
                 notificationSettingDoneMessage,
                 (cleaningId, notificationSwitch.IsToggled));
+        }
+
+        public void NotifyButton_Clicked(object sender, EventArgs e)
+        {
+            DependencyService.Get<IFormsNotification>().Notify("Test title", "これは通知テストです");
         }
     }
 }

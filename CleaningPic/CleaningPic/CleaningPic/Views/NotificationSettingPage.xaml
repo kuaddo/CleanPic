@@ -10,5 +10,9 @@
             x:Name="notificationSwitch"
             IsToggled="{Binding CanNotify, Mode=TwoWay}" 
             Toggled="NotifySwitch_Toggled"/>
+
+        <Button
+            Text="通知を送る"
+            Clicked="NotifyButton_Clicked"/>
     </StackLayout>
 </ContentPage>
