@@ -3,7 +3,8 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="CleaningPic.Views.CameraPage"
-    Title="カメラ">
+    Title="カメラ"
+    BackgroundColor="#338DD0">
     
     <Image 
         HorizontalOptions="CenterAndExpand"

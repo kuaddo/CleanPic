@@ -22,53 +22,104 @@
                 Clicked="CameraMenu_Clicked"/>
         </ContentPage.ToolbarItems>
 
-        <StackLayout
+        <Grid
             HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand"
-            Orientation="Vertical">
-            
-            <Label
-                Text="これはトップページです" 
-                HorizontalOptions="Center"
-                VerticalOptions="Center"/>
+            VerticalOptions="FillAndExpand">
 
-            <Button
-                Text="データを削除する"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                Clicked="DeleteButton_Clicked"/>
+            <StackLayout
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                Orientation="Vertical">
 
-            <Button
-                Text="画像をファイルから選択する"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                Clicked="SelectImageButton_Clicked"/>
+                <StackLayout
+                    HorizontalOptions="FillAndExpand"
+                    Margin="0, 20, 0, 0"
+                    HeightRequest="40"
+                    BackgroundColor="#E6E6E6">
 
-            <ListView ItemsSource="{Binding Items}" HasUnevenRows="True">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <customviews:CleaningView
-                                ShowsAddDate="True"
-                                Created="{Binding Created}"
-                                DirtOrPlace="{Binding Dirt}"
-                                ToolsString="{Binding ToolsString}"
-                                CleaningTime="{Binding CleaningTime}" 
-                                ShoppingIsVisible="True"
-                                NotificationIsVisible="True"
-                                DoneIsVisible="True"
-                                CanNotify="{Binding CanNotify}"
-                                RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference topPage}}"
-                                RemoveParam="{Binding}"
-                                DoneCommand="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference topPage}}"
-                                DoneParam="{Binding}"
-                                NotificationCommand="{Binding BindingContext.CleaningNotificationCommand, Source={x:Reference topPage}}"
-                                NotificationParam="{Binding}"/>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+                    <StackLayout 
+                        Orientation="Horizontal"
+                        HorizontalOptions="Center"
+                        Spacing="10">
+
+                        <Label 
+                            Text="汚れをファイルから送信する"
+                            HorizontalOptions="Center"
+                            HeightRequest="40"
+                            VerticalTextAlignment="Center"
+                            FontSize="Large"/>
+
+                        <Image 
+                            Source="ic_image_upload"
+                            HorizontalOptions="Center"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="36"
+                            HeightRequest="36"/>
+                    </StackLayout>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SelectImageButton_Clicked"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <ListView 
+                    ItemsSource="{Binding Items}" 
+                    HasUnevenRows="True"
+                    Margin="0, 20, 0 ,0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <customviews:CleaningView
+                                    ShowsAddDate="True"
+                                    Created="{Binding Created}"
+                                    DirtOrPlace="{Binding Dirt}"
+                                    ToolsString="{Binding ToolsString}"
+                                    CleaningTime="{Binding CleaningTime}" 
+                                    ShoppingIsVisible="True"
+                                    NotificationIsVisible="True"
+                                    DoneIsVisible="True"
+                                    CanNotify="{Binding CanNotify}"
+                                    RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference topPage}}"
+                                    RemoveParam="{Binding}"
+                                    DoneCommand="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference topPage}}"
+                                    DoneParam="{Binding}"
+                                    NotificationCommand="{Binding BindingContext.CleaningNotificationCommand, Source={x:Reference topPage}}"
+                                    NotificationParam="{Binding}"/>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Button
+                    Text="データを削除する"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Clicked="DeleteButton_Clicked"/>
+            </StackLayout>
+
+            <RelativeLayout
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+
+                <Image
+                    x:Name="sideCameraImage"
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-48}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=50}"
+                    WidthRequest="48"
+                    HeightRequest="48"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    Source="ic_camera"
+                    BackgroundColor="#338DD0"/>
+
+                <Label   
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-24}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=sideCameraImage, Property=Y, Factor=1, Constant=48}"
+                    RelativeLayout.WidthConstraint="24"
+                    HorizontalTextAlignment="Center"
+                    Text="ス&#xD;&#xA;ワ&#xD;&#xA;イ&#xD;&#xA;プ&#xD;&#xA;で&#xD;&#xA;カ&#xD;&#xA;メ&#xD;&#xA;ラ&#xD;&#xA;を&#xD;&#xA;起&#xD;&#xA;動"
+                    BackgroundColor="##338DD0"/>
+            </RelativeLayout>
+        </Grid>
     </ContentPage>
     
     <pages:CameraPage x:Name="cameraPage"/>

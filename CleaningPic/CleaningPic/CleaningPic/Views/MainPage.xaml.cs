@@ -25,7 +25,7 @@ namespace CleaningPic.Views
 
             Page page = (Page)Activator.CreateInstance(item.TargetType, item.Params);
             page.Title = item.Title;
-            Detail = new NavigationPage(page);
+            Detail = new NavigationPage(page) { BarBackgroundColor = Color.FromRgb(51, 141, 208) };
             IsPresented = false;
 
             MasterPage.ListView.SelectedItem = null;
