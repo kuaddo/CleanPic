@@ -16,6 +16,7 @@
       <SubType>Code</SubType>
       <DependentUpon>CleaningView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)CustomViews\ExBoxView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Cleaning.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\DataSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Place.cs" />

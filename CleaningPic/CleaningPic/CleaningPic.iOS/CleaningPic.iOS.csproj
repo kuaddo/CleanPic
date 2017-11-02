@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderers\ExBoxViewRenderer.cs" />
     <None Include="app.config" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
@@ -218,9 +219,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\ic_add_finish.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dependencies\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\CleaningPic\CleaningPic.projitems" Label="Shared" Condition="Exists('..\CleaningPic\CleaningPic.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
