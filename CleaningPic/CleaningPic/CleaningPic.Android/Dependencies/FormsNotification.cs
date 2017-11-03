@@ -5,6 +5,7 @@ using Android.App;
 using Android.Support.V7.App;
 using System;
 using Android.Content;
+using Android.OS;
 
 [assembly: Dependency(typeof(FormsNotification))]
 namespace CleaningPic.Droid
@@ -15,7 +16,7 @@ namespace CleaningPic.Droid
         public const string message = "message";
         private static DateTime unixTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
 
-        public void Notify(string title, string message)
+        public void Notify(string title, string message, DateTime time)
         {
             var context = Android.App.Application.Context;
 
@@ -24,16 +25,21 @@ namespace CleaningPic.Droid
                 .PutExtra(FormsNotification.message, message);
             var pending = PendingIntent.GetBroadcast(context, 9999, intent, PendingIntentFlags.UpdateCurrent);
 
-            SetAlarm(DateTime.Now.AddSeconds(10), pending);
+            SetAlarm(time, pending);
         }
 
         private void SetAlarm(DateTime dateTime, PendingIntent pending)
         {
             var context = Android.App.Application.Context;
             var manager = context.GetSystemService(Context.AlarmService) as AlarmManager;
-            // Set()はAPI19から正確では無くなったらしい。Ticksは100ns
-            manager.SetExact(AlarmType.Rtc, (dateTime.Ticks - unixTime.Ticks) / 10_000, pending);
-            // 上手く時間指定できてないけど、一旦保留
+            var millis = (dateTime.Ticks - unixTime.Ticks) / 10_000;
+            // APIごとにメソッドを変える。Ticksは100ns
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+                manager.SetAlarmClock(new AlarmManager.AlarmClockInfo(millis, null), pending);
+            else if (Build.VERSION.SdkInt >= BuildVersionCodes.Kitkat)
+                manager.SetExact(AlarmType.Rtc, millis, pending);
+            else
+                manager.Set(AlarmType.Rtc, millis, pending);
         }
     }
 
@@ -45,7 +51,7 @@ namespace CleaningPic.Droid
             var notification = new NotificationCompat.Builder(context)
                 .SetContentTitle(intent.GetStringExtra(FormsNotification.title))
                 .SetContentText(intent.GetStringExtra(FormsNotification.message))
-                .SetSmallIcon(Resource.Drawable.ic_want)
+                .SetSmallIcon(Resource.Drawable.ic_notification)
                 .SetAutoCancel(true)
                 .Build();
 

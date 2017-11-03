@@ -33,7 +33,7 @@ namespace CleaningPic.Views
 
         public void NotifyButton_Clicked(object sender, EventArgs e)
         {
-            DependencyService.Get<IFormsNotification>().Notify("Test title", "これは通知テストです");
+            DependencyService.Get<IFormsNotification>().Notify("Test title", "これは通知テストです", DateTime.UtcNow.AddSeconds(5));
         }
     }
 }
