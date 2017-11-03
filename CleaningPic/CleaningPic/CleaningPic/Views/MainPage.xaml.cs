@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace CleaningPic.Views
 {
@@ -15,6 +9,10 @@ namespace CleaningPic.Views
         {
             InitializeComponent();
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
+            MessagingCenter.Subscribe<TopPage>(
+                this,
+                TopPage.navigateWantToDoPageMessage,
+                (sender) => Navigate(new MainPageMenuItem { Id = 1, Title = "やりたい", TargetType = typeof(CleaningTabbedPage), Params = new object[] { true } }));
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -22,7 +20,11 @@ namespace CleaningPic.Views
             var item = e.SelectedItem as MainPageMenuItem;
             if (item == null)
                 return;
+            Navigate(item);
+        }
 
+        private void Navigate(MainPageMenuItem item)
+        {
             Page page = (Page)Activator.CreateInstance(item.TargetType, item.Params);
             page.Title = item.Title;
             Detail = new NavigationPage(page) { BarBackgroundColor = Color.FromRgb(51, 141, 208) };

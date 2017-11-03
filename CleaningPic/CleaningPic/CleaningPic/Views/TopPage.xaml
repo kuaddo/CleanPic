@@ -43,7 +43,7 @@
                         Spacing="10">
 
                         <Label 
-                            Text="汚れをファイルから送信する"
+                            Text="汚れをファイルから送信"
                             HorizontalOptions="Center"
                             HeightRequest="40"
                             VerticalTextAlignment="Center"
@@ -62,8 +62,10 @@
                 </StackLayout>
 
                 <StackLayout
+                    x:Name="stackLayout"
                     Orientation="Vertical" 
                     Margin="0, 20, 0 ,0"
+                    Padding="0, 4, 0, 4"
                     BackgroundColor="#E6E6E6">
 
                     <ListView 
@@ -96,6 +98,12 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+
+                    <Label Text="もっと見る" HorizontalOptions="EndAndExpand" Margin="0, 0, 8, 0" TextColor="#338DD0">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="GoWantToDoLabel_Clicked"/>
+                        </Label.GestureRecognizers>
+                    </Label>
                 </StackLayout>
 
                 <Button

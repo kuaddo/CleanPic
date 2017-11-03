@@ -2,21 +2,18 @@
 using CleaningPic.Utils;
 using CleaningPic.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace CleaningPic.Views
 {
     // このページのMVVMは妥協することにした
-	public partial class TopPage : CarouselPage
+    public partial class TopPage : CarouselPage
 	{
-		public TopPage ()
+        public const string navigateWantToDoPageMessage = "navigateWantToDoPageMessage";
+
+        public TopPage ()
 		{
 			InitializeComponent();
             CurrentPageChanged += async (sender, e) =>
@@ -27,7 +24,7 @@ namespace CleaningPic.Views
                     var imageData = await cameraPage.LaunchCamera();
                     if (imageData != null)
                     {
-                        var data = DependencyService.Get<IImageEditor>().SquareAndResize(imageData, 14);   // 72 * 2 = 144
+                        var data = DependencyService.Get<IImageEditor>().SquareAndResize(imageData, 144);   // 72 * 2 = 144
                         await Navigation.PushAsync(new UploadPage(data));
                     }
                 }
@@ -63,6 +60,11 @@ namespace CleaningPic.Views
         public void ListViewItem_Clicked(object sender, EventArgs e)
         {
             listView.SelectedItem = null;
+        }
+
+        public void GoWantToDoLabel_Clicked(object sender, EventArgs e)
+        {
+            MessagingCenter.Send(this, navigateWantToDoPageMessage);
         }
 
         public void DeleteButton_Clicked(object sender, EventArgs e)

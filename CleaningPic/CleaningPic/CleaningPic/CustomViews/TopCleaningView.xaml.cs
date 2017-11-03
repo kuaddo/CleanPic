@@ -123,7 +123,7 @@ namespace CleaningPic.CustomViews
             set
             {
                 SetValue(CleaningTimeProperty, value);
-                timeLabel.Text = string.Format("{0}分", value);
+                timeLabel.Text = timeLabel.Text + "　" + string.Format("{0}分", value);
             }
         }
 
@@ -133,7 +133,7 @@ namespace CleaningPic.CustomViews
             set
             {
                 SetValue(ToolsStringProperty, value);
-                toolsLabel.Text = value;
+                toolsLabel.Text = toolsLabel.Text + "　" + value;
             }
         }
 
