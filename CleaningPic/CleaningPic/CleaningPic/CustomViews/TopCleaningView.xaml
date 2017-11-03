@@ -34,9 +34,9 @@
             <StackLayout Orientation="Horizontal">
 
                 <ffimageloading:CachedImage
+                    x:Name="dirtImage"
                     WidthRequest="100"
-                    HeightRequest="100"
-                    Source="ic_remove.png"/>
+                    HeightRequest="100"/>
 
                 <StackLayout 
                     Orientation="Vertical"

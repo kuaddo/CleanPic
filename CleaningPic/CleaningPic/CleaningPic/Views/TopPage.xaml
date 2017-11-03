@@ -65,7 +65,7 @@
                     x:Name="stackLayout"
                     Orientation="Vertical" 
                     Margin="0, 20, 0 ,0"
-                    Padding="0, 4, 0, 4"
+                    Padding="0, 8, 0, 8"
                     BackgroundColor="#E6E6E6">
 
                     <ListView 
@@ -83,7 +83,8 @@
                                         Created="{Binding Created}"
                                         DirtOrPlace="{Binding Dirt}"
                                         ToolsString="{Binding ToolsString}"
-                                        CleaningTime="{Binding CleaningTime}" 
+                                        CleaningTime="{Binding CleaningTime}"
+                                        ImageData="{Binding ImageData}"
                                         ShoppingIsVisible="True"
                                         NotificationIsVisible="True"
                                         DoneIsVisible="True"
@@ -99,7 +100,12 @@
                         </ListView.ItemTemplate>
                     </ListView>
 
-                    <Label Text="もっと見る" HorizontalOptions="EndAndExpand" Margin="0, 0, 8, 0" TextColor="#338DD0">
+                    <Label  
+                        HorizontalOptions="EndAndExpand" 
+                        Margin="0, 0, 8, 0"
+                        IsVisible="{Binding HasMoreItem}"
+                        TextColor="#338DD0"
+                        Text="もっと見る">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="GoWantToDoLabel_Clicked"/>
                         </Label.GestureRecognizers>

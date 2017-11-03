@@ -15,6 +15,7 @@ namespace CleaningPic.Views
 		{
 			InitializeComponent();
             uploadImage.Source = new ImageConverter().Convert(imageData, null, null, null) as ImageSource;
+            (BindingContext as UploadViewModel).ImageData = imageData;
 
             // 画面遷移のメッセージ
             MessagingCenter.Subscribe<UploadViewModel, Cleaning[]>(

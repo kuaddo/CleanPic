@@ -14,9 +14,18 @@ namespace CleaningPic.ViewModels
         public ObservableCollection<Cleaning> Items { get; set; } = new ObservableCollection<Cleaning>();
         public const string navigateNotificationSettingPageMessage = "navigateNotificationSettingPageMessage";
 
+        public bool _HasMoreItem = true;
+        public bool HasMoreItem
+        {
+            get { return _HasMoreItem; }
+            set { SetProperty(ref _HasMoreItem, value); }
+        }
+
         public Command CleaningDoneCommand { get; private set; }
         public Command CleaningRemoveCommand { get; private set; }
         public Command CleaningNotificationCommand { get; private set; }
+
+        private const int displayLimit = 5;
 
         public TopViewModel()
         {
@@ -25,14 +34,20 @@ namespace CleaningPic.ViewModels
                 c.Done = true;
                 c.Created = DateTimeOffset.UtcNow;
                 using (var ds = new DataSource())
+                {
                     ds.UpdateCleaning(c);
+                    HasMoreItem = ds.ReadAllCleaning().Where(cleanig => !cleanig.Done).Count() > displayLimit;
+                }
                 Items.Remove(c);
             });
 
             CleaningRemoveCommand = new Command<Cleaning>(c =>
             {
                 using (var ds = new DataSource())
+                {
                     ds.RemoveCleaning(c);
+                    HasMoreItem = ds.ReadAllCleaning().Where(cleaning => !cleaning.Done).Count() > displayLimit;
+                }
                 Items.Remove(c);
             });
 
@@ -48,8 +63,11 @@ namespace CleaningPic.ViewModels
 
             // データの読み込み
             using (var ds = new DataSource())
-                foreach (var c in ds.ReadAllCleaning().Where(c => !c.Done).Take(5))
+            {
+                foreach (var c in ds.ReadAllCleaning().Where(cleaning => !cleaning.Done).Take(displayLimit))
                     Items.Add(c);
+                HasMoreItem = ds.ReadAllCleaning().Where(cleaning => !cleaning.Done).Count() > displayLimit;
+            }
         }
 
         private void UpdateCanNotify(string cleaningId, bool canNotify)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CleaningPic.Utils;
+using System;
 using Xamarin.Forms;
 
 namespace CleaningPic.CustomViews
@@ -25,6 +26,12 @@ namespace CleaningPic.CustomViews
             typeof(TopCleaningView),
             0,
             propertyChanged: (b, o, n) => (b as TopCleaningView).CleaningTime = (int)n);
+        public static readonly BindableProperty ImageDataProperty = BindableProperty.Create(
+            nameof(ImageData),
+            typeof(byte[]),
+            typeof(TopCleaningView),
+            null,
+            propertyChanged: (b, o, n) => (b as TopCleaningView).ImageData = (byte[])n);
 
         public static readonly BindableProperty ToolsStringProperty = BindableProperty.Create(
             nameof(ToolsString),
@@ -124,6 +131,16 @@ namespace CleaningPic.CustomViews
             {
                 SetValue(CleaningTimeProperty, value);
                 timeLabel.Text = timeLabel.Text + "　" + string.Format("{0}分", value);
+            }
+        }
+
+        public byte[] ImageData
+        {
+            get { return (byte[])GetValue(ImageDataProperty); }
+            set
+            {
+                SetValue(ImageDataProperty, value);
+                dirtImage.Source = new ImageConverter().Convert(value, null, null, null) as ImageSource;
             }
         }
 
