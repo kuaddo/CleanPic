@@ -60,6 +60,11 @@ namespace CleaningPic.Views
             }
         }
 
+        public void ListViewItem_Clicked(object sender, EventArgs e)
+        {
+            listView.SelectedItem = null;
+        }
+
         public void DeleteButton_Clicked(object sender, EventArgs e)
         {
             using (var ds = new DataSource())

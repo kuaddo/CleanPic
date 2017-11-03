@@ -3,99 +3,99 @@ using Xamarin.Forms;
 
 namespace CleaningPic.CustomViews
 {
-    public partial class CleaningView : ContentView
-	{
+	public partial class TopCleaningView : ContentView
+    {
         public static readonly BindableProperty CreatedProperty = BindableProperty.Create(
             nameof(Created),
             typeof(DateTimeOffset),
-            typeof(CleaningView),
+            typeof(TopCleaningView),
             DateTimeOffset.Now,
-            propertyChanged: (b, o, n) => (b as CleaningView).Created = (DateTimeOffset)n);
+            propertyChanged: (b, o, n) => (b as TopCleaningView).Created = (DateTimeOffset)n);
 
         public static readonly BindableProperty DirtOrPlaceProperty = BindableProperty.Create(
             nameof(DirtOrPlace),
             typeof(string),
-            typeof(CleaningView),
+            typeof(TopCleaningView),
             "",
-            propertyChanged: (b, o, n) => (b as CleaningView).DirtOrPlace = (string)n);
+            propertyChanged: (b, o, n) => (b as TopCleaningView).DirtOrPlace = (string)n);
 
         public static readonly BindableProperty CleaningTimeProperty = BindableProperty.Create(
             nameof(CleaningTime),
             typeof(int),
-            typeof(CleaningView),
+            typeof(TopCleaningView),
             0,
-            propertyChanged: (b, o, n) => (b as CleaningView).CleaningTime = (int)n);
+            propertyChanged: (b, o, n) => (b as TopCleaningView).CleaningTime = (int)n);
 
         public static readonly BindableProperty ToolsStringProperty = BindableProperty.Create(
             nameof(ToolsString),
             typeof(string),
-            typeof(CleaningView),
+            typeof(TopCleaningView),
             "",
-            propertyChanged: (b, o, n) => (b as CleaningView).ToolsString = (string)n);
+            propertyChanged: (b, o, n) => (b as TopCleaningView).ToolsString = (string)n);
 
         public static readonly BindableProperty CanNotifyProperty = BindableProperty.Create(
             nameof(CanNotify),
             typeof(bool),
-            typeof(CleaningView),
+            typeof(TopCleaningView),
             false,
-            propertyChanged: (b, o, n) => (b as CleaningView).CanNotify = (bool)n,                
+            propertyChanged: (b, o, n) => (b as TopCleaningView).CanNotify = (bool)n,
             defaultBindingMode: BindingMode.TwoWay);    // TwoWayにしないと動かない。
 
         public static readonly BindableProperty DoneCommandProperty = BindableProperty.Create(
             nameof(DoneCommand),
             typeof(Command),
-            typeof(CleaningView),
+            typeof(TopCleaningView),
             null,
-            propertyChanged: (b, o, n) => (b as CleaningView).DoneCommand = n as Command);
+            propertyChanged: (b, o, n) => (b as TopCleaningView).DoneCommand = n as Command);
 
         public static readonly BindableProperty DoneParamProperty = BindableProperty.Create(
             nameof(DoneParam),
             typeof(object),
-            typeof(CleaningView),
+            typeof(TopCleaningView),
             null,
-            propertyChanged: (b, o, n) => (b as CleaningView).DoneParam = n);
+            propertyChanged: (b, o, n) => (b as TopCleaningView).DoneParam = n);
 
         public static readonly BindableProperty RemoveCommandProperty = BindableProperty.Create(
             nameof(RemoveCommand),
             typeof(Command),
-            typeof(CleaningView),
+            typeof(TopCleaningView),
             null,
-            propertyChanged: (b, o, n) => (b as CleaningView).RemoveCommand = n as Command);
+            propertyChanged: (b, o, n) => (b as TopCleaningView).RemoveCommand = n as Command);
 
         public static readonly BindableProperty RemoveParamProperty = BindableProperty.Create(
             nameof(RemoveParam),
             typeof(object),
-            typeof(CleaningView),
+            typeof(TopCleaningView),
             null,
-            propertyChanged: (b, o, n) => (b as CleaningView).RemoveParam = n);
+            propertyChanged: (b, o, n) => (b as TopCleaningView).RemoveParam = n);
 
         public static readonly BindableProperty AddCommandProperty = BindableProperty.Create(
             nameof(AddCommand),
             typeof(Command),
-            typeof(CleaningView),
+            typeof(TopCleaningView),
             null,
-            propertyChanged: (b, o, n) => (b as CleaningView).AddCommand = n as Command);
+            propertyChanged: (b, o, n) => (b as TopCleaningView).AddCommand = n as Command);
 
         public static readonly BindableProperty AddParamProperty = BindableProperty.Create(
             nameof(AddParam),
             typeof(object),
-            typeof(CleaningView),
+            typeof(TopCleaningView),
             null,
-            propertyChanged: (b, o, n) => (b as CleaningView).AddParam = n);
+            propertyChanged: (b, o, n) => (b as TopCleaningView).AddParam = n);
 
         public static readonly BindableProperty NotificationCommandProperty = BindableProperty.Create(
             nameof(NotificationCommand),
             typeof(Command),
-            typeof(CleaningView),
+            typeof(TopCleaningView),
             null,
-            propertyChanged: (b, o, n) => (b as CleaningView).NotificationCommand = n as Command);
+            propertyChanged: (b, o, n) => (b as TopCleaningView).NotificationCommand = n as Command);
 
         public static readonly BindableProperty NotificationParamProperty = BindableProperty.Create(
             nameof(NotificationParam),
             typeof(object),
-            typeof(CleaningView),
+            typeof(TopCleaningView),
             null,
-            propertyChanged: (b, o, n) => (b as CleaningView).NotificationParam = n);
+            propertyChanged: (b, o, n) => (b as TopCleaningView).NotificationParam = n);
 
         public DateTimeOffset Created
         {
@@ -315,9 +315,9 @@ namespace CleaningPic.CustomViews
             notificationImage.GestureRecognizers.Add(recognizer);
         }
 
-        public CleaningView ()
-		{
-			InitializeComponent ();
-		}
-	}
+        public TopCleaningView()
+        {
+            InitializeComponent();
+        }
+    }
 }

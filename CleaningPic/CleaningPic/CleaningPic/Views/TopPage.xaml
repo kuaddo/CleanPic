@@ -61,33 +61,42 @@
                     </StackLayout.GestureRecognizers>
                 </StackLayout>
 
-                <ListView 
-                    ItemsSource="{Binding Items}" 
-                    HasUnevenRows="True"
-                    Margin="0, 20, 0 ,0">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <customviews:CleaningView
-                                    ShowsAddDate="True"
-                                    Created="{Binding Created}"
-                                    DirtOrPlace="{Binding Dirt}"
-                                    ToolsString="{Binding ToolsString}"
-                                    CleaningTime="{Binding CleaningTime}" 
-                                    ShoppingIsVisible="True"
-                                    NotificationIsVisible="True"
-                                    DoneIsVisible="True"
-                                    CanNotify="{Binding CanNotify}"
-                                    RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference topPage}}"
-                                    RemoveParam="{Binding}"
-                                    DoneCommand="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference topPage}}"
-                                    DoneParam="{Binding}"
-                                    NotificationCommand="{Binding BindingContext.CleaningNotificationCommand, Source={x:Reference topPage}}"
-                                    NotificationParam="{Binding}"/>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <StackLayout
+                    Orientation="Vertical" 
+                    Margin="0, 20, 0 ,0"
+                    BackgroundColor="#E6E6E6">
+
+                    <ListView 
+                        x:Name="listView"
+                        ItemsSource="{Binding Items}" 
+                        HasUnevenRows="True"
+                        SeparatorVisibility="None"
+                        ItemSelected="ListViewItem_Clicked">
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <customviews:TopCleaningView
+                                        ShowsAddDate="True"
+                                        Created="{Binding Created}"
+                                        DirtOrPlace="{Binding Dirt}"
+                                        ToolsString="{Binding ToolsString}"
+                                        CleaningTime="{Binding CleaningTime}" 
+                                        ShoppingIsVisible="True"
+                                        NotificationIsVisible="True"
+                                        DoneIsVisible="True"
+                                        CanNotify="{Binding CanNotify}"
+                                        RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference topPage}}"
+                                        RemoveParam="{Binding}"
+                                        DoneCommand="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference topPage}}"
+                                        DoneParam="{Binding}"
+                                        NotificationCommand="{Binding BindingContext.CleaningNotificationCommand, Source={x:Reference topPage}}"
+                                        NotificationParam="{Binding}"/>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
 
                 <Button
                     Text="データを削除する"
@@ -127,7 +136,7 @@
 
                 <Grid
                     RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-24}"
-                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=sideCameraImage, Property=Y, Factor=1, Constant=40}">
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=sideCameraImage, Property=Y, Factor=1, Constant=42}">
 
                     <customviews:ExBoxView  
                         WidthRequest="26"
@@ -140,7 +149,7 @@
                     
                     <Label   
                         WidthRequest="24"
-                        Margin="0, 2, 2, 4"
+                        Margin="0, 4, 2, 4"
                         HorizontalTextAlignment="Center"
                         Text="ス&#xD;&#xA;ワ&#xD;&#xA;イ&#xD;&#xA;プ&#xD;&#xA;で&#xD;&#xA;カ&#xD;&#xA;メ&#xD;&#xA;ラ&#xD;&#xA;を&#xD;&#xA;起&#xD;&#xA;動"/>
                 </Grid>

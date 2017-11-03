@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+    xmlns:customviews="clr-namespace:CleaningPic.CustomViews"
+    x:Class="CleaningPic.CustomViews.TopCleaningView"
+    Margin="8, 6, 6, 0">
+
+    <Grid>
+        <customviews:ExBoxView
+            Color="White"
+            ShadowSize="2"
+            LeftTopRadius="16"
+            LeftBottomRadius="16"
+            RightTopRadius="16"
+            RightBottomRadius="16"/>
+        
+        <StackLayout Orientation="Vertical" Padding="5">
+
+            <StackLayout Orientation="Horizontal" Spacing="3">
+
+                <Label x:Name="titleLabel" FontAttributes="Bold" FontSize="Large" HorizontalOptions="StartAndExpand"/>
+
+                <Label x:Name="addDateLabel"  IsVisible="False" Text="追加日"/>
+
+                <Label x:Name="doneDateLable" IsVisible="False" Text="完了日"/>
+
+                <Label x:Name="dateTimeLabel"/>
+            </StackLayout>
+
+            <Grid Padding="12, 0, 0, 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Text="掃除道具"/>
+
+                <Label Grid.Row="0" Grid.Column="1" x:Name="toolsLabel"/>
+
+                <Label Grid.Row="1" Grid.Column="0" Text="予想作業時間"/>
+
+                <Label Grid.Row="1" Grid.Column="1" x:Name="timeLabel"/>
+            </Grid>
+
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="EndAndExpand"
+                Spacing="12">
+
+                <ffimageloading:CachedImage Source="ic_remove.png"           x:Name="removeImage"       WidthRequest="26" HeightRequest="26" IsVisible="False"/>
+
+                <ffimageloading:CachedImage Source="ic_shopping.png"         x:Name="shoppingImage"     WidthRequest="26" HeightRequest="26" IsVisible="False"/>
+
+                <ffimageloading:CachedImage Source="ic_add.png"              x:Name="addImage"          WidthRequest="26" HeightRequest="26" IsVisible="False"/>
+
+                <ffimageloading:CachedImage Source="ic_add_finish.png"       x:Name="addFinishImage"    WidthRequest="26" HeightRequest="26" IsVisible="False"/>
+
+                <ffimageloading:CachedImage Source="ic_notification_off.png" x:Name="notificationImage" WidthRequest="26" HeightRequest="26" IsVisible="False"/>
+
+                <ffimageloading:CachedImage Source="ic_done.png"             x:Name="doneImage"         WidthRequest="26" HeightRequest="26" IsVisible="False"/>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentView>
