@@ -22,13 +22,12 @@
                 Clicked="CameraMenu_Clicked"/>
         </ContentPage.ToolbarItems>
 
-        <Grid
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand">
-
+        <RelativeLayout>
             <StackLayout
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand"
+                RelativeLayout.XConstraint="0"
+                RelativeLayout.YConstraint="0"   
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=0}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}"
                 Orientation="Vertical">
 
                 <StackLayout
@@ -118,57 +117,51 @@
                     VerticalOptions="Center"
                     Clicked="DeleteButton_Clicked"/>
             </StackLayout>
+            
+            <Grid
+                x:Name="sideCameraImage"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-48}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=70}">
 
-            <RelativeLayout
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand">
+                <customviews:ExBoxView
+                    WidthRequest="50"
+                    HeightRequest="48"
+                    LeftTopRadius="16"
+                    LeftBottomRadius="16"
+                    RightTopRadius="0"
+                    RightBottomRadius="0"
+                    ShadowSize="2"
+                    Color="#338DD0"/>
 
+                <Image
+                    WidthRequest="44"
+                    HeightRequest="44"
+                    Margin="0, 0, 2, 2"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Source="ic_camera"/>
+            </Grid>
 
-                <Grid
-                    x:Name="sideCameraImage"
-                    RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-48}"
-                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=70}">
+            <Grid
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-24}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=sideCameraImage, Property=Y, Factor=1, Constant=42}">
 
-                    <customviews:ExBoxView
-                        WidthRequest="50"
-                        HeightRequest="48"
-                        LeftTopRadius="16"
-                        LeftBottomRadius="16"
-                        RightTopRadius="0"
-                        RightBottomRadius="0"
-                        ShadowSize="2"
-                        Color="#338DD0"/>
-
-                    <Image
-                        WidthRequest="44"
-                        HeightRequest="44"
-                        Margin="0, 0, 2, 2"
-                        HorizontalOptions="CenterAndExpand"
-                        VerticalOptions="CenterAndExpand"
-                        Source="ic_camera"/>
-                </Grid>
-
-                <Grid
-                    RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-24}"
-                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=sideCameraImage, Property=Y, Factor=1, Constant=42}">
-
-                    <customviews:ExBoxView  
-                        WidthRequest="26"
-                        LeftTopRadius="0"
-                        LeftBottomRadius="16"
-                        RightTopRadius="0"
-                        RightBottomRadius="0"
-                        ShadowSize="2"
-                        Color="#338DD0"/>
+                <customviews:ExBoxView  
+                    WidthRequest="26"
+                    LeftTopRadius="0"
+                    LeftBottomRadius="16"
+                    RightTopRadius="0"
+                    RightBottomRadius="0"
+                    ShadowSize="2"
+                    Color="#338DD0"/>
                     
-                    <Label   
-                        WidthRequest="24"
-                        Margin="0, 4, 2, 4"
-                        HorizontalTextAlignment="Center"
-                        Text="ス&#xD;&#xA;ワ&#xD;&#xA;イ&#xD;&#xA;プ&#xD;&#xA;で&#xD;&#xA;カ&#xD;&#xA;メ&#xD;&#xA;ラ&#xD;&#xA;を&#xD;&#xA;起&#xD;&#xA;動"/>
-                </Grid>
-            </RelativeLayout>
-        </Grid>
+                <Label   
+                    WidthRequest="24"
+                    Margin="0, 4, 2, 4"
+                    HorizontalTextAlignment="Center"
+                    Text="ス&#xD;&#xA;ワ&#xD;&#xA;イ&#xD;&#xA;プ&#xD;&#xA;で&#xD;&#xA;カ&#xD;&#xA;メ&#xD;&#xA;ラ&#xD;&#xA;を&#xD;&#xA;起&#xD;&#xA;動"/>
+            </Grid>
+        </RelativeLayout>
     </ContentPage>
     
     <pages:CameraPage x:Name="cameraPage"/>
