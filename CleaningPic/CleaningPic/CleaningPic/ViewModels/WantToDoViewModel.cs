@@ -1,13 +1,8 @@
 ﻿using CleaningPic.Data;
 using CleaningPic.Utils;
-using CleaningPic.Views;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -69,9 +64,9 @@ namespace CleaningPic.ViewModels
                 MessagingCenter.Send(this, navigateNotificationSettingPageMessage, (c.CanNotify, c.Id));
             });
 
-            MessagingCenter.Subscribe<NotificationSettingPage, (string, bool)>(
+            MessagingCenter.Subscribe<NotificationSettingViewModel, (string, bool)>(
                 this,
-                NotificationSettingPage.notificationSettingDoneMessage,
+                NotificationSettingViewModel.notificationSettingDoneMessage,
                 (sender, args) => UpdateCanNotify(args.Item1, args.Item2));
 
             // Itemsが変化した時にItemCountStringを更新するようにする

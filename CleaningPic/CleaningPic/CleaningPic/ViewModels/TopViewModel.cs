@@ -1,10 +1,7 @@
 ﻿using CleaningPic.Data;
-using CleaningPic.Views;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using Xamarin.Forms;
 
 namespace CleaningPic.ViewModels
@@ -56,9 +53,9 @@ namespace CleaningPic.ViewModels
                 MessagingCenter.Send(this, navigateNotificationSettingPageMessage, (c.CanNotify, c.Id));
             });
 
-            MessagingCenter.Subscribe<NotificationSettingPage, (string, bool)>(
+            MessagingCenter.Subscribe<NotificationSettingViewModel, (string, bool)>(
                 this,
-                NotificationSettingPage.notificationSettingDoneMessage,
+                NotificationSettingViewModel.notificationSettingDoneMessage,
                 (sender, args) => UpdateCanNotify(args.Item1, args.Item2));
 
             // データの読み込み

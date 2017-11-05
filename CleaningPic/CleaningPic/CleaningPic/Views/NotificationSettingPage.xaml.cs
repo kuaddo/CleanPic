@@ -1,39 +1,26 @@
 ﻿using CleaningPic.Utils;
 using CleaningPic.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace CleaningPic.Views
 {
-	public partial class NotificationSettingPage : ContentPage
+    public partial class NotificationSettingPage : ContentPage
 	{
-        public const string notificationSettingDoneMessage = "notificationSettingDoneMessage";
-        private string cleaningId;
+        // SwitchにCommandをバインドできないので仕方なくVMを所持
+        private NotificationSettingViewModel viewModel;
 
 		public NotificationSettingPage(bool canNotify, string cleaningId)
 		{
 			InitializeComponent();
-            this.cleaningId = cleaningId;
-            notificationSwitch.IsToggled = canNotify;
+            viewModel = (BindingContext as NotificationSettingViewModel);
+            viewModel.CanNotify = canNotify;
+            viewModel.CleaningId = cleaningId;
         }
 
         public void NotifySwitch_Toggled(object sender, EventArgs e)
         {
-            MessagingCenter.Send(
-                this,
-                notificationSettingDoneMessage,
-                (cleaningId, notificationSwitch.IsToggled));
-        }
-
-        public void NotifyButton_Clicked(object sender, EventArgs e)
-        {
-            DependencyService.Get<IFormsNotification>().Notify("Test title", "これは通知テストです", DateTime.UtcNow.AddSeconds(5));
+            viewModel.NotificationStateChanged();
         }
     }
 }

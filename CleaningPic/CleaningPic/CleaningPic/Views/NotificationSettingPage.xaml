@@ -1,18 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"   
+    xmlns:viewmodels="clr-namespace:CleaningPic.ViewModels"
+    xmlns:utils="clr-namespace:CleaningPic.Utils"
     x:Class="CleaningPic.Views.NotificationSettingPage"
     Title="掃除時間アラーム">
-    
-    <StackLayout>
-        <Switch
-            x:Name="notificationSwitch"
-            IsToggled="{Binding CanNotify, Mode=TwoWay}" 
-            Toggled="NotifySwitch_Toggled"/>
 
-        <Button
-            Text="通知を送る"
-            Clicked="NotifyButton_Clicked"/>
+    <ContentPage.BindingContext>
+        <viewmodels:NotificationSettingViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <utils:NotConverter x:Key ="NotConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="日付"/>
+            <DatePicker Date="{Binding NotificationDate, Mode=TwoWay}"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+            <Label Text="時間"/>
+            <TimePicker Time="{Binding NotificationTime, Mode=TwoWay}"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Vertical">
+            <Label 
+                Text="通知時間を現在よりも後に設定して下さい" 
+                TextColor="Red" 
+                IsVisible="{Binding ValidDate, Converter={StaticResource NotConverter}}"/>
+            <Switch
+                IsToggled="{Binding CanNotify, Mode=TwoWay}"
+                IsEnabled="{Binding ValidDate}"
+                Toggled="NotifySwitch_Toggled"/>
+        </StackLayout>
     </StackLayout>
 </ContentPage>
