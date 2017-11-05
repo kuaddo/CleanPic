@@ -48,10 +48,16 @@ namespace CleaningPic.Droid
     {
         public override void OnReceive(Context context, Intent intent)
         {
+            // 通知をタップされた時に発行されるインテント
+            var pending = TaskStackBuilder.Create(context)
+                .AddNextIntent(new Intent(context, typeof(MainActivity)))
+                .GetPendingIntent(0, PendingIntentFlags.UpdateCurrent);
+
             var notification = new NotificationCompat.Builder(context)
                 .SetContentTitle(intent.GetStringExtra(FormsNotification.title))
                 .SetContentText(intent.GetStringExtra(FormsNotification.message))
                 .SetSmallIcon(Resource.Drawable.ic_notification)
+                .SetContentIntent(pending)
                 .SetAutoCancel(true)
                 .Build();
 
