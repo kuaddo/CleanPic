@@ -27,7 +27,7 @@ namespace CleaningPic.Views
         // ONになったSwitch以外を全てOFFにする
         public void SelectPlaceSwitch_Toggled(Object sender, EventArgs e)
         {
-            var switchList = new List<Switch>() { livingSwitch, kitchenSwitch, bathSwitch, toiletSwitch };
+            var switchList = new List<Switch>() { livingSwitch, entranceSwitch, kitchenSwitch, bathSwitch, windowSwitch, toiletSwitch };
             var onCount = switchList.Where(s => s.IsToggled).Count();
             switch (onCount)
             {

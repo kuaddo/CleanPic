@@ -4,84 +4,122 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:CleaningPic.ViewModels"
     x:Class="CleaningPic.Views.UploadPage"
-    Padding="16, 16, 16, 16"
     Title="アップロード">
 
     <ContentPage.BindingContext>
         <viewmodels:UploadViewModel/>
     </ContentPage.BindingContext>
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="2*"/>    
-        </Grid.RowDefinitions>
 
-        <Image
-            x:Name="uploadImage"
-            Grid.Row="0"
-            Grid.Column="0"/>
-        
-        <StackLayout
-            Grid.Row="1"
-            Grid.Column="0"
-            Orientation="Vertical">
 
-            <!-- RadioButtonが無いようなので、Switchで代用 -->
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Label Text="リビング" HorizontalOptions="StartAndExpand"/>
-                <Switch 
-                    x:Name="livingSwitch"
-                    HorizontalOptions="End"
-                    IsToggled="True"
-                    Toggled="SelectPlaceSwitch_Toggled"/>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Label Text="キッチン" HorizontalOptions="StartAndExpand"/>
-                <Switch 
-                    x:Name="kitchenSwitch"
-                    HorizontalOptions="End"
-                    IsToggled="false"
-                    Toggled="SelectPlaceSwitch_Toggled"/>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Label Text="お風呂" HorizontalOptions="StartAndExpand"/>
-                <Switch
-                    x:Name="bathSwitch"
-                    HorizontalOptions="End"
-                    IsToggled="false"
-                    Toggled="SelectPlaceSwitch_Toggled"/>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Label Text="トイレ" HorizontalOptions="StartAndExpand"/>
-                <Switch
-                    x:Name="toiletSwitch"
-                    HorizontalOptions="End"
-                    IsToggled="false"
-                    Toggled="SelectPlaceSwitch_Toggled"/>
+    <ScrollView HorizontalOptions="FillAndExpand">
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical">
+
+                <Grid>
+                    <BoxView 
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand" 
+                        Margin="28, 28, 28, 13"
+                        Color="Black"/>
+                    
+                    <Image                 
+                        BackgroundColor="Red"
+                        x:Name="uploadImage"
+                        HorizontalOptions="FillAndExpand"
+                        HeightRequest="{Binding Width, Source={x:Reference uploadImage}}"
+                        Margin="30, 30, 30, 15"
+                        Aspect="Fill"/>
+                </Grid>
+
+                <Label
+                    Text="写真の撮影場所を選択してください"
+                    Margin="20, 0, 20, 0"/>
+
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="FillAndExpand"
+                    Margin="16, 10, 16, 0">
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Label Text="キッチン" HorizontalOptions="StartAndExpand"/>
+                            <Switch 
+                                x:Name="kitchenSwitch"
+                                HorizontalOptions="EndAndExpand"
+                                IsToggled="True"
+                                Toggled="SelectPlaceSwitch_Toggled"/>
+                        </StackLayout>
+                        
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Label Text="玄関" HorizontalOptions="StartAndExpand"/>
+                            <Switch 
+                                x:Name="entranceSwitch"
+                                HorizontalOptions="EndAndExpand"
+                                IsToggled="False"
+                                Toggled="SelectPlaceSwitch_Toggled"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Label Text="トイレ" HorizontalOptions="StartAndExpand"/>
+                            <Switch
+                                x:Name="toiletSwitch"
+                                HorizontalOptions="EndAndExpand"
+                                IsToggled="False"
+                                Toggled="SelectPlaceSwitch_Toggled"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <BoxView VerticalOptions="FillAndExpand" WidthRequest="1" Margin="5, 0, 5, 0" Color="Gray"/>
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Label Text="浴室・洗面所" HorizontalOptions="StartAndExpand"/>
+                            <Switch
+                                x:Name="bathSwitch"
+                                HorizontalOptions="EndAndExpand"
+                                IsToggled="False"
+                                Toggled="SelectPlaceSwitch_Toggled"/>
+                        </StackLayout>
+                        
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Label Text="窓" HorizontalOptions="StartAndExpand"/>
+                            <Switch
+                                x:Name="windowSwitch"
+                                HorizontalOptions="EndAndExpand"
+                                IsToggled="False"
+                                Toggled="SelectPlaceSwitch_Toggled"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Label Text="リビング" HorizontalOptions="StartAndExpand"/>
+                            <Switch 
+                                x:Name="livingSwitch"
+                                HorizontalOptions="EndAndExpand"
+                                IsToggled="False"
+                                Toggled="SelectPlaceSwitch_Toggled"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+
+                <Button
+                    HorizontalOptions="EndAndExpand"
+                    VerticalOptions="EndAndExpand"
+                    Margin="0, 10, 24, 10"
+                    Text="汚れを解析！"
+                    Command="{Binding UploadCommand}"/>
             </StackLayout>
 
-            <Button
-                HorizontalOptions="EndAndExpand"
-                VerticalOptions="EndAndExpand"
-                Text="アップロード"
-                Command="{Binding UploadCommand}"/>
-        </StackLayout>
+            <Frame
+                HorizontalOptions="Center" 
+                VerticalOptions="Center"
+                BackgroundColor="White"
+                IsVisible="{Binding IsUploading}">
 
-        <Frame
-            Grid.Row="0"
-            Grid.Column="0"
-            Grid.RowSpan="2"
-            Grid.ColumnSpan="1"
-            HorizontalOptions="Center" 
-            VerticalOptions="Center"
-            BackgroundColor="White"
-            IsVisible="{Binding IsUploading}">
-
-            <StackLayout>
-                <ActivityIndicator IsRunning="True" Color="Black"/>
-                <Label Text="画像送信中..." XAlign="Center"/>
-            </StackLayout>
-        </Frame>
-    </Grid>
+                <StackLayout>
+                    <ActivityIndicator IsRunning="True" Color="Black"/>
+                    <Label Text="画像送信中..." XAlign="Center"/>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ScrollView>
 </ContentPage>
