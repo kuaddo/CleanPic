@@ -19,7 +19,7 @@
                     <BoxView 
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="FillAndExpand" 
-                        Margin="28, 28, 28, 13"
+                        Margin="58, 28, 58, 13"
                         Color="Black"/>
                     
                     <Image                 
@@ -27,7 +27,7 @@
                         x:Name="uploadImage"
                         HorizontalOptions="FillAndExpand"
                         HeightRequest="{Binding Width, Source={x:Reference uploadImage}}"
-                        Margin="30, 30, 30, 15"
+                        Margin="60, 30, 60, 15"
                         Aspect="Fill"/>
                 </Grid>
 
