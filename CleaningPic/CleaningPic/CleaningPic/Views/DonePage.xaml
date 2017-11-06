@@ -13,17 +13,18 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <StackLayout>
-            <ListView ItemsSource="{Binding Items}" HasUnevenRows="True">
+        <StackLayout BackgroundColor="#E6E6E6">
+            <ListView ItemsSource="{Binding Items}" HasUnevenRows="True" SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <customviews:CleaningView 
+                            <customviews:TopCleaningView
                                 ShowsDoneDate="True"
                                 Created="{Binding Created}"
                                 DirtOrPlace="{Binding Dirt}"
                                 ToolsString="{Binding ToolsString}"
                                 CleaningTime="{Binding CleaningTime}"
+                                ImageData="{Binding ImageData}"
                                 RemoveIsVisible="True"
                                 RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference root}}"
                                 RemoveParam="{Binding}"/>

@@ -12,17 +12,18 @@
         <viewmodels:WantToDoViewModel/>
     </ContentPage.BindingContext>
 
-    <Grid>
-        <ListView ItemsSource="{Binding Items}" ItemAppearing="OnItemAppearing" HasUnevenRows="True">
+    <Grid BackgroundColor="#E6E6E6">
+        <ListView ItemsSource="{Binding Items}" ItemAppearing="OnItemAppearing" HasUnevenRows="True" SeparatorVisibility="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <customviews:CleaningView
+                        <customviews:TopCleaningView
                             ShowsAddDate="True"
                             Created="{Binding Created}"
                             DirtOrPlace="{Binding Dirt}"
                             ToolsString="{Binding ToolsString}"
                             CleaningTime="{Binding CleaningTime}" 
+                            ImageData="{Binding ImageData}"
                             RemoveIsVisible="True"
                             ShoppingIsVisible="True"
                             NotificationIsVisible="True"
