@@ -66,13 +66,5 @@ namespace CleaningPic.Views
         {
             MessagingCenter.Send(this, navigateWantToDoPageMessage);
         }
-
-        public void DeleteButton_Clicked(object sender, EventArgs e)
-        {
-            using (var ds = new DataSource())
-            {
-                ds.RemoveAllCleaning();
-            }
-        }
     }
 }

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using CleaningPic.Data;
+using System;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace CleaningPic.Views
 {
@@ -50,6 +47,14 @@ namespace CleaningPic.Views
             indicator.IsVisible = false;
             apiPicker.IsEnabled = true;
             getButton.IsEnabled = true;
+        }
+
+        public void DeleteButton_Clicked(object sender, EventArgs e)
+        {
+            using (var ds = new DataSource())
+            {
+                ds.RemoveAllCleaning();
+            }
         }
     }
 }

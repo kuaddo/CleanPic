@@ -67,6 +67,8 @@
                     Padding="0, 8, 0, 8"
                     BackgroundColor="#E6E6E6">
 
+                    <Label Margin="8, 0, 0, 0" Text="やりたいリスト" FontSize="Medium"/>
+
                     <ListView 
                         x:Name="listView"
                         ItemsSource="{Binding Items}" 
@@ -110,12 +112,6 @@
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
-
-                <Button
-                    Text="データを削除する"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    Clicked="DeleteButton_Clicked"/>
             </StackLayout>
             
             <Grid

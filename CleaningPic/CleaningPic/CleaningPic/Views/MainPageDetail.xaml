@@ -18,5 +18,11 @@
         <Button x:Name="getButton" Text="GET" Clicked="GetButton_Clicked"/>
         <ActivityIndicator x:Name="indicator" IsRunning="True" IsVisible="False"/>
         <Label x:Name ="resultLabel" Text="Result"/>
+
+        <Button
+            Text="データを削除する"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Clicked="DeleteButton_Clicked"/>
     </StackLayout>
 </ContentPage>
