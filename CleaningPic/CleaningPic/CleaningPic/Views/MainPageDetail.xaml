@@ -3,26 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CleaningPic.Views.MainPageDetail"
              Title="Detail">
-    <StackLayout Padding="10">
-        <Picker x:Name="apiPicker">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>categories</x:String>
-                    <x:String>locations</x:String>
-                    <x:String>tools</x:String>
-                    <x:String>results</x:String>
-                    <x:String>uploaded-images</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
-        <Button x:Name="getButton" Text="GET" Clicked="GetButton_Clicked"/>
-        <ActivityIndicator x:Name="indicator" IsRunning="True" IsVisible="False"/>
-        <Label x:Name ="resultLabel" Text="Result"/>
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Picker x:Name="apiPicker">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>categories</x:String>
+                        <x:String>locations</x:String>
+                        <x:String>tools</x:String>
+                        <x:String>results</x:String>
+                        <x:String>uploaded-images</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Button x:Name="getButton" Text="GET" Clicked="GetButton_Clicked"/>
+            <ActivityIndicator x:Name="indicator" IsRunning="True" IsVisible="False"/>
+            <Label x:Name ="resultLabel" Text="Result"/>
 
-        <Button
+            <Button
+            Text="最初に保存された画像をPOST"
+            Clicked="PostButton_Clicked"/>
+
+            <Button
             Text="データを削除する"
             HorizontalOptions="Center"
             VerticalOptions="Center"
             Clicked="DeleteButton_Clicked"/>
-    </StackLayout>
+            
+            <Label x:Name="postContentLabel"/>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

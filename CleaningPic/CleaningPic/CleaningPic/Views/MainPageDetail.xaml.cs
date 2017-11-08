@@ -49,6 +49,51 @@ namespace CleaningPic.Views
             getButton.IsEnabled = true;
         }
 
+        public async void PostButton_Clicked(object sender, EventArgs e)
+        {
+            apiPicker.IsEnabled = false;
+            getButton.IsEnabled = false;
+            indicator.IsVisible = true;
+            HttpResponseMessage result = null;
+            byte[] imageData = null;
+            var content = new MultipartFormDataContent();
+
+            using (var ds = new DataSource())
+            {
+                imageData = ds.ReadAllCleaning()[0].ImageData;
+                content.Add(new ByteArrayContent(imageData), "upload_file", "image");
+                content.Add(new StringContent("114514"), "category_id");
+            }
+            
+            postContentLabel.Text = content.Headers.ContentType.ToString() + await content.ReadAsStringAsync();
+
+            try
+            {
+                result = await client.PostAsync("http://35.189.147.104/sub_uploader/", content);
+            }
+            catch (TaskCanceledException _)
+            {
+                resultLabel.Text = "タイムアウト";
+                indicator.IsVisible = false;
+                apiPicker.IsEnabled = true;
+                getButton.IsEnabled = true;
+                return;
+            }
+
+            if (result?.StatusCode == System.Net.HttpStatusCode.OK || result.StatusCode == System.Net.HttpStatusCode.Created)
+            {
+                var response = await result.Content.ReadAsStringAsync();
+                resultLabel.Text = response;
+                Console.WriteLine(response);
+            }
+            else
+                resultLabel.Text = "通信失敗 : StatusCode = " + result?.StatusCode + ", " + await result?.Content?.ReadAsStringAsync() + ", " + result?.Headers?.ToString();
+
+            indicator.IsVisible = false;
+            apiPicker.IsEnabled = true;
+            getButton.IsEnabled = true;
+        }
+
         public void DeleteButton_Clicked(object sender, EventArgs e)
         {
             using (var ds = new DataSource())
