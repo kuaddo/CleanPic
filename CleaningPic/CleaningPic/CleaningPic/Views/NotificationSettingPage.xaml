@@ -17,23 +17,52 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout>
-        <StackLayout Orientation="Horizontal">
-            <Label Text="日付"/>
-            <DatePicker Date="{Binding NotificationDate, Mode=TwoWay}"/>
+    <StackLayout Spacing="0">
+
+        <Label
+            HeightRequest="50"
+            Margin="10, 0, 10, 0"
+            VerticalTextAlignment="Center"
+            Text="通知してほしい日付と時間を指定してください"/>
+
+        <StackLayout 
+            Orientation="Horizontal" 
+            HorizontalOptions="FillAndExpand"
+            HeightRequest="45"
+            Padding="20, 0, 20, 0"
+            BackgroundColor="#E6E6E6">
+            
+            <Label Text="日付" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+            <DatePicker Date="{Binding NotificationDate, Mode=TwoWay}" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+            
         </StackLayout>
 
-        <StackLayout Orientation="Horizontal">
-            <Label Text="時間"/>
-            <TimePicker Time="{Binding NotificationTime, Mode=TwoWay}"/>
+        <BoxView HorizontalOptions="Start" HeightRequest="1" WidthRequest="10" Color="#E6E6E6"/>
+
+        <StackLayout 
+            Orientation="Horizontal"
+            HorizontalOptions="FillAndExpand"
+            HeightRequest="45"
+            Padding="20, 0, 20, 0"
+            BackgroundColor="#E6E6E6" >
+
+            <Label Text="時間" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+            <TimePicker Time="{Binding NotificationTime, Mode=TwoWay}" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
         </StackLayout>
 
-        <StackLayout Orientation="Vertical">
+        <StackLayout 
+            Orientation="Vertical"
+            HorizontalOptions="FillAndExpand"
+            Margin="0, 10, 20, 0">
+            
             <Label 
+                HorizontalOptions="End"
                 Text="通知時間を現在よりも後に設定して下さい" 
                 TextColor="Red" 
                 IsVisible="{Binding ValidDate, Converter={StaticResource NotConverter}}"/>
+            
             <Switch
+                HorizontalOptions="End"
                 IsToggled="{Binding CanNotify, Mode=TwoWay}"
                 IsEnabled="{Binding ValidDate}"
                 Toggled="NotifySwitch_Toggled"/>

@@ -8,8 +8,8 @@ namespace CleaningPic.ViewModels
     {
         public const string notificationSettingDoneMessage = "notificationSettingDoneMessage";
         private bool _CanNotify;
-        private DateTime _NotificationDate = DateTime.Now;
-        private TimeSpan _NotificationTime = DateTime.Now.TimeOfDay;
+        private DateTime _NotificationDate = DateTime.Now.AddHours(3);
+        private TimeSpan _NotificationTime = DateTime.Now.AddHours(3).TimeOfDay;
 
         public bool CanNotify
         {
