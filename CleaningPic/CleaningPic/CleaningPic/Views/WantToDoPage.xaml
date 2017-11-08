@@ -13,7 +13,7 @@
     </ContentPage.BindingContext>
 
     <Grid BackgroundColor="#E6E6E6">
-        <ListView ItemsSource="{Binding Items}" ItemAppearing="OnItemAppearing" HasUnevenRows="True" SeparatorVisibility="None">
+        <ListView x:Name="listView" ItemsSource="{Binding Items}" ItemAppearing="OnItemAppearing" HasUnevenRows="True" SeparatorVisibility="None" ItemSelected="ListViewItem_Clicked">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

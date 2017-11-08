@@ -1,11 +1,11 @@
 ﻿using CleaningPic.Data;
 using CleaningPic.ViewModels;
-using System.Threading.Tasks;
+using System;
 using Xamarin.Forms;
 
 namespace CleaningPic.Views
 {
-	public partial class WantToDoPage : ContentPage
+    public partial class WantToDoPage : ContentPage
 	{
         public WantToDoPage()
         {
@@ -19,6 +19,11 @@ namespace CleaningPic.Views
         public async void OnItemAppearing(object sender, ItemVisibilityEventArgs e)
         {
             await (BindingContext as WantToDoViewModel).OnItemAppearing(e.Item as Cleaning);
+        }
+
+        public void ListViewItem_Clicked(object sender, EventArgs e)
+        {
+            listView.SelectedItem = null;
         }
     }
 }

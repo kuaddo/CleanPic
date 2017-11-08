@@ -14,7 +14,7 @@
 
     <ContentPage.Content>
         <StackLayout BackgroundColor="#E6E6E6">
-            <ListView ItemsSource="{Binding Items}" HasUnevenRows="True" SeparatorVisibility="None">
+            <ListView x:Name="listView" ItemsSource="{Binding Items}" HasUnevenRows="True" SeparatorVisibility="None" ItemSelected="ListViewItem_Clicked">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
