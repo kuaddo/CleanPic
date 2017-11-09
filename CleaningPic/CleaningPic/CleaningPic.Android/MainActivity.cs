@@ -8,7 +8,7 @@ using FFImageLoading.Forms.Droid;
 [assembly: UsesFeature("android.hardware.camera.autofocus", Required = false)]
 namespace CleaningPic.Droid
 {
-    [Activity (Label = "CleaningPic", Icon = "@drawable/icon", Theme="@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity (Label = "Let's clean up!", Icon = "@drawable/icon", Theme="@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{    
         protected override void OnCreate (Bundle bundle)
