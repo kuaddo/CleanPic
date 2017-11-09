@@ -36,16 +36,18 @@ namespace CleaningPic.iOS
             }
         }
 
-        private void DrawPartialRoundRect(int l, int r, int t, int b, int lt, int lb, int rt, int rb, CGContext context)
+        private void DrawPartialRoundRect(int l, int t, int r, int b, int lt, int lb, int rt, int rb, CGContext context)
         {
+            var kappa_ = (float)(1 - 4 * (System.Math.Sqrt(2) - 1) / 3);
+
             context.MoveTo(l + lt, t);
-            context.AddArcToPoint(l, t, l + lt * 2, t + lt * 2, 90f);
+            context.AddCurveToPoint(l + lt * kappa_, t, l, t + lt * kappa_, l, t + lt);
             context.AddLineToPoint(l, b - lb);
-            context.AddArcToPoint(l, b - lb * 2, l + lb * 2, b, 90f);
+            context.AddCurveToPoint(l, b - lb * kappa_, l + lb * kappa_, b, l + lb, b);
             context.AddLineToPoint(r - rb, b);
-            context.AddArcToPoint(r - rb * 2, b - rb * 2, r, b, 90f);
-            context.AddLineToPoint(r, t - rt);
-            context.AddArcToPoint(r - rt * 2, t, r, t + rt * 2, 90f);
+            context.AddCurveToPoint(r - rb * kappa_, b, r, b - rb * kappa_, r, b - rb);
+            context.AddLineToPoint(r, t + rt);
+            context.AddCurveToPoint(r, t + rt * kappa_, r - rt * kappa_, t, r - rt, t);
             context.ClosePath();
             context.DrawPath(CGPathDrawingMode.Fill);
         }

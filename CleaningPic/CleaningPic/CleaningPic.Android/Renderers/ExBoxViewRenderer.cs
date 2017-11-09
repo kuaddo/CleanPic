@@ -46,17 +46,18 @@ namespace CleaningPic.Droid
             var r = rect.Right;
             var t = rect.Top;
             var b = rect.Bottom;
+            var kappa_ = (float)(1 - 4 * (System.Math.Sqrt(2) - 1) / 3);
 
             using (var path = new Path())
             {
                 path.MoveTo(l + lt, t);
-                path.ArcTo(new RectF(l ,t, l + lt * 2, t + lt * 2), 270f, -90f);
+                path.CubicTo(l + lt * kappa_, t, l, t + lt * kappa_, l, t + lt);
                 path.LineTo(l, b - lb);
-                path.ArcTo(new RectF(l, b - lb * 2, l + lb * 2, b), 180f, -90f);
+                path.CubicTo(l, b - lb * kappa_, l + lb * kappa_, b, l + lb, b);
                 path.LineTo(r - rb, b);
-                path.ArcTo(new RectF(r - rb * 2, b - rb * 2, r, b), 90f, -90f);
-                path.LineTo(r, t -rt);
-                path.ArcTo(new RectF(r - rt * 2, t, r, t + rt * 2), 0f, -90f);
+                path.CubicTo(r - rb * kappa_, b, r, b - rb * kappa_, r, b - rb);
+                path.LineTo(r, t + rt);
+                path.CubicTo(r, t + rt * kappa_, r - rt * kappa_, t, r - rt, t);
                 canvas.DrawPath(path, paint);
             }
         }
