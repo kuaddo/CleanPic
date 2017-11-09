@@ -25,10 +25,10 @@
         <RelativeLayout>
             <StackLayout
                 RelativeLayout.XConstraint="0"
-                RelativeLayout.YConstraint="0"   
+                RelativeLayout.YConstraint="0"
+                Orientation="Vertical"
                 RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=0}"
-                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}"
-                Orientation="Vertical">
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}">
 
                 <StackLayout
                     HorizontalOptions="FillAndExpand"
@@ -51,7 +51,7 @@
                         <Image 
                             Source="ic_image_upload"
                             HorizontalOptions="Center"
-                            VerticalOptions="CenterAndExpand"
+                            VerticalOptions="Center"
                             WidthRequest="36"
                             HeightRequest="36"/>
                     </StackLayout>
@@ -63,6 +63,7 @@
                 <StackLayout
                     x:Name="stackLayout"
                     Orientation="Vertical" 
+                    VerticalOptions="FillAndExpand"
                     Margin="0, 20, 0 ,0"
                     Padding="0, 8, 0, 8"
                     BackgroundColor="#E6E6E6">
