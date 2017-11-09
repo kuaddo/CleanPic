@@ -1,5 +1,4 @@
-﻿using CleaningPic.Data;
-using CleaningPic.Utils;
+﻿using CleaningPic.Utils;
 using CleaningPic.ViewModels;
 using System;
 using System.IO;
@@ -12,6 +11,7 @@ namespace CleaningPic.Views
     public partial class TopPage : CarouselPage
 	{
         public const string navigateWantToDoPageMessage = "navigateWantToDoPageMessage";
+        private const int imageSize = 163;
 
         public TopPage ()
 		{
@@ -24,7 +24,7 @@ namespace CleaningPic.Views
                     var imageData = await cameraPage.LaunchCamera();
                     if (imageData != null)
                     {
-                        var data = DependencyService.Get<IImageEditor>().SquareAndResize(imageData, 144);   // 72 * 2 = 144
+                        var data = DependencyService.Get<IImageEditor>().SquareAndResize(imageData, imageSize);
                         await Navigation.PushAsync(new UploadPage(data));
                     }
                 }
@@ -51,7 +51,7 @@ namespace CleaningPic.Views
                 {
                     if (stream == null) return;
                     stream.CopyTo(ms);
-                    var data = DependencyService.Get<IImageEditor>().SquareAndResize(ms.ToArray(), 144);    // 72 * 2 = 144
+                    var data = DependencyService.Get<IImageEditor>().SquareAndResize(ms.ToArray(), imageSize);
                     await Navigation.PushAsync(new UploadPage(data));
                 }
             }

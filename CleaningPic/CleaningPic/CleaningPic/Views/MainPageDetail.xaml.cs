@@ -57,11 +57,12 @@ namespace CleaningPic.Views
             HttpResponseMessage result = null;
             byte[] imageData = null;
             var content = new MultipartFormDataContent();
+            var fileName = DateTime.Now.ToString("yyyy_MM_dd-HH:mm:ss") + ".jpg";
 
             using (var ds = new DataSource())
             {
                 imageData = ds.ReadAllCleaning()[0].ImageData;
-                content.Add(new ByteArrayContent(imageData), "upload_file", "image");
+                content.Add(new ByteArrayContent(imageData), "upload_file", fileName);
                 content.Add(new StringContent("114514"), "category_id");
             }
             
