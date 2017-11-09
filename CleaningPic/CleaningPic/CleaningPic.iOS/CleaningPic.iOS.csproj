@@ -190,7 +190,7 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_want.png" />
+    <BundleResource Include="Resources\ic_want%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_add.png" />
@@ -199,7 +199,7 @@
     <BundleResource Include="Resources\ic_camera.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_done.png" />
+    <BundleResource Include="Resources\ic_done%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_image_upload.png" />
@@ -219,7 +219,18 @@
   <ItemGroup>
     <BundleResource Include="Resources\ic_add_finish.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_done%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_want.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_want%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_done.png" />
+  </ItemGroup>
   <Import Project="..\CleaningPic\CleaningPic.projitems" Label="Shared" Condition="Exists('..\CleaningPic\CleaningPic.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Fody.2.2.0\build\netstandard1.2\Fody.targets" Condition="Exists('..\..\packages\Fody.2.2.0\build\netstandard1.2\Fody.targets')" />
