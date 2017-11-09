@@ -24,7 +24,7 @@ namespace CleaningPic.Views
             MessagingCenter.Subscribe<UploadViewModel, Cleaning[]>(
                 this, 
                 UploadViewModel.navigateResultPageMessage,
-                async (sender, args) => { await Navigation.PushAsync(new ResultPage(imageData, args, UploadPlace)); });
+                async (sender, args) => { await Navigation.PushAsync(new ResultPage(imageData, args)); });
 		}
 
         // ONになったSwitch以外を全てOFFにする

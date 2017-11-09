@@ -1,7 +1,6 @@
 ﻿using Realms;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CleaningPic.Data
 {
@@ -11,8 +10,16 @@ namespace CleaningPic.Data
 
         [PrimaryKey]
         public string Id { get; set; } = Guid.NewGuid().ToString(); // Id。DBのアップデートなどに利用
-        public string Dirt { get; set; }                            // 汚れの種類。TODO: 後でDirtクラスを作る
+        private int _Place { get; set; }                            // 汚れのある場所(Placeに対応するint)
+        [Ignored]
+        public Place Place
+        {
+            get { return (Place)_Place; }
+            set { _Place = (int)value; }
+        }                            
+        public string Dirt { get; set; }                            // 汚れの種類。
         public string Method { get; set; }                          // 掃除の手法
+        public string Caution { get; set; }                         // 掃除の注意点
         public string ToolsString { get; private set; }             // リスト表示用の道具リストの文字列
         public IList<string> Tools                                  // 掃除の道具。入出力のインターフェースで、保存はToolsStringの方で行う
         {
@@ -23,14 +30,12 @@ namespace CleaningPic.Data
         public byte[] ImageData { get; set; }                       // 汚れの画像
         public bool Done { get; set; } = false;                     // やりたいならfalse、やったならtrue
         public DateTimeOffset Created { get; set; }                 // この手法のクラスを作成・追加・完了した日時。ソートに利用。offsetが上手く保存されないのでUTCで保存する
-        public double Probability { get; set; }                     // 汚れの予想確率。0~1
         public bool CanNotify { get; set; } = false;                // 通知を行うかどうか
         public DateTimeOffset NotificationDate { get; set; }        // 通知日時
 
         public override string ToString()
         {
-            // TODO: Place実装時にPlaceの情報も追加する
-            return Dirt;
+            return Place.DisplayName() + "の" + Dirt;
         }
 
         public Cleaning Clone()
@@ -38,14 +43,15 @@ namespace CleaningPic.Data
             var clone = new Cleaning()
             {
                 Id = Id,
+                Place = Place,
                 Dirt = Dirt,
                 Method = Method,
+                Caution = Caution,
                 ToolsString = ToolsString,
                 CleaningTime = CleaningTime,
                 ImageData = ImageData,
                 Done = Done,
                 Created = Created,
-                Probability = Probability,
                 CanNotify = CanNotify,
                 NotificationDate = NotificationDate
             };
