@@ -60,7 +60,7 @@
                     Padding="7, 8, 7, 8">
 
                     <Label x:Name="firstLabel" Margin="8, 0, 0, 0" VerticalTextAlignment="Center" FontSize="Medium"/>
-                    <customviews:TopCleaningView x:Name="firstCleaningView"/>
+                    <customviews:CleaningView x:Name="firstCleaningView"/>
 
                     <Label Margin="8, 0, 0, 0" VerticalTextAlignment="Center" Text="他の汚れかも...?" FontSize="Medium"/>
                     <StackLayout x:Name="otherStack" Orientation="Vertical" Spacing="0"/>

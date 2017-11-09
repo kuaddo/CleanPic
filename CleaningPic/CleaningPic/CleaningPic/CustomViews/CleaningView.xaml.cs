@@ -1,10 +1,11 @@
-﻿using System;
+﻿using CleaningPic.Utils;
+using System;
 using Xamarin.Forms;
 
 namespace CleaningPic.CustomViews
 {
-    public partial class CleaningView : ContentView
-	{
+	public partial class CleaningView : ContentView
+    {
         public static readonly BindableProperty CreatedProperty = BindableProperty.Create(
             nameof(Created),
             typeof(DateTimeOffset),
@@ -25,6 +26,12 @@ namespace CleaningPic.CustomViews
             typeof(CleaningView),
             0,
             propertyChanged: (b, o, n) => (b as CleaningView).CleaningTime = (int)n);
+        public static readonly BindableProperty ImageDataProperty = BindableProperty.Create(
+            nameof(ImageData),
+            typeof(byte[]),
+            typeof(CleaningView),
+            null,
+            propertyChanged: (b, o, n) => (b as CleaningView).ImageData = (byte[])n);
 
         public static readonly BindableProperty ToolsStringProperty = BindableProperty.Create(
             nameof(ToolsString),
@@ -38,7 +45,7 @@ namespace CleaningPic.CustomViews
             typeof(bool),
             typeof(CleaningView),
             false,
-            propertyChanged: (b, o, n) => (b as CleaningView).CanNotify = (bool)n,                
+            propertyChanged: (b, o, n) => (b as CleaningView).CanNotify = (bool)n,
             defaultBindingMode: BindingMode.TwoWay);    // TwoWayにしないと動かない。
 
         public static readonly BindableProperty DoneCommandProperty = BindableProperty.Create(
@@ -123,7 +130,17 @@ namespace CleaningPic.CustomViews
             set
             {
                 SetValue(CleaningTimeProperty, value);
-                timeLabel.Text = string.Format("{0}分", value);
+                timeLabel.Text = "作業時間　" + string.Format("{0}分", value);
+            }
+        }
+
+        public byte[] ImageData
+        {
+            get { return (byte[])GetValue(ImageDataProperty); }
+            set
+            {
+                SetValue(ImageDataProperty, value);
+                dirtImage.Source = new ImageConverter().Convert(value, null, null, null) as ImageSource;
             }
         }
 
@@ -133,7 +150,7 @@ namespace CleaningPic.CustomViews
             set
             {
                 SetValue(ToolsStringProperty, value);
-                toolsLabel.Text = value;
+                toolsLabel.Text = "掃除道具　" + value;
             }
         }
 
@@ -238,6 +255,11 @@ namespace CleaningPic.CustomViews
             }
         }
 
+        public bool DirtImageIsVisible
+        {
+            set { dirtImage.IsVisible = value; }
+        }
+
         public bool RemoveIsVisible
         {
             set { removeImage.IsVisible = value; }
@@ -250,7 +272,12 @@ namespace CleaningPic.CustomViews
 
         public bool AddIsVisible
         {
-            set { addImage.IsVisible = value; }
+            set
+            {
+                addLayout.IsVisible = value;
+                addImage.IsVisible = value;
+                addLabel.IsVisible = value;
+            }
         }
 
         public bool NotificationIsVisible
@@ -293,7 +320,7 @@ namespace CleaningPic.CustomViews
         private void SetAddRecognizer()
         {
             var recognizer = new TapGestureRecognizer() { Command = AddCommand, CommandParameter = AddParam };
-            addImage.GestureRecognizers.Add(recognizer);
+            addLayout.GestureRecognizers.Add(recognizer);
         }
 
         private void SetAddFinishRecognizer()
@@ -306,7 +333,7 @@ namespace CleaningPic.CustomViews
                     addFinishImage.IsVisible = true;
                 })
             };
-            addImage.GestureRecognizers.Add(recognizer);
+            addLayout.GestureRecognizers.Add(recognizer);
         }
 
         private void SetNotificationRecognizer()
@@ -315,9 +342,9 @@ namespace CleaningPic.CustomViews
             notificationImage.GestureRecognizers.Add(recognizer);
         }
 
-        public CleaningView ()
-		{
-			InitializeComponent ();
-		}
-	}
+        public CleaningView()
+        {
+            InitializeComponent();
+        }
+    }
 }

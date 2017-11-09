@@ -80,7 +80,7 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <customviews:TopCleaningView
+                                    <customviews:CleaningView
                                         ShowsAddDate="True"
                                         Created="{Binding Created}"
                                         DirtOrPlace="{Binding Dirt}"

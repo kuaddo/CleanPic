@@ -37,7 +37,7 @@ namespace CleaningPic.Views
 
             foreach (var c in cleaningList.Skip(1))
             {
-                var view = new TopCleaningView()
+                var view = new CleaningView()
                 {
                     DirtOrPlace = c.Dirt,
                     ToolsString = c.ToolsString,
