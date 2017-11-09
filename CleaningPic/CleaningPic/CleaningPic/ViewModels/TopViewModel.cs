@@ -1,4 +1,5 @@
 ﻿using CleaningPic.Data;
+using CleaningPic.Utils;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -36,6 +37,8 @@ namespace CleaningPic.ViewModels
                     HasMoreItem = ds.ReadAllCleaning().Where(cleanig => !cleanig.Done).Count() > displayLimit;
                 }
                 Items.Remove(c);
+
+                DependencyService.Get<IFormsToast>().Show(c.ToString() + "を完了しました");
             });
 
             CleaningRemoveCommand = new Command<Cleaning>(c =>
@@ -46,6 +49,8 @@ namespace CleaningPic.ViewModels
                     HasMoreItem = ds.ReadAllCleaning().Where(cleaning => !cleaning.Done).Count() > displayLimit;
                 }
                 Items.Remove(c);
+                
+                DependencyService.Get<IFormsToast>().Show(c.ToString() + "を削除しました");
             });
 
             CleaningNotificationCommand = new Command<Cleaning>(c =>
