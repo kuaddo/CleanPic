@@ -12,38 +12,60 @@
         <viewmodels:ResultViewModel/>
     </ContentPage.BindingContext>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="3*"/>
-        </Grid.RowDefinitions>
+    <ScrollView>
+        <StackLayout
+            Orientation="Vertical"
+            Spacing="0">
 
-        <Image
-            x:Name="resultImage"
-            Grid.Row="0"
-            Grid.Column="0"/>
+            <Grid>
+                <BoxView 
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" 
+                    Margin="58, 28, 58, 13"
+                    Color="Black"/>
 
-        <ListView 
-            x:Name="listView" 
-            Grid.Row="1"
-            Grid.Column="0"
-            ItemsSource="{Binding Items}" 
-            HasUnevenRows="True">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <customviews:CleaningView
-                            DirtOrPlace="{Binding Dirt}"
-                            ToolsString="{Binding ToolsString}"
-                            CleaningTime="{Binding CleaningTime}"
-                            ShoppingIsVisible="True"
-                            AddIsVisible="True"
-                            ChangesAddColor="True"
-                            AddCommand="{Binding BindingContext.CleaningAddCommand, Source={x:Reference root}}"
-                            AddParam="{Binding}"/>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </Grid>
+                <Image                 
+                    BackgroundColor="Red"
+                    x:Name="resultImage"
+                    HorizontalOptions="FillAndExpand"
+                    HeightRequest="{Binding Width, Source={x:Reference resultImage}}"
+                    Margin="60, 30, 60, 15"
+                    Aspect="Fill"/>
+            </Grid>
+
+            <Label
+                Margin="20, 0, 0, 0"
+                Text="汚れの結果は..."/>
+
+            <StackLayout
+                Margin="60, 10, 0, 0"
+                Orientation="Horizontal">
+
+                <Label x:Name="dirtLabel" VerticalOptions="CenterAndExpand" TextColor="Red" FontSize="30" FontAttributes="Bold"/>
+                <Label VerticalOptions="EndAndExpand" Text="の可能性が高いです!"/>
+            </StackLayout>
+
+            <Grid Margin="20, 10, 20 ,5">
+                <customviews:ExBoxView
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"
+                    LeftTopRadius="16"
+                    LeftBottomRadius="16"
+                    RightTopRadius="16"
+                    RightBottomRadius="16"
+                    Color="#E6E6E6"/>
+                
+                <StackLayout
+                    Orientation="Vertical" 
+                    Padding="7, 8, 7, 8">
+
+                    <Label x:Name="firstLabel" Margin="8, 0, 0, 0" VerticalTextAlignment="Center" FontSize="Medium"/>
+                    <customviews:TopCleaningView x:Name="firstCleaningView"/>
+
+                    <Label Margin="8, 0, 0, 0" VerticalTextAlignment="Center" Text="他の汚れかも...?" FontSize="Medium"/>
+                    <StackLayout x:Name="otherStack" Orientation="Vertical" Spacing="0"/>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

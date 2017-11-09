@@ -1,14 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CleaningPic
+﻿namespace CleaningPic
 {
     public enum Place
     {
-        Living,
         Kitchen,
+        Entrance,
+        Toilet,
         Bath,
-        Toilet
+        Window,
+        Living
+    }
+
+    static class PlaceExtension
+    {
+        public static string DisplayName(this Place place)
+        {
+            string[] names = { "キッチン", "玄関", "トイレ", "浴槽・洗面所", "窓", "リビング"};
+            return names[(int)place];
+        }
     }
 }

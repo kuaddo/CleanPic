@@ -44,8 +44,8 @@
                     VerticalOptions="FillAndExpand"
                     Margin="4, 0, 0, 0">
                     
-                    <Label x:Name="toolsLabel" Text="掃除道具"/>
-                    <Label x:Name="timeLabel" Text="作業時間"/>
+                    <Label x:Name="toolsLabel"/>
+                    <Label x:Name="timeLabel"/>
 
                     <StackLayout
                         Orientation="Horizontal"
@@ -57,9 +57,14 @@
 
                         <ffimageloading:CachedImage Source="ic_shopping.png"         x:Name="shoppingImage"     WidthRequest="26" HeightRequest="26" IsVisible="False"/>
 
-                        <ffimageloading:CachedImage Source="ic_add.png"              x:Name="addImage"          WidthRequest="26" HeightRequest="26" IsVisible="False"/>
+                        <StackLayout Orientation="Horizontal" Spacing="0"            x:Name="addLayout" IsVisible="False">
+                            <ffimageloading:CachedImage Source="ic_add.png"          x:Name="addImage"          WidthRequest="26" HeightRequest="26" IsVisible="False"/>
 
-                        <ffimageloading:CachedImage Source="ic_add_finish.png"       x:Name="addFinishImage"    WidthRequest="26" HeightRequest="26" IsVisible="False"/>
+                            <ffimageloading:CachedImage Source="ic_add_finish.png"   x:Name="addFinishImage"    WidthRequest="26" HeightRequest="26" IsVisible="False"/>
+
+                            <Label Text="やりたい" VerticalOptions="CenterAndExpand" x:Name="addLabel" IsVisible="False"/>
+                        </StackLayout>
+
 
                         <ffimageloading:CachedImage Source="ic_notification_off.png" x:Name="notificationImage" WidthRequest="26" HeightRequest="26" IsVisible="False"/>
 

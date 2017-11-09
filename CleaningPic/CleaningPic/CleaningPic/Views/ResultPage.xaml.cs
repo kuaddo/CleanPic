@@ -1,25 +1,55 @@
-﻿using CleaningPic.Data;
+﻿using CleaningPic.CustomViews;
+using CleaningPic.Data;
 using CleaningPic.Utils;
-using System;
+using CleaningPic.ViewModels;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace CleaningPic.Views
 {
-	public partial class ResultPage : ContentPage
+    public partial class ResultPage : ContentPage
 	{
-        public ResultPage(byte[] imageData, Cleaning[] methods)
+        public ResultPage(byte[] imageData, Cleaning[] cleanings, Place place)
 		{
 			InitializeComponent();
             // TODO: 後で綺麗にする
             resultImage.Source = new ImageConverter().Convert(imageData, null, null, null) as ImageSource;
-            listView.ItemsSource = methods.ToList();
+            CreateDynamicLayout(cleanings, place);
+        }
+
+        private void CreateDynamicLayout(IList<Cleaning> cleaningList, Place place)
+        {
+            var bc = (BindingContext as ResultViewModel);
+            var first = cleaningList[0];
+
+            dirtLabel.Text = first.Dirt;
+            firstLabel.Text = $"{place.DisplayName()}の{first.Dirt}の落とし方";
+            firstCleaningView.DirtOrPlace = first.Dirt;
+            firstCleaningView.ToolsString = first.ToolsString;
+            firstCleaningView.CleaningTime = first.CleaningTime;
+            firstCleaningView.DirtImageIsVisible = false;
+            firstCleaningView.AddIsVisible = true;
+            firstCleaningView.ChangesAddColor = true;
+            firstCleaningView.AddCommand = bc.CleaningAddCommand;
+            firstCleaningView.AddParam = first;
+
+            foreach (var c in cleaningList.Skip(1))
+            {
+                var view = new TopCleaningView()
+                {
+                    DirtOrPlace = c.Dirt,
+                    ToolsString = c.ToolsString,
+                    CleaningTime = c.CleaningTime,
+                    DirtImageIsVisible = false,
+                    AddIsVisible = true,
+                    ChangesAddColor = true,
+                    AddCommand = bc.CleaningAddCommand,
+                    AddParam = c
+                };
+                otherStack.Children.Add(view);
+            }
         }
     }
 }

@@ -130,7 +130,7 @@ namespace CleaningPic.CustomViews
             set
             {
                 SetValue(CleaningTimeProperty, value);
-                timeLabel.Text = timeLabel.Text + "　" + string.Format("{0}分", value);
+                timeLabel.Text = "作業時間　" + string.Format("{0}分", value);
             }
         }
 
@@ -150,7 +150,7 @@ namespace CleaningPic.CustomViews
             set
             {
                 SetValue(ToolsStringProperty, value);
-                toolsLabel.Text = toolsLabel.Text + "　" + value;
+                toolsLabel.Text = "掃除道具　" + value;
             }
         }
 
@@ -255,6 +255,11 @@ namespace CleaningPic.CustomViews
             }
         }
 
+        public bool DirtImageIsVisible
+        {
+            set { dirtImage.IsVisible = value; }
+        }
+
         public bool RemoveIsVisible
         {
             set { removeImage.IsVisible = value; }
@@ -267,7 +272,12 @@ namespace CleaningPic.CustomViews
 
         public bool AddIsVisible
         {
-            set { addImage.IsVisible = value; }
+            set
+            {
+                addLayout.IsVisible = value;
+                addImage.IsVisible = value;
+                addLabel.IsVisible = value;
+            }
         }
 
         public bool NotificationIsVisible
@@ -310,7 +320,7 @@ namespace CleaningPic.CustomViews
         private void SetAddRecognizer()
         {
             var recognizer = new TapGestureRecognizer() { Command = AddCommand, CommandParameter = AddParam };
-            addImage.GestureRecognizers.Add(recognizer);
+            addLayout.GestureRecognizers.Add(recognizer);
         }
 
         private void SetAddFinishRecognizer()
@@ -323,7 +333,7 @@ namespace CleaningPic.CustomViews
                     addFinishImage.IsVisible = true;
                 })
             };
-            addImage.GestureRecognizers.Add(recognizer);
+            addLayout.GestureRecognizers.Add(recognizer);
         }
 
         private void SetNotificationRecognizer()

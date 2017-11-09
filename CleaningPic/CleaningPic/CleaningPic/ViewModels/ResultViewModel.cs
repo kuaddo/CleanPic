@@ -1,18 +1,12 @@
 ﻿using CleaningPic.Data;
 using CleaningPic.Utils;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Text;
 using Xamarin.Forms;
 
 namespace CleaningPic.ViewModels
 {
     public class ResultViewModel
     {
-        public ObservableCollection<Cleaning> Items { get; set; } = new ObservableCollection<Cleaning>();
-
         public Command CleaningAddCommand { get; private set; }
 
         public ResultViewModel()

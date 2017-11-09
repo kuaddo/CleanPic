@@ -11,23 +11,25 @@ namespace CleaningPic.Views
 {
     public partial class UploadPage : ContentPage
 	{
-		public UploadPage(byte[] imageData)
+        List<Switch> switchList;
+
+        public UploadPage(byte[] imageData)
 		{
 			InitializeComponent();
             uploadImage.Source = new ImageConverter().Convert(imageData, null, null, null) as ImageSource;
             (BindingContext as UploadViewModel).ImageData = imageData;
+            switchList = new List<Switch>() { kitchenSwitch, entranceSwitch, toiletSwitch, bathSwitch, windowSwitch, livingSwitch };
 
             // 画面遷移のメッセージ
             MessagingCenter.Subscribe<UploadViewModel, Cleaning[]>(
                 this, 
                 UploadViewModel.navigateResultPageMessage,
-                async (sender, args) => { await Navigation.PushAsync(new ResultPage(imageData, args)); });
+                async (sender, args) => { await Navigation.PushAsync(new ResultPage(imageData, args, UploadPlace)); });
 		}
 
         // ONになったSwitch以外を全てOFFにする
         public void SelectPlaceSwitch_Toggled(Object sender, EventArgs e)
         {
-            var switchList = new List<Switch>() { livingSwitch, entranceSwitch, kitchenSwitch, bathSwitch, windowSwitch, toiletSwitch };
             var onCount = switchList.Where(s => s.IsToggled).Count();
             switch (onCount)
             {
@@ -43,5 +45,7 @@ namespace CleaningPic.Views
                     break;
             }
         }
+
+        private Place UploadPlace => (Place)switchList.TakeWhile(s => !s.IsToggled).Count();
 	}
 }
