@@ -1,4 +1,5 @@
-﻿using CleaningPic.Utils;
+﻿using CleaningPic.Data;
+using CleaningPic.Utils;
 using System;
 using Xamarin.Forms;
 
@@ -26,6 +27,7 @@ namespace CleaningPic.CustomViews
             typeof(CleaningView),
             0,
             propertyChanged: (b, o, n) => (b as CleaningView).CleaningTime = (int)n);
+
         public static readonly BindableProperty ImageDataProperty = BindableProperty.Create(
             nameof(ImageData),
             typeof(byte[]),
@@ -300,46 +302,63 @@ namespace CleaningPic.CustomViews
             set { doneDateLable.IsVisible = value; }
         }
 
-        public bool ChangesAddColor
-        {
-            set { if (value) SetAddFinishRecognizer(); }
-        }
-
         private void SetDoneRecognizer()
         {
+            doneImage.GestureRecognizers.Clear();
             var recognizer = new TapGestureRecognizer() { Command = DoneCommand, CommandParameter = DoneParam };
             doneImage.GestureRecognizers.Add(recognizer);
         }
 
         private void SetRemoveRecognizer()
         {
+            removeImage.GestureRecognizers.Clear();
             var recognizer = new TapGestureRecognizer() { Command = RemoveCommand, CommandParameter = RemoveParam };
             removeImage.GestureRecognizers.Add(recognizer);
         }
 
         private void SetAddRecognizer()
         {
-            var recognizer = new TapGestureRecognizer() { Command = AddCommand, CommandParameter = AddParam };
-            addLayout.GestureRecognizers.Add(recognizer);
-        }
-
-        private void SetAddFinishRecognizer()
-        {
-            var recognizer = new TapGestureRecognizer()
+            addLayout.GestureRecognizers.Clear();
+            var recognizer1 = new TapGestureRecognizer() { Command = AddCommand, CommandParameter = AddParam };
+            var recognizer2 = new TapGestureRecognizer();
+            recognizer2.Command = new Command(() =>
             {
-                Command = new Command(() =>
-                {
-                    addImage.IsVisible = false;
-                    addFinishImage.IsVisible = true;
-                })
-            };
-            addLayout.GestureRecognizers.Add(recognizer);
+                addImage.IsVisible = false;
+                addFinishImage.IsVisible = true;
+                recognizer1.Command = null;
+                recognizer2.Command = null;
+            });
+
+            addLayout.GestureRecognizers.Add(recognizer1);
+            addLayout.GestureRecognizers.Add(recognizer2);
         }
 
         private void SetNotificationRecognizer()
         {
+            notificationImage.GestureRecognizers.Clear();
             var recognizer = new TapGestureRecognizer() { Command = NotificationCommand, CommandParameter = NotificationParam };
             notificationImage.GestureRecognizers.Add(recognizer);
+        }
+
+        // ListViewでキャッシュを利用するために、BindingContextが変わった時の処理を書く必要がある
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+
+            if (BindingContext != null && BindingContext is Cleaning c)
+            {
+                // 二度セットしないように、プロパティではなくSetValueでBindablePropertyに直接セットする
+                SetValue(CreatedProperty, c.Created);
+                SetValue(DirtOrPlaceProperty, c.Dirt);
+                SetValue(CleaningTimeProperty, c.CleaningTime);
+                SetValue(ImageDataProperty, c.ImageData);
+                SetValue(ToolsStringProperty, c.ToolsString);
+                SetValue(CanNotifyProperty, c.CanNotify);
+                SetValue(DoneParamProperty, c);
+                SetValue(RemoveParamProperty, c);
+                SetValue(AddParamProperty, c);
+                SetValue(NotificationParamProperty, c);
+            }
         }
 
         public CleaningView()

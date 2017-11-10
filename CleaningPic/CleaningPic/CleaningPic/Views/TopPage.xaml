@@ -74,7 +74,8 @@
                         x:Name="listView"
                         ItemsSource="{Binding Items}" 
                         HasUnevenRows="True"
-                        SeparatorVisibility="None"
+                        SeparatorVisibility="None" 
+                        CachingStrategy="RecycleElement"
                         ItemSelected="ListViewItem_Clicked">
 
                         <ListView.ItemTemplate>

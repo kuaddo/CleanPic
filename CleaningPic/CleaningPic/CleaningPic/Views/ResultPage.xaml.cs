@@ -31,7 +31,6 @@ namespace CleaningPic.Views
             firstCleaningView.CleaningTime = first.CleaningTime;
             firstCleaningView.DirtImageIsVisible = false;
             firstCleaningView.AddIsVisible = true;
-            firstCleaningView.ChangesAddColor = true;
             firstCleaningView.AddCommand = bc.CleaningAddCommand;
             firstCleaningView.AddParam = first;
 
@@ -44,7 +43,6 @@ namespace CleaningPic.Views
                     CleaningTime = c.CleaningTime,
                     DirtImageIsVisible = false,
                     AddIsVisible = true,
-                    ChangesAddColor = true,
                     AddCommand = bc.CleaningAddCommand,
                     AddParam = c
                 };

@@ -13,7 +13,15 @@
     </ContentPage.BindingContext>
 
     <Grid BackgroundColor="#E6E6E6">
-        <ListView x:Name="listView" ItemsSource="{Binding Items}" ItemAppearing="OnItemAppearing" HasUnevenRows="True" SeparatorVisibility="None" ItemSelected="ListViewItem_Clicked">
+        <ListView 
+            x:Name="listView"
+            ItemsSource="{Binding Items}"
+            HasUnevenRows="True"
+            SeparatorVisibility="None"
+            CachingStrategy="RecycleElement" 
+            ItemAppearing="OnItemAppearing"
+            ItemSelected="ListViewItem_Clicked">
+
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -39,7 +47,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
 
         <Frame
             HorizontalOptions="Center" 
