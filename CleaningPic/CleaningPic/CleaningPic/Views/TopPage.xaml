@@ -76,7 +76,8 @@
                         HasUnevenRows="True"
                         SeparatorVisibility="None" 
                         CachingStrategy="RecycleElement"
-                        ItemSelected="ListViewItem_Clicked">
+                        ItemSelected="ListViewItem_Clicked"
+                        BackgroundColor="#E6E6E6">
 
                         <ListView.ItemTemplate>
                             <DataTemplate>
