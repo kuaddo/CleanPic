@@ -20,7 +20,8 @@
             SeparatorVisibility="None"
             CachingStrategy="RecycleElement" 
             ItemAppearing="OnItemAppearing"
-            ItemSelected="ListViewItem_Clicked">
+            ItemSelected="ListViewItem_Clicked"
+            BackgroundColor="#E6E6E6">
 
             <ListView.ItemTemplate>
                 <DataTemplate>

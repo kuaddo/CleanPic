@@ -1,10 +1,8 @@
 ﻿using CleaningPic.Data;
 using CleaningPic.Utils;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace CleaningPic.ViewModels
@@ -13,7 +11,17 @@ namespace CleaningPic.ViewModels
     {
         public ObservableCollection<Cleaning> Items { get; set; } = new ObservableCollection<Cleaning>();
 
+        private bool isLoading = false;
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set { SetProperty(ref isLoading, value); }
+        }
+        private int ItemCount { get; set; }
+
         public Command CleaningRemoveCommand { get; private set; }
+
+        private const int loadingCount = 10;
 
         public DoneViewModel()
         {
@@ -31,10 +39,39 @@ namespace CleaningPic.ViewModels
                 DependencyService.Get<IFormsToast>().Show(c.ToString() + "を削除しました");
             });
 
-            // データの読み込み
+            Items.CollectionChanged += (sender, e) =>
+            {
+                using (var ds = new DataSource())
+                    ItemCount = ds.ReadAllCleaning()
+                        .Where(c => c.Done)
+                        .Count();
+            };
+
+            LoadItem();
+        }
+
+        public async Task OnItemAppearing(Cleaning cleaning)
+        {
+            if (cleaning == Items.Last() && ItemCount != Items.Count)
+            {
+                // ObservableCollection にデータを追加する処理
+                IsLoading = true;
+                await Task.Run(() => LoadItem());
+                IsLoading = false;
+            }
+        }
+
+        private void LoadItem()
+        {
             using (var ds = new DataSource())
-                foreach (var c in ds.ReadAllCleaning().Where(c => c.Done).OrderByDescending(c => c.Created.Ticks))
+                foreach (var c in ds.ReadAllCleaning()
+                    .Where(c => c.Done)
+                    .OrderByDescending(c => c.Created.Ticks)
+                    .Skip(Items.Count)
+                    .Take(loadingCount))
+                {
                     Items.Add(c);
+                }
         }
     }
 }

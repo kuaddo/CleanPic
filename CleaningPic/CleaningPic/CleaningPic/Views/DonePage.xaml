@@ -12,33 +12,45 @@
         <viewmodels:DoneViewModel/>
     </ContentPage.BindingContext>
 
-    <ContentPage.Content>
-        <StackLayout BackgroundColor="#E6E6E6">
-            <ListView 
-                x:Name="listView" 
-                ItemsSource="{Binding Items}" 
-                HasUnevenRows="True" 
-                SeparatorVisibility="None"   
-                CachingStrategy="RecycleElement"
-                ItemSelected="ListViewItem_Clicked">
+    <Grid BackgroundColor="#E6E6E6">
+        <ListView 
+            x:Name="listView" 
+            ItemsSource="{Binding Items}" 
+            HasUnevenRows="True" 
+            SeparatorVisibility="None"   
+            CachingStrategy="RecycleElement"  
+            ItemAppearing="OnItemAppearing"
+            ItemSelected="ListViewItem_Clicked"
+            BackgroundColor="#E6E6E6">
                 
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <customviews:CleaningView
-                                ShowsDoneDate="True"
-                                Created="{Binding Created}"
-                                DirtOrPlace="{Binding Dirt}"
-                                ToolsString="{Binding ToolsString}"
-                                CleaningTime="{Binding CleaningTime}"
-                                ImageData="{Binding ImageData}"
-                                RemoveIsVisible="True"
-                                RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference root}}"
-                                RemoveParam="{Binding}"/>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
-    </ContentPage.Content>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <customviews:CleaningView
+                            ShowsDoneDate="True"
+                            Created="{Binding Created}"
+                            DirtOrPlace="{Binding Dirt}"
+                            ToolsString="{Binding ToolsString}"
+                            CleaningTime="{Binding CleaningTime}"
+                            ImageData="{Binding ImageData}"
+                            RemoveIsVisible="True"
+                            RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference root}}"
+                            RemoveParam="{Binding}"/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Frame
+            HorizontalOptions="Center" 
+            VerticalOptions="Center"
+            BackgroundColor="White"
+            IsVisible="{Binding IsLoading}">
+
+            <StackLayout>
+                <ActivityIndicator IsRunning="True" Color="Black"/>
+                <Label Text="Data loading..." XAlign="Center"/>
+            </StackLayout>
+        </Frame>
+    </Grid>
 </ContentPage>
