@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:CleaningPic.Views"  
     xmlns:badge="clr-namespace:Plugin.Badge.Abstractions;assembly=Plugin.Badge.Abstractions"
-    x:Class="CleaningPic.Views.CleaningTabbedPage">
+    x:Class="CleaningPic.Views.CleaningTabbedPage"
+    BarBackgroundColor="#338DD0">
 
     <pages:WantToDoPage
         x:Name="wantToDoPage"
