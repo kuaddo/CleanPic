@@ -12,6 +12,12 @@
         <viewmodels:ResultViewModel/>
     </ContentPage.BindingContext>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="トップに戻る"
+            Clicked="GoBackTop_Clicked"/>
+    </ContentPage.ToolbarItems>
+
     <ScrollView>
         <StackLayout
             Orientation="Vertical"

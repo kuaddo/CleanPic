@@ -2,6 +2,7 @@
 using CleaningPic.Data;
 using CleaningPic.Utils;
 using CleaningPic.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,6 +18,11 @@ namespace CleaningPic.Views
             // TODO: 後で綺麗にする
             resultImage.Source = new ImageConverter().Convert(imageData, null, null, null) as ImageSource;
             CreateDynamicLayout(cleanings);
+        }
+
+        public void GoBackTop_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopToRootAsync();
         }
 
         private void CreateDynamicLayout(IList<Cleaning> cleaningList)
