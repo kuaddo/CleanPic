@@ -41,7 +41,7 @@ namespace CleaningPic.Views
                 default:    // ONのSwitchが複数ある場合
                     var offList = switchList.Where(s => !ReferenceEquals(s, sender) && (s as Switch).IsToggled);
                     foreach (var s in offList) s.IsToggled = false;
-                    (BindingContext as UploadViewModel).CleanigPlace = (Place)switchList.IndexOf(sender as Switch);
+                    (BindingContext as UploadViewModel).CleaningPlace = (Place)switchList.IndexOf(sender as Switch);
                     break;
             }
         }
