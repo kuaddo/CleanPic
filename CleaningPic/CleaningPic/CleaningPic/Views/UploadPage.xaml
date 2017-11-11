@@ -23,7 +23,6 @@
                         Color="Black"/>
                     
                     <Image                 
-                        BackgroundColor="Red"
                         x:Name="uploadImage"
                         HorizontalOptions="FillAndExpand"
                         HeightRequest="{Binding Width, Source={x:Reference uploadImage}}"

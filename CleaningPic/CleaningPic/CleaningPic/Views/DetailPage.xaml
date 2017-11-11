@@ -37,7 +37,8 @@
                         x:Name="dirtImage"
                         HorizontalOptions="FillAndExpand"
                         Margin="1, 1, 1, 1"
-                        HeightRequest="{Binding Width, Source={x:Reference dirtImage}}"/>
+                        HeightRequest="{Binding Width, Source={x:Reference dirtImage}}"
+                        Aspect="Fill"/>
                 </Grid>
 
                 <StackLayout

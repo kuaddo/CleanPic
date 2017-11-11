@@ -25,7 +25,6 @@
                     Color="Black"/>
 
                 <Image                 
-                    BackgroundColor="Red"
                     x:Name="resultImage"
                     HorizontalOptions="FillAndExpand"
                     HeightRequest="{Binding Width, Source={x:Reference resultImage}}"
