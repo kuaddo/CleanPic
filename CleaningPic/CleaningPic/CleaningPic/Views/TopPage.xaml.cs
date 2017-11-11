@@ -37,11 +37,6 @@ namespace CleaningPic.Views
                 async (sender, args) => { await Navigation.PushAsync(new NotificationSettingPage(args.Item1, args.Item2)); });
         }
 
-        public void CameraMenu_Clicked(object sender, EventArgs e)
-        {
-            CurrentPage = cameraPage;
-        }
-
         public async void SelectImageButton_Clicked(object sender, EventArgs e)
         {
             var photo = await Plugin.Media.CrossMedia.Current.PickPhotoAsync();

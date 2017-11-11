@@ -19,14 +19,17 @@ namespace CleaningPic.ViewModels
             set { SetProperty(ref _HasMoreItem, value); }
         }
 
-        public Command CleaningDoneCommand { get; private set; }
-        public Command CleaningRemoveCommand { get; private set; }
+        public Command CleaningRefreshCommand      { get; private set; }
+        public Command CleaningDoneCommand         { get; private set; }
+        public Command CleaningRemoveCommand       { get; private set; }
         public Command CleaningNotificationCommand { get; private set; }
 
         private const int displayLimit = 5;
 
         public TopViewModel()
         {
+            CleaningRefreshCommand = new Command(() => LoadCleaning());
+
             CleaningDoneCommand = new Command<Cleaning>(c =>
             {
                 c.Done = true;
@@ -63,7 +66,12 @@ namespace CleaningPic.ViewModels
                 NotificationSettingViewModel.notificationSettingDoneMessage,
                 (sender, args) => UpdateCanNotify(args.Item1, args.Item2));
 
-            // データの読み込み
+            LoadCleaning();
+        }
+
+        private void LoadCleaning()
+        {
+            Items.Clear();
             using (var ds = new DataSource())
             {
                 foreach (var c in ds.ReadAllCleaning().Where(cleaning => !cleaning.Done).Take(displayLimit))

@@ -17,9 +17,9 @@
         
         <ContentPage.ToolbarItems>
             <ToolbarItem
-                Text="カメラ"
-                Icon="ic_camera.png"
-                Clicked="CameraMenu_Clicked"/>
+                Text="更新"
+                Icon="ic_refresh.png"
+                Command="{Binding CleaningRefreshCommand}"/>
         </ContentPage.ToolbarItems>
 
         <RelativeLayout>

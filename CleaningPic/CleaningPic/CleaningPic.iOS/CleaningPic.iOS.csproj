@@ -231,6 +231,15 @@
   <ItemGroup>
     <BundleResource Include="Resources\ic_done.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_refresh%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_refresh%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_refresh.png" />
+  </ItemGroup>
   <Import Project="..\CleaningPic\CleaningPic.projitems" Label="Shared" Condition="Exists('..\CleaningPic\CleaningPic.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
