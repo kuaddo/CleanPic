@@ -123,8 +123,8 @@
                 <customviews:ExBoxView
                     WidthRequest="50"
                     HeightRequest="48"
-                    LeftTopRadius="16"
-                    LeftBottomRadius="16"
+                    LeftTopRadius="8"
+                    LeftBottomRadius="8"
                     RightTopRadius="0"
                     RightBottomRadius="0"
                     ShadowSize="2"
@@ -146,7 +146,7 @@
                 <customviews:ExBoxView  
                     WidthRequest="26"
                     LeftTopRadius="0"
-                    LeftBottomRadius="16"
+                    LeftBottomRadius="8"
                     RightTopRadius="0"
                     RightBottomRadius="0"
                     ShadowSize="2"

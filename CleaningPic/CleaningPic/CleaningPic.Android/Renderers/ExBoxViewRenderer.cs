@@ -21,10 +21,10 @@ namespace CleaningPic.Droid
                 var height = (int)(exBoxView.Height * expand);
                 var shadowSize = (int)(exBoxView.ShadowSize * expand);
 
-                var lt = exBoxView.LeftTopRadius;
-                var lb = exBoxView.LeftBottomRadius;
-                var rt = exBoxView.RightTopRadius;
-                var rb = exBoxView.RightBottomRadius;
+                var lt = (int)(exBoxView.LeftTopRadius     * expand);
+                var lb = (int)(exBoxView.LeftBottomRadius  * expand);
+                var rt = (int)(exBoxView.RightTopRadius    * expand);
+                var rb = (int)(exBoxView.RightBottomRadius * expand);
 
                 paint.AntiAlias = true;
 

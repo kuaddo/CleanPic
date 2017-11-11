@@ -11,10 +11,10 @@
         <customviews:ExBoxView
             Color="White"
             ShadowSize="2"
-            LeftTopRadius="16"
-            LeftBottomRadius="16"
-            RightTopRadius="16"
-            RightBottomRadius="16"/>
+            LeftTopRadius="12"
+            LeftBottomRadius="12"
+            RightTopRadius="12"
+            RightBottomRadius="12"/>
         
         <StackLayout 
             Orientation="Vertical" 
