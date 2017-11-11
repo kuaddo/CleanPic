@@ -23,6 +23,7 @@ namespace CleaningPic.Views
         {
             var bc = (BindingContext as ResultViewModel);
             var first = cleaningList[0];
+            var goDetailRecognizer = new TapGestureRecognizer { Command = new Command(() => Navigation.PushAsync(new DetailPage(first))) };
 
             dirtLabel.Text = first.Dirt;
             firstLabel.Text = $"{first.Place.DisplayName()}の{first.Dirt}の落とし方";
@@ -33,9 +34,11 @@ namespace CleaningPic.Views
             firstCleaningView.AddIsVisible = true;
             firstCleaningView.AddCommand = bc.CleaningAddCommand;
             firstCleaningView.AddParam = first;
+            firstCleaningView.GestureRecognizers.Add(goDetailRecognizer);
 
             foreach (var c in cleaningList.Skip(1))
             {
+                var r = new TapGestureRecognizer { Command = new Command(() => Navigation.PushAsync(new DetailPage(c))) };
                 var view = new CleaningView()
                 {
                     DirtOrPlace = c.Dirt,
@@ -44,8 +47,9 @@ namespace CleaningPic.Views
                     DirtImageIsVisible = false,
                     AddIsVisible = true,
                     AddCommand = bc.CleaningAddCommand,
-                    AddParam = c
+                    AddParam = c,
                 };
+                view.GestureRecognizers.Add(r);
                 otherStack.Children.Add(view);
             }
         }

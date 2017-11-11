@@ -20,7 +20,13 @@ namespace CleaningPic.Views
 
         public void ListViewItem_Clicked(object sender, EventArgs e)
         {
-            listView.SelectedItem = null;
+            var listView = ((ListView)sender);
+            if (listView.SelectedItem != null)
+            {
+                var cleaning = listView.SelectedItem as Cleaning;
+                ((ListView)sender).SelectedItem = null;
+                Navigation.PushAsync(new DetailPage(cleaning));
+            }
         }
     }
 }

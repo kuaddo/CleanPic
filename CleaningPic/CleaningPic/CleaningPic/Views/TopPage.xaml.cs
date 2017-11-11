@@ -1,4 +1,5 @@
-﻿using CleaningPic.Utils;
+﻿using CleaningPic.Data;
+using CleaningPic.Utils;
 using CleaningPic.ViewModels;
 using System;
 using System.IO;
@@ -59,7 +60,13 @@ namespace CleaningPic.Views
 
         public void ListViewItem_Clicked(object sender, EventArgs e)
         {
-            listView.SelectedItem = null;
+            var listView = ((ListView)sender);
+            if (listView.SelectedItem != null)
+            {
+                var cleaning = listView.SelectedItem as Cleaning;
+                ((ListView)sender).SelectedItem = null;
+                Navigation.PushAsync(new DetailPage(cleaning));
+            }
         }
 
         public void GoWantToDoLabel_Clicked(object sender, EventArgs e)

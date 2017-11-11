@@ -61,7 +61,6 @@
                 </StackLayout>
 
                 <StackLayout
-                    x:Name="stackLayout"
                     Orientation="Vertical" 
                     VerticalOptions="FillAndExpand"
                     Margin="0, 20, 0 ,0"
@@ -71,7 +70,6 @@
                     <Label Margin="8, 0, 0, 0" Text="やりたいリスト" FontSize="Medium"/>
 
                     <ListView 
-                        x:Name="listView"
                         ItemsSource="{Binding Items}" 
                         HasUnevenRows="True"
                         SeparatorVisibility="None" 
