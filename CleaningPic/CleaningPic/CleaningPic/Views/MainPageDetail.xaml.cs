@@ -15,6 +15,7 @@ namespace CleaningPic.Views
         public MainPageDetail()
         {
             InitializeComponent();
+            offlineUseSwitch.IsToggled = PropSource.UseOffline;
         }
 
         public async void GetButton_Clicked(object sender, EventArgs e)
@@ -93,6 +94,11 @@ namespace CleaningPic.Views
             indicator.IsVisible = false;
             apiPicker.IsEnabled = true;
             getButton.IsEnabled = true;
+        }
+
+        public void OfflineUseSwitch_Toggled(object sender, EventArgs e)
+        {
+            PropSource.UseOffline = offlineUseSwitch.IsToggled;
         }
 
         public void DeleteButton_Clicked(object sender, EventArgs e)

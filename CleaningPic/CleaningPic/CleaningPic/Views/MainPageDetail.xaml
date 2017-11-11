@@ -29,7 +29,12 @@
             HorizontalOptions="Center"
             VerticalOptions="Center"
             Clicked="DeleteButton_Clicked"/>
-            
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="オフラインモード"/>
+                <Switch x:Name="offlineUseSwitch" Toggled="OfflineUseSwitch_Toggled"/>
+            </StackLayout>
+
             <Label x:Name="postContentLabel"/>
         </StackLayout>
     </ScrollView>
