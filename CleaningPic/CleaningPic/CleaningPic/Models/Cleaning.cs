@@ -1,6 +1,7 @@
 ﻿using Realms;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CleaningPic.Data
 {
@@ -20,11 +21,21 @@ namespace CleaningPic.Data
         public string Dirt { get; set; }                            // 汚れの種類。
         public string Method { get; set; }                          // 掃除の手法
         public string Caution { get; set; }                         // 掃除の注意点
-        public string ToolsString { get; private set; }             // リスト表示用の道具リストの文字列
+        private string _ToolsString { get; set; }                   // Tools保存用
+        [Ignored]
+        public string ToolsString                                   // ToolsStringのリスト表示用
+        {
+            get
+            {
+                var ret = string.Join(concatChar.ToString(), Tools.Take(2));
+                if (Tools.Count() > 2) ret += "...";
+                return ret;
+            }
+        }
         public IList<string> Tools                                  // 掃除の道具。入出力のインターフェースで、保存はToolsStringの方で行う
         {
-            get { return ToolsString.Split(concatChar); }
-            set { ToolsString = string.Join(concatChar.ToString(), value); }
+            get { return _ToolsString.Split(concatChar); }
+            set { _ToolsString = string.Join(concatChar.ToString(), value); }
         }
         public int CleaningTime { get; set; }
         public byte[] ImageData { get; set; }                       // 汚れの画像
@@ -43,11 +54,11 @@ namespace CleaningPic.Data
             var clone = new Cleaning()
             {
                 Id = Id,
-                Place = Place,
+                _Place = _Place,
                 Dirt = Dirt,
                 Method = Method,
                 Caution = Caution,
-                ToolsString = ToolsString,
+                _ToolsString = _ToolsString,
                 CleaningTime = CleaningTime,
                 ImageData = ImageData,
                 Done = Done,
