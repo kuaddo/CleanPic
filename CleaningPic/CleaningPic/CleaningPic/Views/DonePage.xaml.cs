@@ -12,11 +12,21 @@ namespace CleaningPic.Views
         public DonePage()
         {
             InitializeComponent();
+        }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
             MessagingCenter.Subscribe<DoneViewModel, Cleaning>(
                 this,
                 DoneViewModel.navigateWebBrowserMessage,
                 (sender, args) => DisplayLinkAsync(args));
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            MessagingCenter.Unsubscribe<DoneViewModel, Cleaning>(this, DoneViewModel.navigateWebBrowserMessage);
         }
 
         public async void OnItemAppearing(object sender, ItemVisibilityEventArgs e)

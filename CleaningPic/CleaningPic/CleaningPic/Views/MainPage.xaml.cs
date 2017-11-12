@@ -9,6 +9,8 @@ namespace CleaningPic.Views
         {
             InitializeComponent();
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
+
+            // MainPageはルートなのでUnsubscribeする必要はない
             MessagingCenter.Subscribe<TopPage>(
                 this,
                 TopPage.navigateWantToDoPageMessage,

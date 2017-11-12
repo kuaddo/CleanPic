@@ -11,7 +11,7 @@ namespace CleaningPic.Views
     // このページのMVVMは妥協することにした
     public partial class TopPage : CarouselPage
 	{
-        public const string navigateWantToDoPageMessage = "navigateWantToDoPageMessage";
+        public const string navigateWantToDoPageMessage = "navigateWantToDoPageMessage_TopPage";
         private const int imageSize = 163;
 
         public TopPage ()
@@ -30,7 +30,11 @@ namespace CleaningPic.Views
                     }
                 }
             };
+        }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
             MessagingCenter.Subscribe<TopViewModel, (bool, string)>(
                 this,
                 TopViewModel.navigateNotificationSettingPageMessage,
@@ -40,6 +44,13 @@ namespace CleaningPic.Views
                 this,
                 TopViewModel.navigateWebBrowserMessage,
                 (sender, args) => DisplayLinkAsync(args));
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            MessagingCenter.Unsubscribe<TopViewModel, (bool, string)>(this, TopViewModel.navigateNotificationSettingPageMessage);
+            MessagingCenter.Unsubscribe<TopViewModel, Cleaning>(this, TopViewModel.navigateWebBrowserMessage);
         }
 
         public async void SelectImageButton_Clicked(object sender, EventArgs e)

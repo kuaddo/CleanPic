@@ -12,20 +12,31 @@ namespace CleaningPic.Views
     public partial class UploadPage : ContentPage
 	{
         List<Switch> switchList;
+        private byte[] imageData;
 
         public UploadPage(byte[] imageData)
 		{
 			InitializeComponent();
+            this.imageData = imageData;
             uploadImage.Source = new ImageConverter().Convert(imageData, null, null, null) as ImageSource;
             (BindingContext as UploadViewModel).ImageData = imageData;
             switchList = new List<Switch>() { kitchenSwitch, entranceSwitch, toiletSwitch, bathSwitch, windowSwitch, livingSwitch };
+		}
 
-            // 画面遷移のメッセージ
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
             MessagingCenter.Subscribe<UploadViewModel, Cleaning[]>(
-                this, 
+                this,
                 UploadViewModel.navigateResultPageMessage,
                 async (sender, args) => { await Navigation.PushAsync(new ResultPage(imageData, args)); });
-		}
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            MessagingCenter.Unsubscribe<UploadViewModel, Cleaning[]>(this, UploadViewModel.navigateResultPageMessage);
+        }
 
         // ONになったSwitch以外を全てOFFにする
         public void SelectPlaceSwitch_Toggled(Object sender, EventArgs e)

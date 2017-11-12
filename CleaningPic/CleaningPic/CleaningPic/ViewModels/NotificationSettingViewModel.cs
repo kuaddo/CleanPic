@@ -6,7 +6,7 @@ namespace CleaningPic.ViewModels
 {
     public class NotificationSettingViewModel : BindableBase
     {
-        public const string notificationSettingDoneMessage = "notificationSettingDoneMessage";
+        public const string notificationSettingDoneMessage = "notificationSettingDoneMessage_NotificationSettingViewModel";
         private bool _CanNotify;
         private DateTime _NotificationDate = DateTime.Now.AddHours(3);
         private TimeSpan _NotificationTime = DateTime.Now.AddHours(3).TimeOfDay;

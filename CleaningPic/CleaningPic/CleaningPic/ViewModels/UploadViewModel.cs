@@ -11,7 +11,7 @@ namespace CleaningPic.ViewModels
 {
     public class UploadViewModel : BindableBase
     {
-        public const string navigateResultPageMessage = "navigateResultPageMessage";
+        public const string navigateResultPageMessage = "navigateResultPageMessage_UploadViewModel";
         private Place cleaningPlace;
         private bool isUploading = false;
 

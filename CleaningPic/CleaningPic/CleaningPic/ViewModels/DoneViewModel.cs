@@ -19,7 +19,7 @@ namespace CleaningPic.ViewModels
         }
         private int ItemCount { get; set; }
         
-        public const string navigateWebBrowserMessage = "navigateWebBrowserMessage";
+        public const string navigateWebBrowserMessage = "navigateWebBrowserMessage_doneViewModel";
 
         public Command CleaningShoppingCommand { get; private set; }
         public Command CleaningRemoveCommand { get; private set; }

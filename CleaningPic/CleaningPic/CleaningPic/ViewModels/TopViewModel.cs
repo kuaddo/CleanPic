@@ -10,8 +10,8 @@ namespace CleaningPic.ViewModels
     public class TopViewModel : BindableBase
     {
         public ObservableCollection<Cleaning> Items { get; set; } = new ObservableCollection<Cleaning>();
-        public const string navigateNotificationSettingPageMessage = "navigateNotificationSettingPageMessage";
-        public const string navigateWebBrowserMessage = "navigateWebBrowserMessage";
+        public const string navigateNotificationSettingPageMessage = "navigateNotificationSettingPageMessage_TopViewModel";
+        public const string navigateWebBrowserMessage = "navigateWebBrowserMessage_TopViewModel";
 
         public bool _HasMoreItem = true;
         public bool HasMoreItem
@@ -34,6 +34,7 @@ namespace CleaningPic.ViewModels
 
             CleaningShoppingCommand = new Command<Cleaning>(c =>
             {
+                Console.WriteLine("Send!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 MessagingCenter.Send(this, navigateWebBrowserMessage, c);
             });
 

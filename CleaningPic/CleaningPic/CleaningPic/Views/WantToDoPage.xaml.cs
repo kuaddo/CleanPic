@@ -12,6 +12,11 @@ namespace CleaningPic.Views
         public WantToDoPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
             MessagingCenter.Subscribe<WantToDoViewModel, (bool, string)>(
                 this,
                 WantToDoViewModel.navigateNotificationSettingPageMessage,
@@ -21,6 +26,13 @@ namespace CleaningPic.Views
                 this,
                 WantToDoViewModel.navigateWebBrowserMessage,
                 (sender, args) => DisplayLinkAsync(args));
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            MessagingCenter.Unsubscribe<WantToDoViewModel, (bool, string)>(this, WantToDoViewModel.navigateNotificationSettingPageMessage);
+            MessagingCenter.Unsubscribe<WantToDoViewModel, Cleaning>(this, WantToDoViewModel.navigateWebBrowserMessage);
         }
 
         public async void OnItemAppearing(object sender, ItemVisibilityEventArgs e)

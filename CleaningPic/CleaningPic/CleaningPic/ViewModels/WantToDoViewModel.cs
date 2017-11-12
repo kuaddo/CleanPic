@@ -25,9 +25,9 @@ namespace CleaningPic.ViewModels
         }
 
         private const int loadingCount = 10;
-        public const string cleaningDoneMessage = "cleaningDoneMessage";
-        public const string navigateNotificationSettingPageMessage = "navigateNotificationSettingPageMessage";
-        public const string navigateWebBrowserMessage = "navigateWebBrowserMessage";
+        public const string cleaningDoneMessage = "cleaningDoneMessage_WantToDoViewModel";
+        public const string navigateNotificationSettingPageMessage = "navigateNotificationSettingPageMessage_WantToDoViewModel";
+        public const string navigateWebBrowserMessage = "navigateWebBrowserMessage_WantToDoViewModel";
 
         public Command CleaningShoppingCommand { get; private set; }
         public Command CleaningDoneCommand { get; private set; }
