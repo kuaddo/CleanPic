@@ -34,7 +34,6 @@ namespace CleaningPic.ViewModels
 
             CleaningShoppingCommand = new Command<Cleaning>(c =>
             {
-                Console.WriteLine("Send!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 MessagingCenter.Send(this, navigateWebBrowserMessage, c);
             });
 
