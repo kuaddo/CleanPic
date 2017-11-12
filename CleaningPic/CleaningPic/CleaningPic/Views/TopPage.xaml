@@ -52,8 +52,9 @@
                             Source="ic_image_upload"
                             HorizontalOptions="Center"
                             VerticalOptions="Center"
-                            WidthRequest="36"
-                            HeightRequest="36"/>
+                            Margin="4, 4, 4, 4"
+                            WidthRequest="32"
+                            HeightRequest="32"/>
                     </StackLayout>
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="SelectImageButton_Clicked"/>
