@@ -40,6 +40,8 @@ namespace CleaningPic.Views
             firstCleaningView.AddIsVisible = true;
             firstCleaningView.AddCommand = bc.CleaningAddCommand;
             firstCleaningView.AddParam = first;
+            firstCleaningView.AddCancelCommand = bc.CleaningAddCancelCommand;
+            firstCleaningView.AddCancelParam = first;
             firstCleaningView.GestureRecognizers.Add(goDetailRecognizer);
 
             foreach (var c in cleaningList.Skip(1))
@@ -54,6 +56,8 @@ namespace CleaningPic.Views
                     AddIsVisible = true,
                     AddCommand = bc.CleaningAddCommand,
                     AddParam = c,
+                    AddCancelCommand = bc.CleaningAddCancelCommand,
+                    AddCancelParam = c
                 };
                 view.GestureRecognizers.Add(r);
                 otherStack.Children.Add(view);

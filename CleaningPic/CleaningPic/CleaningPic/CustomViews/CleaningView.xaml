@@ -57,14 +57,15 @@
 
                         <ffimageloading:CachedImage Source="ic_shopping.png"         x:Name="shoppingImage"     WidthRequest="26" HeightRequest="26" IsVisible="False"/>
 
-                        <StackLayout Orientation="Horizontal" Spacing="0"            x:Name="addLayout" IsVisible="False">
-                            <ffimageloading:CachedImage Source="ic_add.png"          x:Name="addImage"          WidthRequest="26" HeightRequest="26" IsVisible="False"/>
-
-                            <ffimageloading:CachedImage Source="ic_add_finish.png"   x:Name="addFinishImage"    WidthRequest="26" HeightRequest="26" IsVisible="False"/>
-
-                            <Label Text="やりたい" VerticalOptions="CenterAndExpand" x:Name="addLabel" IsVisible="False"/>
+                        <StackLayout x:Name="addLayout" Orientation="Horizontal" Spacing="0" IsVisible="False">
+                            <ffimageloading:CachedImage Source="ic_add.png" WidthRequest="26" HeightRequest="26"/>
+                            <Label Text="やりたい" VerticalOptions="CenterAndExpand" x:Name="addLabel"/>
                         </StackLayout>
 
+                        <StackLayout x:Name="addCancelLayout" Orientation="Horizontal" Spacing="0" IsVisible="False">
+                            <ffimageloading:CachedImage Source="ic_add_finish.png" WidthRequest="26" HeightRequest="26"/>
+                            <Label Text="やりたい" VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
 
                         <ffimageloading:CachedImage Source="ic_notification_off.png" x:Name="notificationImage" WidthRequest="26" HeightRequest="26" IsVisible="False"/>
 

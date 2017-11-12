@@ -92,6 +92,20 @@ namespace CleaningPic.CustomViews
             null,
             propertyChanged: (b, o, n) => (b as CleaningView).AddParam = n);
 
+        public static readonly BindableProperty AddCancelCommandProperty = BindableProperty.Create(
+            nameof(AddCancelCommand),
+            typeof(Command),
+            typeof(CleaningView),
+            null,
+            propertyChanged: (b, o, n) => (b as CleaningView).AddCancelCommand = n as Command);
+
+        public static readonly BindableProperty AddCancelParamProperty = BindableProperty.Create(
+            nameof(AddCancelParam),
+            typeof(object),
+            typeof(CleaningView),
+            null,
+            propertyChanged: (b, o, n) => (b as CleaningView).AddCancelParam = n);
+
         public static readonly BindableProperty NotificationCommandProperty = BindableProperty.Create(
             nameof(NotificationCommand),
             typeof(Command),
@@ -235,6 +249,28 @@ namespace CleaningPic.CustomViews
             }
         }
 
+        public Command AddCancelCommand
+        {
+            get { return GetValue(AddCancelCommandProperty) as Command; }
+            set
+            {
+                SetValue(AddCancelCommandProperty, value);
+                if (AddCancelParam != null)
+                    SetAddCancelRecognizer();
+            }
+        }
+
+        public object AddCancelParam
+        {
+            get { return GetValue(AddCancelParamProperty); }
+            set
+            {
+                SetValue(AddCancelParamProperty, value);
+                if (AddCancelCommand != null)
+                    SetAddCancelRecognizer();
+            }
+        }
+
         public Command NotificationCommand
         {
             get { return GetValue(NotificationCommandProperty) as Command; }
@@ -274,12 +310,7 @@ namespace CleaningPic.CustomViews
 
         public bool AddIsVisible
         {
-            set
-            {
-                addLayout.IsVisible = value;
-                addImage.IsVisible = value;
-                addLabel.IsVisible = value;
-            }
+            set { addLayout.IsVisible = value; }
         }
 
         public bool NotificationIsVisible
@@ -319,18 +350,33 @@ namespace CleaningPic.CustomViews
         private void SetAddRecognizer()
         {
             addLayout.GestureRecognizers.Clear();
-            var recognizer1 = new TapGestureRecognizer() { Command = AddCommand, CommandParameter = AddParam };
-            var recognizer2 = new TapGestureRecognizer();
-            recognizer2.Command = new Command(() =>
+            var recognizer1 = new TapGestureRecognizer { Command = AddCommand, CommandParameter = AddParam };
+            var recognizer2 = new TapGestureRecognizer
             {
-                addImage.IsVisible = false;
-                addFinishImage.IsVisible = true;
-                recognizer1.Command = null;
-                recognizer2.Command = null;
-            });
-
+                Command = new Command(() =>
+                {
+                    addLayout.IsVisible = false;
+                    addCancelLayout.IsVisible = true;
+                })
+            };
             addLayout.GestureRecognizers.Add(recognizer1);
             addLayout.GestureRecognizers.Add(recognizer2);
+        }
+
+        private void SetAddCancelRecognizer()
+        {
+            addCancelLayout.GestureRecognizers.Clear();
+            var recognizer1 = new TapGestureRecognizer { Command = AddCancelCommand, CommandParameter = AddCancelParam };
+            var recognizer2 = new TapGestureRecognizer
+            {
+                Command = new Command(() =>
+                {
+                    addLayout.IsVisible = true;
+                    addCancelLayout.IsVisible = false;
+                })
+            };
+            addCancelLayout.GestureRecognizers.Add(recognizer1);
+            addCancelLayout.GestureRecognizers.Add(recognizer2);
         }
 
         private void SetNotificationRecognizer()
@@ -357,6 +403,7 @@ namespace CleaningPic.CustomViews
                 SetValue(DoneParamProperty, c);
                 SetValue(RemoveParamProperty, c);
                 SetValue(AddParamProperty, c);
+                SetValue(AddCancelParamProperty, c);
                 SetValue(NotificationParamProperty, c);
             }
         }

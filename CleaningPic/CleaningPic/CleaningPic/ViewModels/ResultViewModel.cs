@@ -8,6 +8,7 @@ namespace CleaningPic.ViewModels
     public class ResultViewModel
     {
         public Command CleaningAddCommand { get; private set; }
+        public Command CleaningAddCancelCommand { get; set; }
 
         public ResultViewModel()
         {
@@ -23,6 +24,13 @@ namespace CleaningPic.ViewModels
                         DependencyService.Get<IFormsToast>().Show(c.ToString() + "を追加しました");
                     }
                 }
+            });
+
+            CleaningAddCancelCommand = new Command<Cleaning>(c =>
+            {
+                using (var ds = new DataSource())
+                    ds.RemoveCleaning(c);
+                DependencyService.Get<IFormsToast>().Show(c.ToString() + "を削除しました");
             });
         }
     }
