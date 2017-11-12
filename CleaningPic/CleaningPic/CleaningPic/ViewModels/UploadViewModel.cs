@@ -12,6 +12,7 @@ namespace CleaningPic.ViewModels
     public class UploadViewModel : BindableBase
     {
         public const string navigateResultPageMessage = "navigateResultPageMessage_UploadViewModel";
+        public const string connectionFailedMessage = "connectionFailedMessage_UploadViewModel";
         private Place cleaningPlace;
         private bool isUploading = false;
 
@@ -57,8 +58,18 @@ namespace CleaningPic.ViewModels
                 else
                 {
                     var response = await HttpUtils.PostDirtImageAsync(ImageData, CleaningPlace);
+                    if (response == null)
+                    {
+                        ConnectionFailed();
+                        return;
+                    }
                     var resultIds = response.Split(',').Select(r => int.Parse(r)).ToArray();
                     response = await HttpUtils.GetResult();
+                    if (response == null)
+                    {
+                        ConnectionFailed();
+                        return;
+                    }
                     args = GetCleanings(response, resultIds, now);
                 }
 
@@ -66,6 +77,12 @@ namespace CleaningPic.ViewModels
                 MessagingCenter.Send(this, navigateResultPageMessage, args);
                 IsUploading = false;    // 画面遷移中にアップロードボタンがオンになるが妥協する
             }, () => !IsUploading);
+        }
+
+        private void ConnectionFailed()
+        {
+            IsUploading = false;
+            MessagingCenter.Send(this, connectionFailedMessage);
         }
 
         private Cleaning[] GetCleanings(string json, int[] resultIds, DateTimeOffset dt)

@@ -35,7 +35,7 @@ namespace CleaningPic.Models
             catch (Exception) { return null; }
 
             if (result?.StatusCode == System.Net.HttpStatusCode.OK)
-                return await result.Content.ReadAsStringAsync();
+                return await result?.Content?.ReadAsStringAsync();
             else
                 return null;
         }

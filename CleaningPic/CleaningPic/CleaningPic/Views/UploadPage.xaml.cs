@@ -30,12 +30,18 @@ namespace CleaningPic.Views
                 this,
                 UploadViewModel.navigateResultPageMessage,
                 async (sender, args) => { await Navigation.PushAsync(new ResultPage(imageData, args)); });
+
+            MessagingCenter.Subscribe<UploadViewModel>(
+                this,
+                UploadViewModel.connectionFailedMessage,
+                sender => { DisplayAlert("通信失敗", "画像の送信に失敗しました。通信環境を確かめてから、もう一度送信してください。", "OK"); });
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
             MessagingCenter.Unsubscribe<UploadViewModel, Cleaning[]>(this, UploadViewModel.navigateResultPageMessage);
+            MessagingCenter.Unsubscribe<UploadViewModel>(this, UploadViewModel.connectionFailedMessage);
         }
 
         // ONになったSwitch以外を全てOFFにする
