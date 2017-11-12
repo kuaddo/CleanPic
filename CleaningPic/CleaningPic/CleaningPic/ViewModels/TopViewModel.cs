@@ -11,6 +11,7 @@ namespace CleaningPic.ViewModels
     {
         public ObservableCollection<Cleaning> Items { get; set; } = new ObservableCollection<Cleaning>();
         public const string navigateNotificationSettingPageMessage = "navigateNotificationSettingPageMessage";
+        public const string navigateWebBrowserMessage = "navigateWebBrowserMessage";
 
         public bool _HasMoreItem = true;
         public bool HasMoreItem
@@ -20,6 +21,7 @@ namespace CleaningPic.ViewModels
         }
 
         public Command CleaningRefreshCommand      { get; private set; }
+        public Command CleaningShoppingCommand     { get; private set; }
         public Command CleaningDoneCommand         { get; private set; }
         public Command CleaningRemoveCommand       { get; private set; }
         public Command CleaningNotificationCommand { get; private set; }
@@ -29,6 +31,11 @@ namespace CleaningPic.ViewModels
         public TopViewModel()
         {
             CleaningRefreshCommand = new Command(() => LoadCleaning());
+
+            CleaningShoppingCommand = new Command<Cleaning>(c =>
+            {
+                MessagingCenter.Send(this, navigateWebBrowserMessage, c);
+            });
 
             CleaningDoneCommand = new Command<Cleaning>(c =>
             {

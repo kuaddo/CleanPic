@@ -106,6 +106,20 @@ namespace CleaningPic.CustomViews
             null,
             propertyChanged: (b, o, n) => (b as CleaningView).AddCancelParam = n);
 
+        public static readonly BindableProperty ShoppingCommandProperty = BindableProperty.Create(
+            nameof(ShoppingCommand),
+            typeof(Command),
+            typeof(CleaningView),
+            null,
+            propertyChanged: (b, o, n) => (b as CleaningView).ShoppingCommand = n as Command);
+
+        public static readonly BindableProperty ShoppingParamProperty = BindableProperty.Create(
+            nameof(ShoppingParam),
+            typeof(object),
+            typeof(CleaningView),
+            null,
+            propertyChanged: (b, o, n) => (b as CleaningView).ShoppingParam = n);
+
         public static readonly BindableProperty NotificationCommandProperty = BindableProperty.Create(
             nameof(NotificationCommand),
             typeof(Command),
@@ -271,6 +285,28 @@ namespace CleaningPic.CustomViews
             }
         }
 
+        public Command ShoppingCommand
+        {
+            get { return GetValue(ShoppingCommandProperty) as Command; }
+            set
+            {
+                SetValue(ShoppingCommandProperty, value);
+                if (ShoppingParam != null)
+                    SetShoppingRecognizer();
+            }
+        }
+
+        public object ShoppingParam
+        {
+            get { return GetValue(ShoppingParamProperty); }
+            set
+            {
+                SetValue(ShoppingParamProperty, value);
+                if (ShoppingCommand != null)
+                    SetShoppingRecognizer();
+            }
+        }
+
         public Command NotificationCommand
         {
             get { return GetValue(NotificationCommandProperty) as Command; }
@@ -379,6 +415,13 @@ namespace CleaningPic.CustomViews
             addCancelLayout.GestureRecognizers.Add(recognizer2);
         }
 
+        private void SetShoppingRecognizer()
+        {
+            shoppingImage.GestureRecognizers.Clear();
+            var recognizer = new TapGestureRecognizer() { Command = ShoppingCommand, CommandParameter = ShoppingParam };
+            shoppingImage.GestureRecognizers.Add(recognizer);
+        }
+
         private void SetNotificationRecognizer()
         {
             notificationImage.GestureRecognizers.Clear();
@@ -404,6 +447,7 @@ namespace CleaningPic.CustomViews
                 SetValue(RemoveParamProperty, c);
                 SetValue(AddParamProperty, c);
                 SetValue(AddCancelParamProperty, c);
+                SetValue(ShoppingParamProperty, c);
                 SetValue(NotificationParamProperty, c);
             }
         }

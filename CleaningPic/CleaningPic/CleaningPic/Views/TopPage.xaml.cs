@@ -3,7 +3,7 @@ using CleaningPic.Utils;
 using CleaningPic.ViewModels;
 using System;
 using System.IO;
-
+using System.Linq;
 using Xamarin.Forms;
 
 namespace CleaningPic.Views
@@ -35,6 +35,11 @@ namespace CleaningPic.Views
                 this,
                 TopViewModel.navigateNotificationSettingPageMessage,
                 async (sender, args) => { await Navigation.PushAsync(new NotificationSettingPage(args.Item1, args.Item2)); });
+
+            MessagingCenter.Subscribe<TopViewModel, Cleaning>(
+                this,
+                TopViewModel.navigateWebBrowserMessage,
+                (sender, args) => DisplayLinkAsync(args));
         }
 
         public async void SelectImageButton_Clicked(object sender, EventArgs e)
@@ -67,6 +72,14 @@ namespace CleaningPic.Views
         public void GoWantToDoLabel_Clicked(object sender, EventArgs e)
         {
             MessagingCenter.Send(this, navigateWantToDoPageMessage);
+        }
+
+        private async void DisplayLinkAsync(Cleaning c)
+        {
+            var result = await DisplayActionSheet("買いたい物を選択してください", "キャンセル", null, c.Tools.ToArray());
+            if (result == null || result == "キャンセル") return;
+            var link = c.Links[c.Tools.IndexOf(result)];
+            DependencyService.Get<IWebBrowser>().Open(new Uri(link));
         }
     }
 }

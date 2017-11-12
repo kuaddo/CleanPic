@@ -27,13 +27,20 @@ namespace CleaningPic.ViewModels
         private const int loadingCount = 10;
         public const string cleaningDoneMessage = "cleaningDoneMessage";
         public const string navigateNotificationSettingPageMessage = "navigateNotificationSettingPageMessage";
+        public const string navigateWebBrowserMessage = "navigateWebBrowserMessage";
 
+        public Command CleaningShoppingCommand { get; private set; }
         public Command CleaningDoneCommand { get; private set; }
         public Command CleaningRemoveCommand { get; private set; }
         public Command CleaningNotificationCommand { get; private set; }
 
         public WantToDoViewModel()
         {
+            CleaningShoppingCommand = new Command<Cleaning>(c =>
+            {
+                MessagingCenter.Send(this, navigateWebBrowserMessage, c);
+            });
+
             CleaningDoneCommand = new Command<Cleaning>(c =>
             {
                 c.Done = true;

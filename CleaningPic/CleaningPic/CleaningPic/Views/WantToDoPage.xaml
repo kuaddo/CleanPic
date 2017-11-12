@@ -40,7 +40,9 @@
                             RemoveCommand="{Binding BindingContext.CleaningRemoveCommand, Source={x:Reference root}}"
                             RemoveParam="{Binding}"
                             DoneCommand="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference root}}"
-                            DoneParam="{Binding}"
+                            DoneParam="{Binding}"                
+                            ShoppingCommand="{Binding BindingContext.CleaningShoppingCommand, Source={x:Reference root}}"
+                            ShoppingParam="{Binding}"
                             NotificationCommand="{Binding BindingContext.CleaningNotificationCommand, Source={x:Reference root}}"
                             NotificationParam="{Binding}"/>
                     </ViewCell>

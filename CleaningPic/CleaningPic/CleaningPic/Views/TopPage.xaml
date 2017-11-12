@@ -95,6 +95,8 @@
                                         RemoveParam="{Binding}"
                                         DoneCommand="{Binding BindingContext.CleaningDoneCommand, Source={x:Reference topPage}}"
                                         DoneParam="{Binding}"
+                                        ShoppingCommand="{Binding BindingContext.CleaningShoppingCommand, Source={x:Reference topPage}}"
+                                        ShoppingParam="{Binding}"
                                         NotificationCommand="{Binding BindingContext.CleaningNotificationCommand, Source={x:Reference topPage}}"
                                         NotificationParam="{Binding}"/>
                                 </ViewCell>

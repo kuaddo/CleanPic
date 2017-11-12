@@ -18,7 +18,10 @@ namespace CleaningPic.ViewModels
             set { SetProperty(ref isLoading, value); }
         }
         private int ItemCount { get; set; }
+        
+        public const string navigateWebBrowserMessage = "navigateWebBrowserMessage";
 
+        public Command CleaningShoppingCommand { get; private set; }
         public Command CleaningRemoveCommand { get; private set; }
 
         private const int loadingCount = 10;
@@ -30,6 +33,11 @@ namespace CleaningPic.ViewModels
                 this,
                 WantToDoViewModel.cleaningDoneMessage,
                 (sender, cleaning) => { Items.Add(cleaning); });
+
+            CleaningShoppingCommand = new Command<Cleaning>(c =>
+            {
+                MessagingCenter.Send(this, navigateWebBrowserMessage, c);
+            });
 
             CleaningRemoveCommand = new Command<Cleaning>(c =>
             {
