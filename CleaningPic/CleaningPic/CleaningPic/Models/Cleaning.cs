@@ -32,10 +32,16 @@ namespace CleaningPic.Data
                 return ret;
             }
         }
-        public IList<string> Tools                                  // 掃除の道具。入出力のインターフェースで、保存はToolsStringの方で行う
+        public IList<string> Tools                                  // 掃除の道具。入出力のインターフェースで、保存は_ToolsStringの方で行う
         {
             get { return _ToolsString.Split(concatChar); }
             set { _ToolsString = string.Join(concatChar.ToString(), value); }
+        }
+        private string _Links { get; set; }                         // Link保存用
+        public IList<string> Links                                  // AmazonLink。ない場合には空文字が入る
+        {
+            get { return _Links.Split(concatChar); }
+            set { _Links = string.Join(concatChar.ToString(), value); }
         }
         public int CleaningTime { get; set; }
         public byte[] ImageData { get; set; }                       // 汚れの画像
@@ -59,6 +65,7 @@ namespace CleaningPic.Data
                 Method = Method,
                 Caution = Caution,
                 _ToolsString = _ToolsString,
+                _Links = _Links,
                 CleaningTime = CleaningTime,
                 ImageData = ImageData,
                 Done = Done,

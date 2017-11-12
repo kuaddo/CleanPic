@@ -27,6 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\IImageEditor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ImageConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\IFormsToast.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\IWebBrowser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\NotConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BindableBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DoneViewModel.cs" />

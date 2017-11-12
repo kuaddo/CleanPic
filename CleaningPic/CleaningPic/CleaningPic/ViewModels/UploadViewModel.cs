@@ -79,6 +79,7 @@ namespace CleaningPic.ViewModels
                 Method =           r.Text,
                 Caution =          r.CautionText,
                 Tools =            r.Tools.Select(t => t.Name).ToList(),
+                Links =            r.Tools.Select(t => t.Link).ToList(),
                 Created =          dt,
                 CleaningTime =     r.TimeToFinish,
                 NotificationDate = dt

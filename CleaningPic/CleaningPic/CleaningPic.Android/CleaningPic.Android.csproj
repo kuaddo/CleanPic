@@ -178,6 +178,7 @@
     <Compile Include="Dependencies\FormsNotification.cs" />
     <Compile Include="Dependencies\FormsToast.cs" />
     <Compile Include="Dependencies\ImageEditor.cs" />
+    <Compile Include="Dependencies\WebBrowser.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="Renderers\ExBoxViewRenderer.cs" />
