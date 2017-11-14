@@ -79,7 +79,7 @@ namespace CleaningPic.Views
             {
                 var cleaning = listView.SelectedItem as Cleaning;
                 ((ListView)sender).SelectedItem = null;
-                Navigation.PushAsync(new DetailPage(cleaning));
+                Navigation.PushAsync(new DetailPage(cleaning, false, true));
             }
         }
 
