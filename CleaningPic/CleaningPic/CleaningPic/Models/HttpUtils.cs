@@ -16,7 +16,7 @@ namespace CleaningPic.Models
             var content = new MultipartFormDataContent();
             var fileName = DateTime.Now.ToString("yyyy_MM_dd-HH:mm:ss") + ".jpg";
             content.Add(new ByteArrayContent(imageData), "upload_file", fileName);
-            content.Add(new StringContent(((int)place).ToString()), "location_id");
+            content.Add(new StringContent(((int)place + 1).ToString()), "location_id");
 
             try { result = await client.PostAsync(host + "upload/", content); }
             catch (Exception) { return null; }

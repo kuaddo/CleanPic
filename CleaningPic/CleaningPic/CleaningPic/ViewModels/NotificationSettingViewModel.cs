@@ -52,7 +52,7 @@ namespace CleaningPic.ViewModels
             if (CanNotify)
             {
                 // UTCに変換
-                DependencyService.Get<IFormsNotification>().Notify("Test title", "これは通知テストです", NotificationDateTime.AddHours(-9));
+                DependencyService.Get<IFormsNotification>().Notify("Let's clean up!", "掃除をする時間です!!", NotificationDateTime.AddHours(-9));
                 DependencyService.Get<IFormsToast>().Show(NotificationDateTime + "に通知");
             }
             else

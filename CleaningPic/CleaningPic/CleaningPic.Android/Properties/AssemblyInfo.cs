@@ -37,3 +37,10 @@ using Plugin.Badge.Droid;
 
 // NuGet
 [assembly: ExportRenderer(typeof(TabbedPage), typeof(BadgedTabbedPageRenderer))]
+
+// Must be no debuggable on production.
+#if DEBUG
+[assembly: Application(Debuggable = true)]
+#else
+[assembly: Application(Debuggable = false)]
+#endif

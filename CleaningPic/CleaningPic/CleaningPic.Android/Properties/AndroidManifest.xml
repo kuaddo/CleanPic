@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" android:versionCode="1" android:versionName="1.0.0" package="jp.CleaningPic">
 	<uses-sdk android:minSdkVersion="15" />
 	<application android:icon="@drawable/Icon" android:label="Let's clean up!">
 		<provider android:name="android.support.v4.content.FileProvider" android:authorities="CleaningPic.fileprovider" android:exported="false" android:grantUriPermissions="true">
