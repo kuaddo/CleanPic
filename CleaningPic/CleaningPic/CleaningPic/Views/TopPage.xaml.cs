@@ -51,6 +51,7 @@ namespace CleaningPic.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
+            (topPage.BindingContext as TopViewModel).OnDisappearing();
             MessagingCenter.Unsubscribe<TopViewModel, Cleaning>(this, TopViewModel.navigateNotificationSettingPageMessage);
             MessagingCenter.Unsubscribe<TopViewModel, Cleaning>(this, TopViewModel.navigateWebBrowserMessage);
         }

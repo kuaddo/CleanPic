@@ -28,6 +28,7 @@ namespace CleaningPic.ViewModels
 
         private const int displayLimit = 5;
         private int changedItemIndex = -1;
+        private int cleaningCount = -1;
 
         public TopViewModel()
         {
@@ -69,12 +70,13 @@ namespace CleaningPic.ViewModels
                 MessagingCenter.Send(this, navigateNotificationSettingPageMessage, c);
                 changedItemIndex = Items.IndexOf(c);
             });
-            
-            LoadCleaning();
+
+            // データのロードはOnAppearing()で行う
         }
 
         public void OnAppearing()
         {
+            // 通知用処理
             if (changedItemIndex != -1)
             {
                 var c = Items[changedItemIndex];
@@ -82,6 +84,15 @@ namespace CleaningPic.ViewModels
                 Items.Insert(changedItemIndex, c);
                 changedItemIndex = -1;
             }
+
+            // トップ更新用処理
+            if (cleaningCount != CountWantToDoCleaning())
+                LoadCleaning();
+        }
+
+        public void OnDisappearing()
+        {
+            cleaningCount = CountWantToDoCleaning();
         }
 
         private void LoadCleaning()
@@ -96,8 +107,16 @@ namespace CleaningPic.ViewModels
                 {
                     Items.Add(c);
                 }
-                HasMoreItem = ds.ReadAllCleaning().Where(cleaning => !cleaning.Done).Count() > displayLimit;
+                HasMoreItem = CountWantToDoCleaning() > displayLimit;
             }
+        }
+
+        private int CountWantToDoCleaning()
+        {
+            var count = 0;
+            using (var ds = new DataSource())
+                count = ds.ReadAllCleaning().Where(cleaning => !cleaning.Done).Count();
+            return count;
         }
     }
 }
