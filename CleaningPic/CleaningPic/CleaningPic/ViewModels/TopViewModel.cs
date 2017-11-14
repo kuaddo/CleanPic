@@ -89,8 +89,13 @@ namespace CleaningPic.ViewModels
             Items.Clear();
             using (var ds = new DataSource())
             {
-                foreach (var c in ds.ReadAllCleaning().Where(cleaning => !cleaning.Done).Take(displayLimit))
+                foreach (var c in ds.ReadAllCleaning()
+                    .Where(cleaning => !cleaning.Done)
+                    .OrderByDescending(c => c.Created.Ticks)
+                    .Take(displayLimit))
+                {
                     Items.Add(c);
+                }
                 HasMoreItem = ds.ReadAllCleaning().Where(cleaning => !cleaning.Done).Count() > displayLimit;
             }
         }
