@@ -3,7 +3,6 @@ using CleaningPic.Utils;
 using CleaningPic.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Xamarin.Forms;
 
 namespace CleaningPic.Views
@@ -18,10 +17,12 @@ namespace CleaningPic.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            MessagingCenter.Subscribe<WantToDoViewModel, (bool, string)>(
+            (BindingContext as WantToDoViewModel).OnAppearing();
+
+            MessagingCenter.Subscribe<WantToDoViewModel, Cleaning>(
                 this,
                 WantToDoViewModel.navigateNotificationSettingPageMessage,
-                async (sender, args) => { await Navigation.PushAsync(new NotificationSettingPage(args.Item1, args.Item2)); });
+                async (sender, args) => { await Navigation.PushAsync(new NotificationSettingPage(args)); });
 
             MessagingCenter.Subscribe<WantToDoViewModel, Cleaning>(
                 this,
@@ -32,7 +33,7 @@ namespace CleaningPic.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            MessagingCenter.Unsubscribe<WantToDoViewModel, (bool, string)>(this, WantToDoViewModel.navigateNotificationSettingPageMessage);
+            MessagingCenter.Unsubscribe<WantToDoViewModel, Cleaning>(this, WantToDoViewModel.navigateNotificationSettingPageMessage);
             MessagingCenter.Unsubscribe<WantToDoViewModel, Cleaning>(this, WantToDoViewModel.navigateWebBrowserMessage);
         }
 

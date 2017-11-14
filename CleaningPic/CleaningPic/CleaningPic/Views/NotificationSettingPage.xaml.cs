@@ -1,26 +1,26 @@
-﻿using CleaningPic.Utils;
+﻿using CleaningPic.Data;
 using CleaningPic.ViewModels;
-using System;
 using Xamarin.Forms;
 
 namespace CleaningPic.Views
 {
     public partial class NotificationSettingPage : ContentPage
 	{
-        // SwitchにCommandをバインドできないので仕方なくVMを所持
-        private NotificationSettingViewModel viewModel;
+        // OnDisappearingで処理がしたい為、仕方なくVMを所持
+        private NotificationSettingViewModel vm;
 
-		public NotificationSettingPage(bool canNotify, string cleaningId)
+		public NotificationSettingPage(Cleaning cleaning)
 		{
 			InitializeComponent();
-            viewModel = (BindingContext as NotificationSettingViewModel);
-            viewModel.CanNotify = canNotify;
-            viewModel.CleaningId = cleaningId;
+            vm = (BindingContext as NotificationSettingViewModel);
+            vm.Cleaning = cleaning;
         }
 
-        public void NotifySwitch_Toggled(object sender, EventArgs e)
+        // 画面を離れる際にデータの保存処理をする
+        protected override void OnDisappearing()
         {
-            viewModel.NotificationStateChanged();
+            base.OnDisappearing();
+            vm.NotificationStateChanged();
         }
     }
 }

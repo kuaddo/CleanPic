@@ -4,7 +4,6 @@ using CleaningPic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Xamarin.Forms;
 
 namespace CleaningPic.Views
@@ -16,8 +15,8 @@ namespace CleaningPic.Views
         private const int imageSize = 163;
 
         public TopPage ()
-		{
-			InitializeComponent();
+        {
+            InitializeComponent();
             CurrentPageChanged += async (sender, e) =>
             {
                 if (CurrentPage is CameraPage cameraPage)
@@ -36,10 +35,12 @@ namespace CleaningPic.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            MessagingCenter.Subscribe<TopViewModel, (bool, string)>(
+            (topPage.BindingContext as TopViewModel).OnAppearing();
+
+            MessagingCenter.Subscribe<TopViewModel, Cleaning>(
                 this,
                 TopViewModel.navigateNotificationSettingPageMessage,
-                async (sender, args) => { await Navigation.PushAsync(new NotificationSettingPage(args.Item1, args.Item2)); });
+                async (sender, args) => { await Navigation.PushAsync(new NotificationSettingPage(args)); });
 
             MessagingCenter.Subscribe<TopViewModel, Cleaning>(
                 this,
@@ -50,7 +51,7 @@ namespace CleaningPic.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            MessagingCenter.Unsubscribe<TopViewModel, (bool, string)>(this, TopViewModel.navigateNotificationSettingPageMessage);
+            MessagingCenter.Unsubscribe<TopViewModel, Cleaning>(this, TopViewModel.navigateNotificationSettingPageMessage);
             MessagingCenter.Unsubscribe<TopViewModel, Cleaning>(this, TopViewModel.navigateWebBrowserMessage);
         }
 

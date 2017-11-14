@@ -25,6 +25,7 @@ namespace CleaningPic.ViewModels
         }
 
         private const int loadingCount = 10;
+        private int changedItemIndex = -1;
         public const string cleaningDoneMessage = "cleaningDoneMessage_WantToDoViewModel";
         public const string navigateNotificationSettingPageMessage = "navigateNotificationSettingPageMessage_WantToDoViewModel";
         public const string navigateWebBrowserMessage = "navigateWebBrowserMessage_WantToDoViewModel";
@@ -68,13 +69,9 @@ namespace CleaningPic.ViewModels
 
             CleaningNotificationCommand = new Command<Cleaning>(c =>
             {
-                MessagingCenter.Send(this, navigateNotificationSettingPageMessage, (c.CanNotify, c.Id));
+                MessagingCenter.Send(this, navigateNotificationSettingPageMessage, c);
+                changedItemIndex = Items.IndexOf(c);
             });
-
-            MessagingCenter.Subscribe<NotificationSettingViewModel, (string, bool)>(
-                this,
-                NotificationSettingViewModel.notificationSettingDoneMessage,
-                (sender, args) => UpdateCanNotify(args.Item1, args.Item2));
 
             // Itemsが変化した時にItemCountStringを更新するようにする
             Items.CollectionChanged += (sender, e) =>
@@ -89,6 +86,17 @@ namespace CleaningPic.ViewModels
             };
 
             LoadItem();
+        }
+
+        public void OnAppearing()
+        {
+            if (changedItemIndex != -1)
+            {
+                var c = Items[changedItemIndex];
+                Items.RemoveAt(changedItemIndex);
+                Items.Insert(changedItemIndex, c);
+                changedItemIndex = -1;
+            }
         }
 
         public async Task OnItemAppearing(Cleaning cleaning)
@@ -113,14 +121,6 @@ namespace CleaningPic.ViewModels
                 {
                     Items.Add(c);
                 }
-        }
-
-        private void UpdateCanNotify(string cleaningId, bool canNotify)
-        {
-            var cleaning = Items.First(c => c.Id == cleaningId);
-            cleaning.CanNotify = canNotify;
-            using (var ds = new DataSource())
-                ds.UpdateCleaning(cleaning);
         }
     }
 }

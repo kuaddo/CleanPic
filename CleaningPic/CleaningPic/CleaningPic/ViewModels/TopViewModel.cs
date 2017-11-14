@@ -27,6 +27,7 @@ namespace CleaningPic.ViewModels
         public Command CleaningNotificationCommand { get; private set; }
 
         private const int displayLimit = 5;
+        private int changedItemIndex = -1;
 
         public TopViewModel()
         {
@@ -65,15 +66,22 @@ namespace CleaningPic.ViewModels
 
             CleaningNotificationCommand = new Command<Cleaning>(c =>
             {
-                MessagingCenter.Send(this, navigateNotificationSettingPageMessage, (c.CanNotify, c.Id));
+                MessagingCenter.Send(this, navigateNotificationSettingPageMessage, c);
+                changedItemIndex = Items.IndexOf(c);
             });
-
-            MessagingCenter.Subscribe<NotificationSettingViewModel, (string, bool)>(
-                this,
-                NotificationSettingViewModel.notificationSettingDoneMessage,
-                (sender, args) => UpdateCanNotify(args.Item1, args.Item2));
-
+            
             LoadCleaning();
+        }
+
+        public void OnAppearing()
+        {
+            if (changedItemIndex != -1)
+            {
+                var c = Items[changedItemIndex];
+                Items.RemoveAt(changedItemIndex);
+                Items.Insert(changedItemIndex, c);
+                changedItemIndex = -1;
+            }
         }
 
         private void LoadCleaning()
@@ -85,14 +93,6 @@ namespace CleaningPic.ViewModels
                     Items.Add(c);
                 HasMoreItem = ds.ReadAllCleaning().Where(cleaning => !cleaning.Done).Count() > displayLimit;
             }
-        }
-
-        private void UpdateCanNotify(string cleaningId, bool canNotify)
-        {
-            var cleaning = Items.First(c => c.Id == cleaningId);
-            cleaning.CanNotify = canNotify;
-            using (var ds = new DataSource())
-                ds.UpdateCleaning(cleaning);
         }
     }
 }

@@ -64,8 +64,7 @@
             <Switch
                 HorizontalOptions="End"
                 IsToggled="{Binding CanNotify, Mode=TwoWay}"
-                IsEnabled="{Binding ValidDate}"
-                Toggled="NotifySwitch_Toggled"/>
+                IsEnabled="{Binding ValidDate}"/>
         </StackLayout>
     </StackLayout>
 </ContentPage>
