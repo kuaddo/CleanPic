@@ -369,6 +369,16 @@ namespace CleaningPic.CustomViews
             set { doneDateLable.IsVisible = value; }
         }
 
+        public bool ShowsAddLayout
+        {
+            set { addLayout.IsVisible = value; }
+        }
+
+        public bool ShowsAddCancelLayout
+        {
+            set { addCancelLayout.IsVisible = value; }
+        }
+
         private void SetDoneRecognizer()
         {
             doneImage.GestureRecognizers.Clear();

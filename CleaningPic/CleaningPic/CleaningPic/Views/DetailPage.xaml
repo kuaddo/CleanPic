@@ -105,42 +105,59 @@
             </StackLayout>
         </ScrollView>
 
-        <StackLayout 
-            x:Name="adds"
-            Orientation="Horizontal"
-            HorizontalOptions="FillAndExpand"
-            Spacing="0"
-            Padding="0, 8, 0, 8"
-            BackgroundColor="#338DD0"
+        <Grid
+            x:Name="footer"
+            ColumnSpacing="2"
+            MinimumHeightRequest="42"
+            HeightRequest="42"
+            BackgroundColor="Gray"
             IsVisible="False">
-            <StackLayout x:Name="addLayout" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0" IsVisible="False">
-                <ffimageloading:CachedImage Source="ic_add.png" HorizontalOptions="EndAndExpand" WidthRequest="26" HeightRequest="26"/>
-                <Label Text="やりたい" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout 
+                x:Name="adds"
+                Grid.Row="0"
+                Grid.Column="0"
+                Orientation="Horizontal"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                Padding="0, 8, 0, 8"
+                Spacing="0"
+                BackgroundColor="#338DD0">
+                <StackLayout x:Name="addLayout" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0" IsVisible="False">
+                    <ffimageloading:CachedImage Source="ic_add.png" HorizontalOptions="EndAndExpand" WidthRequest="26" HeightRequest="26"/>
+                    <Label Text="やりたい" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"/>
+                </StackLayout>
+
+                <StackLayout x:Name="addCancelLayout" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0" IsVisible="False">
+                    <ffimageloading:CachedImage Source="ic_add_finish.png" HorizontalOptions="EndAndExpand" WidthRequest="26" HeightRequest="26"/>
+                    <Label Text="やりたい" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"/>
+                </StackLayout>
             </StackLayout>
 
-            <StackLayout x:Name="addCancelLayout" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0" IsVisible="False">
-                <ffimageloading:CachedImage Source="ic_add_finish.png" HorizontalOptions="EndAndExpand" WidthRequest="26" HeightRequest="26"/>
-                <Label Text="やりたい" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center"/>
-            </StackLayout>
-        </StackLayout>
-            
-        <StackLayout 
-            x:Name="dones"
-            Orientation="Horizontal"
-            HorizontalOptions="FillAndExpand"
-            Spacing="0"
-            Padding="0, 8, 0, 8"
-            BackgroundColor="#338DD0"
-            IsVisible="False">
-            <StackLayout x:Name="doneLayout" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0" IsVisible="True">
-                <ffimageloading:CachedImage Source="ic_done.png" HorizontalOptions="EndAndExpand" WidthRequest="26" HeightRequest="26"/>
-                <Label Text="やった" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center"/>
-            </StackLayout>
+            <StackLayout 
+                x:Name="dones"
+                Grid.Row="0"
+                Grid.Column="1"
+                Orientation="Horizontal"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                Spacing="0"                    
+                Padding="0, 8, 0, 8"
+                BackgroundColor="#338DD0">
+                <StackLayout x:Name="doneLayout" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0" IsVisible="False">
+                    <ffimageloading:CachedImage Source="ic_done.png" HorizontalOptions="EndAndExpand" WidthRequest="26" HeightRequest="26"/>
+                    <Label Text="やった" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"/>
+                </StackLayout>
 
-            <StackLayout x:Name="doneCancelLayout" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0" IsVisible="False">
-                <ffimageloading:CachedImage Source="ic_done_finish.png" HorizontalOptions="EndAndExpand" WidthRequest="26" HeightRequest="26"/>
-                <Label Text="やった" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center"/>
+                <StackLayout x:Name="doneCancelLayout" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0" IsVisible="False">
+                    <ffimageloading:CachedImage Source="ic_done_finish.png" HorizontalOptions="EndAndExpand" WidthRequest="26" HeightRequest="26"/>
+                    <Label Text="やった" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"/>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
+        </Grid>
     </StackLayout>
 </ContentPage>

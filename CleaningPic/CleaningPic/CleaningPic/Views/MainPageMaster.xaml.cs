@@ -35,7 +35,7 @@ namespace CleaningPic.Views
                     new MainPageMenuItem { Id = 0, Title = "トップ",   TargetType = typeof(TopPage) },
                     new MainPageMenuItem { Id = 1, Title = "やりたい", TargetType = typeof(CleaningTabbedPage), Params = new object[] { true  } },
                     new MainPageMenuItem { Id = 2, Title = "やった" ,  TargetType = typeof(CleaningTabbedPage), Params = new object[] { false } },
-                    //new MainPageMenuItem { Id = 3, Title = "豆知識" },
+                    new MainPageMenuItem { Id = 3, Title = "豆知識" },
                     //new MainPageMenuItem { Id = 4, Title = "ヘルプ" },
                 });
             }

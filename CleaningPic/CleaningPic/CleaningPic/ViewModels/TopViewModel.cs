@@ -81,7 +81,8 @@ namespace CleaningPic.ViewModels
             {
                 var c = Items[changedItemIndex];
                 Items.RemoveAt(changedItemIndex);
-                Items.Insert(changedItemIndex, c);
+                if (!c.Done)
+                    Items.Insert(changedItemIndex, c);
                 changedItemIndex = -1;
             }
 

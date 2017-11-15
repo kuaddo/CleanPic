@@ -32,7 +32,7 @@ namespace CleaningPic.ViewModels
             MessagingCenter.Subscribe<WantToDoViewModel, Cleaning>(
                 this,
                 WantToDoViewModel.cleaningDoneMessage,
-                (sender, cleaning) => { Items.Add(cleaning); });
+                (sender, cleaning) => { Items.Insert(0, cleaning); });
 
             CleaningShoppingCommand = new Command<Cleaning>(c =>
             {

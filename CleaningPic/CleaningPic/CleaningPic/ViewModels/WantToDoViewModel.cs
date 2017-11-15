@@ -70,7 +70,7 @@ namespace CleaningPic.ViewModels
             CleaningNotificationCommand = new Command<Cleaning>(c =>
             {
                 MessagingCenter.Send(this, navigateNotificationSettingPageMessage, c);
-                changedItemIndex = Items.IndexOf(c);
+                UpdateChangedIndex(c);
             });
 
             // Itemsが変化した時にItemCountStringを更新するようにする
@@ -88,13 +88,22 @@ namespace CleaningPic.ViewModels
             LoadItem();
         }
 
+        public void UpdateChangedIndex(Cleaning c)
+        {
+            changedItemIndex = Items.IndexOf(c);
+        }
+
         public void OnAppearing()
         {
             if (changedItemIndex != -1)
             {
                 var c = Items[changedItemIndex];
                 Items.RemoveAt(changedItemIndex);
-                Items.Insert(changedItemIndex, c);
+                if (!c.Done)
+                    Items.Insert(changedItemIndex, c);
+                else
+                    MessagingCenter.Send(this, cleaningDoneMessage, c);
+
                 changedItemIndex = -1;
             }
         }

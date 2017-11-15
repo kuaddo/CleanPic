@@ -7,13 +7,49 @@ namespace CleaningPic.Views
 {
     public partial class DetailPage : ContentPage
 	{
+        private Cleaning cleaning;
+        private bool showsWantToDo;
+        private bool showsDone;
+        private bool CheckedWantToDo => addCancelLayout.IsVisible;
+        private bool CheckedDone => doneCancelLayout.IsVisible;
+
 		public DetailPage(Cleaning cleaning, bool showsWantToDo, bool showsDone)
 		{
 			InitializeComponent();
-            CreateDynamicLayout(cleaning, showsWantToDo, showsDone);
+            this.cleaning = cleaning;
+            this.showsWantToDo = showsWantToDo;
+            this.showsDone = showsDone;
+            CreateDynamicLayout();
         }
 
-        private void CreateDynamicLayout(Cleaning cleaning, bool showsWantToDo, bool showsDone)
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            if (!showsWantToDo && showsDone && !CheckedDone)
+                return;
+
+            if (CheckedWantToDo)
+                cleaning.Done = false;
+            if (CheckedDone)
+                cleaning.Done = true;
+
+            if (CheckedWantToDo || CheckedDone)
+            {
+                cleaning.Created = DateTimeOffset.UtcNow;
+                using (var ds = new DataSource()) ds.UpdateCleaning(cleaning);
+            }
+
+            if (!CheckedWantToDo && !CheckedDone)
+            {
+                using (var ds = new DataSource())
+                {
+                    if (ds.Exists(cleaning))
+                        ds.RemoveCleaning(cleaning);
+                }
+            }
+        }
+
+        private void CreateDynamicLayout()
         {
             bool hasLink = false;
             titleLabel.Text = cleaning.ToString() + "の落とし方";
@@ -54,30 +90,41 @@ namespace CleaningPic.Views
             methodLabel.Text = cleaning.Method;
             cautionLabel.Text = cleaning.Caution;
 
+            footer.IsVisible = showsDone || showsWantToDo;
             cautionLayout.IsVisible = cleaning.Caution.Length != 0;
             amazonLayout.IsVisible = hasLink;
 
-            if (showsWantToDo)
+            if (showsWantToDo && showsDone)
             {
                 adds.IsVisible = true;
-                using (var ds = new DataSource())
+                if (cleaning.Done)
                 {
-                    if (ds.Exists(cleaning))
-                        addCancelLayout.IsVisible = true;
-                    else
-                        addLayout.IsVisible = true;
+                    addLayout.IsVisible = true;
+                    doneCancelLayout.IsVisible = true;
                 }
-                SetAddRecognizer();
+                else
+                {
+                    doneLayout.IsVisible = true;
+                    using (var ds = new DataSource())
+                    {
+                        if (ds.Exists(cleaning))
+                            addCancelLayout.IsVisible = true;
+                        else
+                            addLayout.IsVisible = true;
+                    }
+                }
+                SetAddAndDoneRecognizer();
             }
-
-            if (showsDone)
+            else if (showsDone)
             {
-                dones.IsVisible = true;
+                addLayout.IsVisible = true;
+                doneLayout.IsVisible = true;
+                adds.BackgroundColor = Color.FromHex("#E6E6E6");
                 SetDoneRecognizer();
             }
         }
 
-        private void SetAddRecognizer()
+        private void SetAddAndDoneRecognizer()
         {
             var addRecognizer = new TapGestureRecognizer
             {
@@ -85,6 +132,9 @@ namespace CleaningPic.Views
                 {
                     addLayout.IsVisible = false;
                     addCancelLayout.IsVisible = true;
+                    doneLayout.IsVisible = true;
+                    doneCancelLayout.IsVisible = false;
+                    DependencyService.Get<IFormsToast>().Show($"{cleaning.ToString()}をやりたいに追加しました");
                 })
             };
             var addCancelRecognizer = new TapGestureRecognizer
@@ -93,11 +143,34 @@ namespace CleaningPic.Views
                 {
                     addLayout.IsVisible = true;
                     addCancelLayout.IsVisible = false;
+                    DependencyService.Get<IFormsToast>().Show($"{cleaning.ToString()}をやりたいから削除しました");
+                })
+            };
+            var doneRecognizer = new TapGestureRecognizer
+            {
+                Command = new Command(() =>
+                {
+                    addLayout.IsVisible = true;
+                    addCancelLayout.IsVisible = false;
+                    doneLayout.IsVisible = false;
+                    doneCancelLayout.IsVisible = true;
+                    DependencyService.Get<IFormsToast>().Show($"{cleaning.ToString()}をやったに追加しました");
+                })
+            };
+            var doneCancelRecognizer = new TapGestureRecognizer
+            {
+                Command = new Command(() =>
+                {
+                    doneLayout.IsVisible = true;
+                    doneCancelLayout.IsVisible = false;
+                    DependencyService.Get<IFormsToast>().Show($"{cleaning.ToString()}をやったから削除しました");
                 })
             };
 
             addLayout.GestureRecognizers.Add(addRecognizer);
             addCancelLayout.GestureRecognizers.Add(addCancelRecognizer);
+            doneLayout.GestureRecognizers.Add(doneRecognizer);
+            doneCancelLayout.GestureRecognizers.Add(doneCancelRecognizer);
         }
 
         private void SetDoneRecognizer()
@@ -108,6 +181,7 @@ namespace CleaningPic.Views
                 {
                     doneLayout.IsVisible = false;
                     doneCancelLayout.IsVisible = true;
+                    DependencyService.Get<IFormsToast>().Show($"{cleaning.ToString()}を掃除しました");
                 })
             };
             var doneCancelRecognizer = new TapGestureRecognizer
@@ -116,6 +190,7 @@ namespace CleaningPic.Views
                 {
                     doneLayout.IsVisible = true;
                     doneCancelLayout.IsVisible = false;
+                    DependencyService.Get<IFormsToast>().Show($"{cleaning.ToString()}をやりたいに戻しました");
                 })
             };
 

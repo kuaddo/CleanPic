@@ -49,6 +49,7 @@ namespace CleaningPic.Views
             {
                 var cleaning = listView.SelectedItem as Cleaning;
                 ((ListView)sender).SelectedItem = null;
+                (BindingContext as WantToDoViewModel).UpdateChangedIndex(cleaning);
                 Navigation.PushAsync(new DetailPage(cleaning, false, true));
             }
         }
