@@ -46,11 +46,11 @@ namespace CleaningPic.ViewModels
             set
             {
                 _Cleaning = value;
-
-                // Date/Time PickerではUTCは用いない
-                var date = new DateTime(value.NotificationDate.AddHours(9).Ticks);
-                if (date > DateTime.Now)
+                
+                if (value.NotificationDate > DateTimeOffset.UtcNow)
                 {
+                    // Date/Time PickerではUTCは用いない
+                    var date = new DateTime(value.NotificationDate.AddHours(9).Ticks);
                     NotificationDate = date;
                     NotificationTime = date.TimeOfDay;
                     CanNotify = value.CanNotify;
@@ -109,7 +109,7 @@ namespace CleaningPic.ViewModels
         private void UpdateDataSource()
         {
             Cleaning.CanNotify = CanNotify;
-            Cleaning.NotificationDate = NotificationDateTime.AddHours(-9);
+            Cleaning.NotificationDate = new DateTimeOffset(NotificationDateTime.AddHours(-9).Ticks, TimeSpan.Zero);
             using (var ds = new DataSource())
                 ds.UpdateCleaning(Cleaning);
         }
