@@ -28,10 +28,10 @@ namespace CleaningPic.Views
             if (!showsWantToDo && showsDone && !CheckedDone)
                 return;
 
-            if (CheckedWantToDo)
-                cleaning.Done = false;
             if (CheckedDone)
                 cleaning.Done = true;
+            else
+                cleaning.Done = false;
 
             if (CheckedWantToDo || CheckedDone)
             {
@@ -96,7 +96,6 @@ namespace CleaningPic.Views
 
             if (showsWantToDo && showsDone)
             {
-                adds.IsVisible = true;
                 if (cleaning.Done)
                 {
                     addLayout.IsVisible = true;
@@ -119,7 +118,7 @@ namespace CleaningPic.Views
             {
                 addLayout.IsVisible = true;
                 doneLayout.IsVisible = true;
-                adds.BackgroundColor = Color.FromHex("#E6E6E6");
+                addLayout.BackgroundColor = Color.FromHex("#555555");
                 SetDoneRecognizer();
             }
         }
