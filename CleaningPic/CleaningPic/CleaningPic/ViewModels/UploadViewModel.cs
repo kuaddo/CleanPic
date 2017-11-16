@@ -87,8 +87,13 @@ namespace CleaningPic.ViewModels
 
         private Cleaning[] GetCleanings(string json, int[] resultIds, DateTimeOffset dt)
         {
-            var results = JsonConvert.DeserializeObject<IList<Result>>(json).Where(r => resultIds.Contains(r.ID));
-            return results.Select(r => new Cleaning
+            var results = JsonConvert.DeserializeObject<IList<Result>>(json);
+            List<Result> selectedResults = new List<Result>();
+            foreach (var id in resultIds)
+            {
+                selectedResults.Add(results.First(r => r.ID == id));
+            }
+            return selectedResults.Select(r => new Cleaning
             {
                 Place =            CleaningPlace,
                 Dirt =             r.Category.Name,
