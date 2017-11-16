@@ -14,22 +14,20 @@ namespace CleaningPic.Views
         public const string navigateWantToDoPageMessage = "navigateWantToDoPageMessage_TopPage";
         private const int imageSize = 163;
 
-        public TopPage ()
+        public TopPage(bool launchesCamera = false)
         {
             InitializeComponent();
-            CurrentPageChanged += async (sender, e) =>
+            CurrentPageChanged += (sender, e) =>
             {
                 if (CurrentPage is CameraPage cameraPage)
                 {
                     CurrentPage = topPage;      // カメラ処理を立ち上げる前に元ページに戻す
-                    var imageData = await cameraPage.LaunchCamera();
-                    if (imageData != null)
-                    {
-                        var data = DependencyService.Get<IImageEditor>().SquareAndResize(imageData, imageSize);
-                        await Navigation.PushAsync(new UploadPage(data));
-                    }
+                    LaunchCameraAsync();
                 }
             };
+
+            if (launchesCamera)
+                LaunchCameraAsync();
         }
 
         protected override void OnAppearing()
@@ -86,6 +84,16 @@ namespace CleaningPic.Views
         public void GoWantToDoLabel_Clicked(object sender, EventArgs e)
         {
             MessagingCenter.Send(this, navigateWantToDoPageMessage);
+        }
+
+        private async void LaunchCameraAsync()
+        {
+            var imageData = await cameraPage.LaunchCamera();
+            if (imageData != null)
+            {
+                var data = DependencyService.Get<IImageEditor>().SquareAndResize(imageData, imageSize);
+                await Navigation.PushAsync(new UploadPage(data));
+            }
         }
 
         private async void DisplayLinkAsync(Cleaning c)

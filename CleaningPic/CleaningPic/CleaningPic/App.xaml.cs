@@ -1,20 +1,23 @@
 ﻿using CleaningPic.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Xamarin.Forms;
 
 namespace CleaningPic
 {
-	public partial class App : Application
+    public partial class App : Application
 	{
-		public App ()
+		public App()
 		{
 			InitializeComponent();
 
-			MainPage = new MainPage();
+            MainPage = new MainPage
+            {
+                Detail = new NavigationPage(new TopPage(false))
+                {
+                    BarBackgroundColor = Color.FromHex("#338DD0"),
+                    BarTextColor = Color.White,                    
+                }
+            };
 		}
 
 		protected override void OnStart ()

@@ -22,7 +22,10 @@ namespace CleaningPic.Views
             var item = e.SelectedItem as MainPageMenuItem;
             if (item == null)
                 return;
-            Navigate(item);
+            if (item.Id == 1)
+                NavigateCamera();
+            else
+                Navigate(item);
         }
 
         private void Navigate(MainPageMenuItem item)
@@ -30,6 +33,19 @@ namespace CleaningPic.Views
             Page page = (Page)Activator.CreateInstance(item.TargetType, item.Params);
             page.Title = item.Title;
             Detail = new NavigationPage(page) {
+                BarBackgroundColor = Color.FromHex("#338DD0"),
+                BarTextColor = Color.White
+            };
+            IsPresented = false;
+
+            MasterPage.ListView.SelectedItem = null;
+        }
+
+        private void NavigateCamera()
+        {
+            var topPage = new TopPage(launchesCamera: true) { Title = "トップ" };
+            Detail = new NavigationPage(topPage)
+            {
                 BarBackgroundColor = Color.FromHex("#338DD0"),
                 BarTextColor = Color.White
             };

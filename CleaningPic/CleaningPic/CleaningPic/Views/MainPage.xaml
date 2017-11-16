@@ -6,13 +6,4 @@
   <MasterDetailPage.Master>
     <pages:MainPageMaster x:Name="MasterPage" />
   </MasterDetailPage.Master>
-  <MasterDetailPage.Detail>
-    <NavigationPage 
-        BarBackgroundColor="#338DD0"
-        BarTextColor="White">
-      <x:Arguments>
-        <pages:TopPage />
-      </x:Arguments>
-    </NavigationPage>
-  </MasterDetailPage.Detail>
 </MasterDetailPage>
