@@ -32,6 +32,20 @@ namespace CleaningPic.Views
             MessagingCenter.Unsubscribe<DoneViewModel, Cleaning>(this, DoneViewModel.navigateWebBrowserMessage);
         }
 
+        public void ReversedFalseMenu_Clicked(object sender, EventArgs e)
+        {
+            var vm = BindingContext as DoneViewModel;
+            vm.Reversed = false;
+            vm.OnAppearing();
+        }
+
+        public void ReversedTrueMenu_Clicked(object sender, EventArgs e)
+        {
+            var vm = BindingContext as DoneViewModel;
+            vm.Reversed = true;
+            vm.OnAppearing();
+        }
+
         public void ListViewItem_Clicked(object sender, EventArgs e)
         {
             var listView = ((ListView)sender);

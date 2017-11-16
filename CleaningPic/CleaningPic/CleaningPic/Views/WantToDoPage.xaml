@@ -12,6 +12,17 @@
         <viewmodels:WantToDoViewModel/>
     </ContentPage.BindingContext>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="古い順に表示する"
+            Clicked="ReversedTrueMenu_Clicked"
+            Order="Secondary"/>
+        <ToolbarItem
+            Text="新しい順に表示する"
+            Clicked="ReversedFalseMenu_Clicked"
+            Order="Secondary"/>
+    </ContentPage.ToolbarItems>
+
     <Grid BackgroundColor="#E6E6E6">
         <ListView 
             ItemsSource="{Binding Items}"

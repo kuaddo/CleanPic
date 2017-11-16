@@ -14,6 +14,7 @@ namespace CleaningPic.ViewModels
         public ObservableCollection<GroupingItem> Items { get; set; } = new ObservableCollection<GroupingItem>();
         private string itemCountString;
         private bool isLoading = false;
+        public bool Reversed { get; set; } = false; 
         public string ItemCountString
         {
             get { return itemCountString; }
@@ -83,8 +84,12 @@ namespace CleaningPic.ViewModels
             using (var ds = new DataSource())
             {
                 var cleanings = ds.ReadAllCleaning()
-                    .Where(c => !c.Done)
-                    .OrderByDescending(c => c.Created.Ticks);
+                    .Where(c => !c.Done);
+                if (Reversed)
+                    cleanings = cleanings.OrderBy(c => c.Created.Ticks);
+                else
+                    cleanings = cleanings.OrderByDescending(c => c.Created.Ticks);
+
                 if (cleanings.Count() == 0) ItemCountString = "";
                 else                        ItemCountString = cleanings.Count().ToString();
 

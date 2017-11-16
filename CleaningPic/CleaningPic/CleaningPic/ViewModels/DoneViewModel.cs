@@ -20,7 +20,8 @@ namespace CleaningPic.ViewModels
             set { SetProperty(ref isLoading, value); }
         }
         private int ItemCount { get; set; }
-        
+        public bool Reversed { get; set; } = false;
+
         public const string navigateWebBrowserMessage = "navigateWebBrowserMessage_doneViewModel";
 
         public Command CleaningShoppingCommand { get; private set; }
@@ -63,8 +64,11 @@ namespace CleaningPic.ViewModels
             using (var ds = new DataSource())
             {
                 var cleanings = ds.ReadAllCleaning()
-                    .Where(c => !c.Done)
-                    .OrderByDescending(c => c.Created.Ticks);
+                    .Where(c => c.Done);
+                if (Reversed)
+                    cleanings = cleanings.OrderBy(c => c.Created.Ticks);
+                else
+                    cleanings = cleanings.OrderByDescending(c => c.Created.Ticks);
 
                 foreach (var c in cleanings)
                 {
