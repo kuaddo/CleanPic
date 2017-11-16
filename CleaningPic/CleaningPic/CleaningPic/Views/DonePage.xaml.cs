@@ -18,6 +18,8 @@ namespace CleaningPic.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            (BindingContext as DoneViewModel).OnAppearing();
+
             MessagingCenter.Subscribe<DoneViewModel, Cleaning>(
                 this,
                 DoneViewModel.navigateWebBrowserMessage,
@@ -28,11 +30,6 @@ namespace CleaningPic.Views
         {
             base.OnDisappearing();
             MessagingCenter.Unsubscribe<DoneViewModel, Cleaning>(this, DoneViewModel.navigateWebBrowserMessage);
-        }
-
-        public async void OnItemAppearing(object sender, ItemVisibilityEventArgs e)
-        {
-            await (BindingContext as DoneViewModel).OnItemAppearing(e.Item as Cleaning);
         }
 
         public void ListViewItem_Clicked(object sender, EventArgs e)

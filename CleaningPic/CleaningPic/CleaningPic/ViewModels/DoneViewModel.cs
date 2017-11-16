@@ -1,15 +1,17 @@
 ﻿using CleaningPic.Data;
+using CleaningPic.Models;
 using CleaningPic.Utils;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace CleaningPic.ViewModels
 {
     public class DoneViewModel : BindableBase
     {
-        public ObservableCollection<Cleaning> Items { get; set; } = new ObservableCollection<Cleaning>();
+        public ObservableCollection<GroupingItem> Items { get; set; } = new ObservableCollection<GroupingItem>();
 
         private bool isLoading = false;
         public bool IsLoading
@@ -23,16 +25,14 @@ namespace CleaningPic.ViewModels
 
         public Command CleaningShoppingCommand { get; private set; }
         public Command CleaningRemoveCommand { get; private set; }
-
-        private const int loadingCount = 10;
-
+        
         public DoneViewModel()
         {
             // やりたいページで完了したものをMessageで確認、やったページに追加
             MessagingCenter.Subscribe<WantToDoViewModel, Cleaning>(
                 this,
                 WantToDoViewModel.cleaningDoneMessage,
-                (sender, cleaning) => { Items.Insert(0, cleaning); });
+                (sender, cleaning) => LoadItem());
 
             CleaningShoppingCommand = new Command<Cleaning>(c =>
             {
@@ -43,43 +43,44 @@ namespace CleaningPic.ViewModels
             {
                 using (var ds = new DataSource())
                     ds.RemoveCleaning(c);
-                Items.Remove(c);
+                LoadItem();
                 DependencyService.Get<IFormsToast>().Show(c.ToString() + "を削除しました");
             });
+        }
 
-            Items.CollectionChanged += (sender, e) =>
-            {
-                using (var ds = new DataSource())
-                    ItemCount = ds.ReadAllCleaning()
-                        .Where(c => c.Done)
-                        .Count();
-            };
-
+        public void OnAppearing()
+        {
+            // データ読み込み
             LoadItem();
         }
-
-        public async Task OnItemAppearing(Cleaning cleaning)
-        {
-            if (cleaning == Items.Last() && ItemCount != Items.Count)
-            {
-                // ObservableCollection にデータを追加する処理
-                IsLoading = true;
-                await Task.Run(() => LoadItem());
-                IsLoading = false;
-            }
-        }
-
+        
         private void LoadItem()
         {
+            Items.Clear();
+            foreach (int val in Enum.GetValues(typeof(Place)))
+                Items.Add(new GroupingItem { PlaceLabel = ((Place)val).DisplayName() });
+
             using (var ds = new DataSource())
-                foreach (var c in ds.ReadAllCleaning()
-                    .Where(c => c.Done)
-                    .OrderByDescending(c => c.Created.Ticks)
-                    .Skip(Items.Count)
-                    .Take(loadingCount))
+            {
+                var cleanings = ds.ReadAllCleaning()
+                    .Where(c => !c.Done)
+                    .OrderByDescending(c => c.Created.Ticks);
+
+                foreach (var c in cleanings)
                 {
-                    Items.Add(c);
+                    foreach (var g in Items)
+                        if (g.PlaceLabel == c.Place.DisplayName())
+                            g.Add(c);
                 }
+            }
+
+            List<GroupingItem> removeItems = new List<GroupingItem>();
+            foreach (var g in Items)
+                if (g.Count == 0)
+                    removeItems.Add(g);
+
+            foreach (var g in removeItems)
+                Items.Remove(g);
         }
     }
 }

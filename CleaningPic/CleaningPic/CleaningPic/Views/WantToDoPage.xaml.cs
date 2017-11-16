@@ -37,11 +37,6 @@ namespace CleaningPic.Views
             MessagingCenter.Unsubscribe<WantToDoViewModel, Cleaning>(this, WantToDoViewModel.navigateWebBrowserMessage);
         }
 
-        public async void OnItemAppearing(object sender, ItemVisibilityEventArgs e)
-        {
-            await (BindingContext as WantToDoViewModel).OnItemAppearing(e.Item as Cleaning);
-        }
-
         public void ListViewItem_Clicked(object sender, EventArgs e)
         {
             var listView = ((ListView)sender);
@@ -49,7 +44,6 @@ namespace CleaningPic.Views
             {
                 var cleaning = listView.SelectedItem as Cleaning;
                 ((ListView)sender).SelectedItem = null;
-                (BindingContext as WantToDoViewModel).UpdateChangedIndex(cleaning);
                 Navigation.PushAsync(new DetailPage(cleaning, false, true));
             }
         }
