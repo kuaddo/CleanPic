@@ -20,12 +20,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>MinimumOSVersion</key>
-	<string>8.0</string>
 	<key>CFBundleDisplayName</key>
 	<string>CleaningPic</string>
 	<key>CFBundleIdentifier</key>
-	<string>yudaikichise.CleaningPic</string>
+	<string>jp.shiita.CleaningPic</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>
